@@ -1,6 +1,6 @@
 Ссылка на проект: https://tonybnk-chat.netlify.app/
 
-Ссылка на PR: 
+Ссылка на PR: https://github.com/TonyBNK/middle.messenger.praktikum.yandex/pull/1
 
 Проект представляет собой мессенджер, реализованный с использованием нативного
 JavaScript'а, шаблонизатора Handlebars, препроцессора SCSS и сборщика Parcel.

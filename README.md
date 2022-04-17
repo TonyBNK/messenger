@@ -1,4 +1,4 @@
-Ссылка на проект: https://tonybnk-chat.netlify.app/ 
+Ссылка на проект: https://tonybnk-chat.netlify.app/
 
 Ссылка на PR: https://github.com/TonyBNK/middle.messenger.praktikum.yandex/pull/1
 

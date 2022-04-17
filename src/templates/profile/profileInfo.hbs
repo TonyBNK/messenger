@@ -1,0 +1,31 @@
+<ul>
+    {{#unless editMode}}
+        {{#each rows}}
+            <li>
+                <div>
+                    <span>{{this.label}}</span>
+                    <span>{{this.value}}</span>
+                </div>
+            </li>
+        {{/each}}
+    {{/unless}}
+    {{#if editMode}}
+        {{#each rows}}
+            <li>
+                <div>
+                    <label for="{{this.name}}">
+                        {{this.label}}
+                    </label>
+                    <input
+                            type='{{this.type}}'
+                            name='{{this.name}}'
+                            id='{{this.name}}'
+                        {{#if this.firstChild}}
+                            autofocus
+                        {{/if}}
+                    >
+                </div>
+            </li>
+        {{/each}}
+    {{/if}}
+</ul>

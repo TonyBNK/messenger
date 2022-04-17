@@ -1,0 +1,18 @@
+@import "../../styles/sass/mixins";
+
+.window {
+  min-width: 375px;
+
+  .development-container {
+    margin: 40px 30px;
+    @include makeFlexBoxContainer(column, flex-start, center);
+
+    h1 {
+      color: #999999;
+    }
+
+    a {
+      @include makeLink();
+    }
+  }
+}

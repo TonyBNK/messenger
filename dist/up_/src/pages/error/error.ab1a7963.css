@@ -1,0 +1,25 @@
+.window {
+  min-width: 375px;
+}
+
+.window .error-container {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 40px 30px;
+  display: flex;
+}
+
+.window .error-container a {
+  color: #3369f3;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.window .error-container a:visited {
+  color: #3369f3;
+}
+
+/*# sourceMappingURL=error.ab1a7963.css.map */

@@ -1,0 +1,85 @@
+@import "../../styles/sass/mixins";
+
+.window {
+  min-width: 375px;
+  width: 800px;
+
+  .profile-container {
+    margin: 40px 30px;
+    @include makeFlexBoxContainer(column, center, center);
+
+    .profile-photo {
+      background-color: #EAEAEA;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 50px;
+    }
+
+    h3 {
+      font-weight: 550;
+    }
+
+    ul {
+      list-style-type: none;
+      width: 100%;
+
+      li {
+        margin-bottom: 15px;
+        border-bottom: #EAEAEA 2px solid;
+        padding-bottom: 15px;
+
+        &:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+          margin-bottom: 50px;
+        }
+
+        div {
+          @include makeFlexBoxContainer(row, space-between, center);
+
+          span, label, input {
+            @include makeLabel();
+
+            font-weight: 550;
+
+            &:first-child, label {
+              color: black;
+            }
+          }
+
+          input {
+            @include makeInput();
+          }
+        }
+      }
+    }
+
+    .button-container {
+      @include makeFlexBoxContainer(column);
+      align-items: flex-start;
+      width: 100%;
+
+      a {
+        @include makeLink();
+
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+
+        &:last-child {
+          padding-bottom: 0;
+          margin-bottom: 0;
+
+          &:visited {
+            color: red;
+          }
+        }
+      }
+
+      button {
+        @include makeMainFormButton();
+        align-self: center;
+      }
+    }
+  }
+}

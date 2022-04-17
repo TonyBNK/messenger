@@ -1,0 +1,59 @@
+@import "../../styles/sass/mixins";
+
+.window {
+  min-width: 375px;
+  background: #FFFFFF;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+
+  .form-container {
+    margin: 40px 30px;
+
+    .form-title {
+      font-family: sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      text-align: center;
+      color: #999999;
+    }
+
+    form {
+      margin-top: 30px;
+      min-height: 400px;
+      @include makeFlexBoxContainer(column, space-between);
+
+      .form-field-container {
+        @include makeFlexBoxContainer(column);
+
+        label {
+          @include makeLabel();
+
+          margin-top: 10px;
+          font-weight: 600;
+        }
+
+        input {
+          @include makeInput();
+
+          height: 30px;
+          margin-bottom: 30px;
+          font-size: 18px;
+          border-bottom: 2px solid #3369F3;
+        }
+      }
+
+      .form-buttons-container {
+        @include makeFlexBoxContainer(column);
+        align-items: center;
+
+        button {
+          @include makeMainFormButton();
+        }
+
+        a {
+          @include makeLink();
+        }
+      }
+    }
+  }
+}

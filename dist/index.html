@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Чат</title>
+</head>
+<body>
+<a href="/up_/src/pages/login/login.html">Логин</a>
+<a href="/up_/src/pages/registration/registration.html">Регистрация</a>
+<a id="404" href="/up_/src/pages/error/error.html">Error 404</a>
+<a id="500" href="/up_/src/pages/error/error.html">Error 500</a>
+<a href="/up_/src/pages/chats/chats.html">Чаты</a>
+<a href="/up_/src/pages/profile/profile.html">Профиль</a>
+<script>document.getElementById('404').setAttribute('href', 'src/pages/error/error.html?statusCode=404');
+document.getElementById('500').setAttribute('href', 'src/pages/error/error.html?statusCode=500');
+
+</script>
+</body>
+</html>

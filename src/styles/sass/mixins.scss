@@ -1,0 +1,48 @@
+@import "variables";
+
+@mixin makeFlexBoxContainer($flexDirection: 'row', $justifyContent: 'flex-start', $alignItems: 'flex-start') {
+  display: flex;
+  flex-direction: $flexDirection;
+  justify-content: $justifyContent;
+  align-items: $alignItems;
+}
+
+@mixin makeMainFormButton() {
+  width: 280px;
+  height: 37px;
+  background: $buttonMainColor;
+  border-radius: 8px;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border: none;
+}
+
+@mixin makeLink() {
+  text-decoration: none;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: 600;
+  color: $linkMainColor;
+
+  &:visited {
+    color: $linkMainColor;
+  }
+}
+
+@mixin makeLabel() {
+  font-size: 16px;
+  color: $titleSecondaryColor;
+  font-family: sans-serif;
+}
+
+@mixin makeInput() {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -1,0 +1,31 @@
+<div class="window">
+	<div class="form-container">
+		<div class="form-title">
+			{{formTitle}}
+		</div>
+		<form action="" method="get" class="form-info">
+			<div class="form-field-container">
+				{{#each fields}}
+					<label for="{{this.name}}" class="field-title">
+						{{this.label}}
+					</label>
+					<input
+							class="field-input"
+							type="{{this.type}}"
+							name="{{this.name}}"
+							id="{{this.name}}"
+							{{#if this.required}}required{{/if}}
+					>
+				{{/each}}
+			</div>
+			<div class="form-buttons-container">
+				<button type="submit" class="main-button">
+					{{buttonLabel}}
+				</button>
+				<a href="{{altUrl}}" class="alt-url">
+					{{altUrlLabel}}
+				</a>
+			</div>
+		</form>
+	</div>
+</div>

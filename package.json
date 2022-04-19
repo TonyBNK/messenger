@@ -1,0 +1,46 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "---",
+  "engines": {
+    "node": "^14.17.3"
+  },
+  "targets": {
+    "default": {
+      "engines": {
+        "browsers": ">= 50%"
+      }
+    }
+  },
+  "scripts": {
+    "dev": "parcel static/index.html --port 3000 --open",
+    "build": "parcel build static/index.html",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonyBNK/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TonyBNK/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/TonyBNK/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@parcel/optimizer-data-url": "^2.4.1",
+    "@parcel/transformer-inline-string": "^2.4.1",
+    "@parcel/transformer-sass": "^2.4.1",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "parcel": "^2.4.1",
+    "parcel-transformer-hbs": "^1.0.4"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "handlebars": "^4.7.7",
+    "hbs": "^4.2.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.50.0"
+  }
+}

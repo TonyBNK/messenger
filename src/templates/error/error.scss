@@ -1,0 +1,10 @@
+@import "../../styles/sass/mixins";
+
+.window {
+  min-width: 375px;
+
+  .error-container {
+    margin: 40px 30px;
+    @include makeFlexBoxContainer(column, flex-start, center);
+  }
+}

@@ -2,10 +2,7 @@
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "---",
-  "main": "index.js",
-  "engines": {
-    "node": "^14.17.3"
-  },
+  "default": "static/index.html",
   "scripts": {
     "dev": "parcel static/index.html --port 3000 --open",
     "build": "parcel build static/index.html",

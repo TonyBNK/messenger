@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 body {
   margin: 0;
@@ -40,4 +40,20 @@ h3 {
   min-height: 100vh;
   max-width: 100vw;
   @include makeFlexBoxContainer(row, center, center);
+}
+
+.alt-url {
+  @include makeLink();
+}
+
+.main-button {
+  @include makeMainFormButton();
+}
+
+.field-title {
+  @include makeLabel();
+}
+
+.field-input {
+  @include makeInput();
 }

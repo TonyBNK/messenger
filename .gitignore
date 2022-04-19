@@ -3,14 +3,14 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-yarn.lock*
-package-lock.json
 Cargo.lock
 
 pids
 *.pid
 *.seed
 *.pid.lock
+
+dist
 
 node_modules/
 

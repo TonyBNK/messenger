@@ -1,8 +1,9 @@
 @import "../../styles/sass/mixins";
+@import "../../styles/sass/variables";
 
 .window {
   min-width: 375px;
-  background: #FFFFFF;
+  background: $windowBackgroundColor;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
   border-radius: 12px;
 
@@ -14,10 +15,10 @@
       font-weight: 600;
       font-size: 24px;
       text-align: center;
-      color: #999999;
+      color: $titleSecondaryColor;
     }
 
-    form {
+    .form-info {
       margin-top: 30px;
       min-height: 400px;
       @include makeFlexBoxContainer(column, space-between);
@@ -25,34 +26,22 @@
       .form-field-container {
         @include makeFlexBoxContainer(column);
 
-        label {
-          @include makeLabel();
-
+        .field-title {
           margin-top: 10px;
           font-weight: 600;
         }
 
-        input {
-          @include makeInput();
-
+        .field-input {
           height: 30px;
           margin-bottom: 30px;
           font-size: 18px;
-          border-bottom: 2px solid #3369F3;
+          border-bottom: 2px solid $borderBottomMainColor;
         }
       }
 
       .form-buttons-container {
         @include makeFlexBoxContainer(column);
         align-items: center;
-
-        button {
-          @include makeMainFormButton();
-        }
-
-        a {
-          @include makeLink();
-        }
       }
     }
   }

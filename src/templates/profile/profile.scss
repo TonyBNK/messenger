@@ -1,4 +1,5 @@
 @import "../../styles/sass/mixins";
+@import "../../styles/sass/variables";
 
 .window {
   min-width: 375px;
@@ -9,24 +10,24 @@
     @include makeFlexBoxContainer(column, center, center);
 
     .profile-photo {
-      background-color: #EAEAEA;
+      background-color: $borderBottomSecondaryColor;
       width: 150px;
       height: 150px;
       border-radius: 50%;
       margin-bottom: 50px;
     }
 
-    h3 {
+    .profile-name {
       font-weight: 550;
     }
 
-    ul {
+    .list {
       list-style-type: none;
       width: 100%;
 
-      li {
+      .list-item {
         margin-bottom: 15px;
-        border-bottom: #EAEAEA 2px solid;
+        border-bottom: $borderBottomSecondaryColor 2px solid;
         padding-bottom: 15px;
 
         &:last-child {
@@ -35,7 +36,7 @@
           margin-bottom: 50px;
         }
 
-        div {
+        .field-container {
           @include makeFlexBoxContainer(row, space-between, center);
 
           span, label, input {
@@ -44,7 +45,7 @@
             font-weight: 550;
 
             &:first-child, label {
-              color: black;
+              color: $titleMainColor;
             }
           }
 
@@ -60,9 +61,7 @@
       align-items: flex-start;
       width: 100%;
 
-      a {
-        @include makeLink();
-
+      .alt-url {
         margin-bottom: 15px;
         padding-bottom: 10px;
 
@@ -71,13 +70,12 @@
           margin-bottom: 0;
 
           &:visited {
-            color: red;
+            color: $linkSecondaryColor;
           }
         }
       }
 
-      button {
-        @include makeMainFormButton();
+      .main-button {
         align-self: center;
       }
     }

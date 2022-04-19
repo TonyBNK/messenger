@@ -1,4 +1,4 @@
-import template from '../../templates/form/form.hbs';
+import template from '../../templates/form/form.tmpl.hbs';
 
 const data = {
     formTitle: 'Авторизация',
@@ -8,7 +8,7 @@ const data = {
     ],
     buttonLabel: 'Вход',
     altUrl: '../registration/registration.html',
-    altUrlLabel: 'Ещё не зарегистрированы?'
-}
+    altUrlLabel: 'Ещё не зарегистрированы?',
+};
 
 document.getElementById('login').innerHTML = template(data);

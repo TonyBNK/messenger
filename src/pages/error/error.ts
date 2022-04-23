@@ -1,4 +1,4 @@
-import template from '../../templates/error/error.tmpl.hbs';
+import template from '../../templates/error/error.hbs';
 import {last} from '../../utils/mydash';
 
 const statusCode = last(window.location.search.split('='));

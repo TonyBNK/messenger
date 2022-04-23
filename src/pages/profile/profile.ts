@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars';
-import mainTemplate from '../../templates/profile/profileMain.tmpl.hbs';
-import buttonsTemplate from '../../templates/profile/profileButtons.tmpl.hbs';
-import infoTemplate from '../../templates/profile/profileInfo.tmpl.hbs';
+import mainTemplate from '../../templates/profile/profileMain.hbs';
+import buttonsTemplate from '../../templates/profile/profileButtons.hbs';
+import infoTemplate from '../../templates/profile/profileInfo.hbs';
 
 const renderProfile = (editMode = false, editPassword = false) => {
     const mainData = {

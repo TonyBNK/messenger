@@ -1,4 +1,4 @@
-import template from '../../templates/form/form.tmpl.hbs';
+import template from '../../templates/form/form.hbs';
 
 const data = {
     formTitle: 'Регистрация',

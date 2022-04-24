@@ -1,0 +1,85 @@
+{
+    "extends": "airbnb/base",
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "no-console": "off",
+        "object-curly-spacing": "off",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "js": "never",
+                "jsx": "never",
+                "ts": "never",
+                "tsx": "never"
+            }
+        ],
+        "no-unused-vars": "off",
+        "no-undef": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": "error",
+        "no-plusplus": "off",
+        "valid-typeof": "off",
+        "no-param-reassign": "off",
+        "no-nested-ternary": "off",
+        "default-case-last": "off",
+        "@typescript-eslint/default-case-last": true,
+        "default-param-last": "off",
+        "@typescript-eslint/default-param-last": "error",
+        "grouped-accessor-pairs": "off",
+        "@typescript-eslint/grouped-accessor-pairs": true,
+        "no-constructor-return": "off",
+        "@typescript-eslint/no-constructor-return": true,
+        "no-nonoctal-decimal-escape": "off",
+        "@typescript-eslint/no-nonoctal-decimal-escape": true,
+        "prefer-regex-literals": "off",
+        "@typescript-eslint/prefer-regex-literals": true,
+        "no-dupe-else-if": "off",
+        "@typescript-eslint/no-dupe-else-if": true,
+        "no-import-assign": "off",
+        "@typescript-eslint/no-import-assign": true,
+        "no-loss-of-precision": "off",
+        "no-promise-executor-return": "off",
+        "@typescript-eslint/no-promise-executor-return": true,
+        "no-setter-return": "off",
+        "@typescript-eslint/no-setter-return": true,
+        "no-unreachable-loop": "off",
+        "@typescript-eslint/no-unreachable-loop": "off",
+        "no-unsafe-optional-chaining": "off",
+        "@typescript-eslint/no-unsafe-optional-chaining": true,
+        "no-useless-backreference": "off",
+        "@typescript-eslint/no-useless-backreference": true,
+        "function-call-argument-newline": "off",
+        "@typescript-eslint/function-call-argument-newline": true,
+        "prefer-exponentiation-operator": "off",
+        "@typescript-eslint/prefer-exponentiation-operator": true,
+        "no-restricted-exports": "off",
+        "@typescript-eslint/no-restricted-exports": true
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [
+                    ".js",
+                    ".jsx",
+                    ".ts",
+                    ".tsx"
+                ]
+            }
+        }
+    }
+}

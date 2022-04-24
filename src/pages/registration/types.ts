@@ -1,4 +1,4 @@
-import {FieldType} from "../types";
+import {FieldType} from '../types';
 
 export type RegistrationDataType = {
     formTitle: string

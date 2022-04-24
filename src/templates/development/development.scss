@@ -1,14 +1,15 @@
-@import "../../styles/sass/mixins";
+@import '../../styles/sass/mixins';
 
 .window {
-  min-width: 375px;
+    min-width: 375px;
 
-  .development-container {
-    margin: 40px 30px;
-    @include makeFlexBoxContainer(column, flex-start, center);
+    .development-container {
+        margin: 40px 30px;
 
-    .development-description {
-      color: $titleSecondaryColor;
+        @include makeFlexBoxContainer(column, flex-start, center);
+
+        .development-description {
+            color: $titleSecondaryColor;
+        }
     }
-  }
 }

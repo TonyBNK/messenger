@@ -1,8 +1,8 @@
 import template from '../../templates/error/error.hbs';
 import {last} from '../../utils/mydash';
-import {ErrorDataType, Status} from "./types";
+import {ErrorDataType, Status} from './types';
 
-const searchParams = window.location.search.split('=').map(param => +param);
+const searchParams = window.location.search.split('=').map((param) => +param);
 
 const statusCode: number = last(searchParams) ?? 404;
 

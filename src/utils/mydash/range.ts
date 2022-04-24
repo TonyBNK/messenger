@@ -9,7 +9,7 @@ const baseRange = (start: number, end: number, step: number, isRight: boolean): 
     }
 
     return result;
-}
+};
 
 function range(start = 0, end?: number, step?: number, isRight = false): Array<number> {
     if (end === undefined) {

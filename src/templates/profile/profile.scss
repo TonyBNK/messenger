@@ -1,83 +1,85 @@
-@import "../../styles/sass/mixins";
-@import "../../styles/sass/variables";
+@import '../../styles/sass/mixins';
+@import '../../styles/sass/variables';
 
 .window {
-  min-width: 375px;
-  width: 800px;
+    min-width: 375px;
+    width: 800px;
 
-  .profile-container {
-    margin: 40px 30px;
-    @include makeFlexBoxContainer(column, center, center);
+    .profile-container {
+        margin: 40px 30px;
 
-    .profile-photo {
-      background-color: $borderBottomSecondaryColor;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 50px;
-    }
+        @include makeFlexBoxContainer(column, center, center);
 
-    .profile-name {
-      font-weight: 550;
-    }
-
-    .list {
-      list-style-type: none;
-      width: 100%;
-
-      .list-item {
-        margin-bottom: 15px;
-        border-bottom: $borderBottomSecondaryColor 2px solid;
-        padding-bottom: 15px;
-
-        &:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
-          margin-bottom: 50px;
+        .profile-photo {
+            background-color: $borderBottomSecondaryColor;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 50px;
         }
 
-        .field-container {
-          @include makeFlexBoxContainer(row, space-between, center);
-
-          span, label, input {
-            @include makeLabel();
-
+        .profile-name {
             font-weight: 550;
+        }
 
-            &:first-child, label {
-              color: $titleMainColor;
+        .list {
+            list-style-type: none;
+            width: 100%;
+
+            .list-item {
+                margin-bottom: 15px;
+                border-bottom: $borderBottomSecondaryColor 2px solid;
+                padding-bottom: 15px;
+
+                &:last-child {
+                    border-bottom: none;
+                    padding-bottom: 0;
+                    margin-bottom: 50px;
+                }
+
+                .field-container {
+                    @include makeFlexBoxContainer(row, space-between, center);
+
+                    span, label, input {
+                        @include makeLabel;
+
+                        font-weight: 550;
+
+                        &:first-child, label {
+                            color: $titleMainColor;
+                        }
+                    }
+
+                    input {
+                        @include makeInput;
+                    }
+                }
             }
-          }
-
-          input {
-            @include makeInput();
-          }
         }
-      }
-    }
 
-    .button-container {
-      @include makeFlexBoxContainer(column);
-      align-items: flex-start;
-      width: 100%;
+        .button-container {
+            @include makeFlexBoxContainer(column);
 
-      .alt-url {
-        margin-bottom: 15px;
-        padding-bottom: 10px;
+            align-items: flex-start;
+            width: 100%;
 
-        &:last-child {
-          padding-bottom: 0;
-          margin-bottom: 0;
+            .alt-url {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
 
-          &:visited {
-            color: $linkSecondaryColor;
-          }
+                &:last-child {
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+
+                    &:visited {
+                        color: $linkSecondaryColor;
+                    }
+                }
+            }
+
+            .main-button {
+                align-self: center;
+            }
         }
-      }
-
-      .main-button {
-        align-self: center;
-      }
     }
-  }
 }

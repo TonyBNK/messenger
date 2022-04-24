@@ -1,5 +1,5 @@
 import template from '../../templates/development/development.hbs';
-import {ChatsDataType} from "./types";
+import {ChatsDataType} from './types';
 
 const data: ChatsDataType = {
     description: 'Страница в разработке',

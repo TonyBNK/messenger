@@ -1,7 +1,7 @@
 export type MainDataType = {
     editMode: boolean
     avatar: string
-    display_name: string
+    displayName: string
 }
 
 export type ButtonsDataType = {
@@ -31,6 +31,3 @@ export type ProfileInfoType = {
 }
 
 export type RenderProfileType = (editMode?: boolean, editPassword?: boolean) => void;
-export type ChangeInfoType = (e: MouseEvent) => void;
-export type ChangePasswordType = ChangeInfoType;
-export type SaveChangesType = () => void;

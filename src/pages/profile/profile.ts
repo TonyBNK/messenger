@@ -2,21 +2,32 @@ import Handlebars from 'handlebars';
 import mainTemplate from '../../templates/profile/profileMain.hbs';
 import buttonsTemplate from '../../templates/profile/profileButtons.hbs';
 import infoTemplate from '../../templates/profile/profileInfo.hbs';
+import {
+    ButtonsDataType,
+    ChangeInfoType,
+    ChangePasswordType,
+    MainDataType,
+    ProfileInfoRowType,
+    ProfileInfoType,
+    ProfilePasswordRowType,
+    RenderProfileType,
+    SaveChangesType
+} from "./types";
 
-const renderProfile = (editMode = false, editPassword = false) => {
-    const mainData = {
+const renderProfile: RenderProfileType = (editMode = false, editPassword = false) => {
+    const mainData: MainDataType = {
         editMode,
         avatar: '',
         display_name: 'Иван',
     };
 
-    const buttonsData = {
+    const buttonsData: ButtonsDataType = {
         editMode,
         quit: '/',
         buttonLabel: 'Сохранить',
     };
 
-    const passwordRows = [
+    const passwordRows: Array<ProfilePasswordRowType> = [
         {
             label: 'Старый пароль',
             name: 'oldPassword',
@@ -35,7 +46,7 @@ const renderProfile = (editMode = false, editPassword = false) => {
         },
     ];
 
-    const infoRows = [
+    const infoRows: Array<ProfileInfoRowType> = [
         {
             label: 'Почта',
             name: 'email',
@@ -75,7 +86,7 @@ const renderProfile = (editMode = false, editPassword = false) => {
         },
     ];
 
-    const infoData = {
+    const infoData: ProfileInfoType = {
         editMode,
         rows: editPassword ? passwordRows : infoRows,
     };
@@ -83,35 +94,45 @@ const renderProfile = (editMode = false, editPassword = false) => {
     Handlebars.registerPartial('profileInfo', infoTemplate(infoData));
     Handlebars.registerPartial('profileButtons', buttonsTemplate(buttonsData));
 
-    document
-        .getElementById('profile').innerHTML = mainTemplate(mainData);
+    const profile = document.getElementById('profile');
+
+    if (profile) {
+        profile.innerHTML = mainTemplate(mainData);
+    }
 
     if (!editMode) {
-        document
-            .getElementById('changeInfo')
-            .onclick = changeInfo;
+        const info = document.getElementById('changeInfo');
 
-        document
-            .getElementById('changePassword')
-            .onclick = changePassword;
+        if (info) {
+            info.onclick = changeInfo;
+        }
+
+
+        const password = document.getElementById('changePassword');
+
+        if (password) {
+            password.onclick = changePassword;
+        }
     } else {
-        document
-            .getElementById('saveChanges')
-            .onclick = saveChanges;
+        const save = document.getElementById('saveChanges');
+
+        if (save) {
+            save.onclick = saveChanges;
+        }
     }
 }
 
-const changeInfo = (e) => {
+const changeInfo: ChangeInfoType = (e) => {
     e.preventDefault();
     renderProfile(true);
 }
 
-const changePassword = (e) => {
+const changePassword: ChangePasswordType = (e) => {
     e.preventDefault();
     renderProfile(true, true);
 }
 
-const saveChanges = () => {
+const saveChanges: SaveChangesType = () => {
     renderProfile();
 }
 

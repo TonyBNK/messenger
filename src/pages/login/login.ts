@@ -1,6 +1,7 @@
 import template from '../../templates/form/form.hbs';
+import {LoginDataType} from "./types";
 
-const data = {
+const data: LoginDataType = {
     formTitle: 'Авторизация',
     fields: [
         {name: 'login', label: 'Логин', type: 'text', required: true},
@@ -11,4 +12,8 @@ const data = {
     altUrlLabel: 'Ещё не зарегистрированы?',
 };
 
-document.getElementById('login').innerHTML = template(data);
+const login = document.getElementById('login');
+
+if (login) {
+    login.innerHTML = template(data);
+}

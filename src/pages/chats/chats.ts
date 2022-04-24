@@ -1,9 +1,14 @@
 import template from '../../templates/development/development.hbs';
+import {ChatsDataType} from "./types";
 
-const data = {
+const data: ChatsDataType = {
     description: 'Страница в разработке',
     altUrl: '/',
     altUrlLabel: 'Назад',
 };
 
-document.getElementById('chats').innerHTML = template(data);
+const chats = document.getElementById('chats');
+
+if (chats) {
+    chats.innerHTML = template(data);
+}

@@ -1,6 +1,7 @@
 import template from '../../templates/form/form.hbs';
+import {RegistrationDataType} from "./types";
 
-const data = {
+const data: RegistrationDataType = {
     formTitle: 'Регистрация',
     fields: [
         {name: 'first_name', label: 'Имя', type: 'text', required: true},
@@ -21,4 +22,8 @@ const data = {
     altUrlLabel: 'Войти',
 };
 
-document.getElementById('registration').innerHTML = template(data);
+const registration = document.getElementById('registration');
+
+if (registration) {
+    registration.innerHTML = template(data);
+}

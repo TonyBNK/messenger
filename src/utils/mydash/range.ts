@@ -1,4 +1,4 @@
-const baseRange = (start, end, step, isRight) => {
+const baseRange = (start: number, end: number, step: number, isRight: boolean): Array<number> => {
     let index = -1;
     let length = Math.max(Math.ceil((end - start) / (step || 1)), 0);
     const result = new Array(length);
@@ -11,7 +11,7 @@ const baseRange = (start, end, step, isRight) => {
     return result;
 }
 
-function range(start = 0, end, step, isRight = false) {
+function range(start = 0, end?: number, step?: number, isRight = false): Array<number> {
     if (end === undefined) {
         end = start;
         start = 0;

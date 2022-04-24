@@ -1,4 +1,4 @@
-function identity(value) {
+function identity<T>(value: T): T {
     return value;
 }
 

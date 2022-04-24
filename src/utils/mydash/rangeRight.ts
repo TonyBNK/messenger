@@ -1,6 +1,6 @@
 import range from "./range";
 
-function rangeRight(start, end, step) {
+function rangeRight(start: number, end?: number, step?: number): Array<number> {
     return range(start, end, step, true);
 }
 

@@ -1,13 +1,20 @@
 import template from '../../templates/error/error.hbs';
 import {last} from '../../utils/mydash';
+import {ErrorDataType, Status} from "./types";
 
-const statusCode = last(window.location.search.split('='));
+const searchParams = window.location.search.split('=').map(param => +param);
 
-const data = {
+const statusCode: number = last(searchParams) ?? 404;
+
+const data: ErrorDataType = {
     errorStatus: statusCode,
-    errorDescription: statusCode === '404' ? 'Не туда попали' : 'Мы уже фиксим',
+    errorDescription: statusCode === Status.NotFound ? 'Не туда попали' : 'Мы уже фиксим',
     altUrl: '../chats/chats.html',
     altUrlLabel: 'Назад к чатам',
 };
 
-document.getElementById('error').innerHTML = template(data);
+const error = document.getElementById('error');
+
+if (error) {
+    error.innerHTML = template(data);
+}

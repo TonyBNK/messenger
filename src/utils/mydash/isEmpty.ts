@@ -1,4 +1,4 @@
-function isEmpty(value) {
+function isEmpty<T>(value: T | any): boolean {
     if (!value) {
         return true;
     }

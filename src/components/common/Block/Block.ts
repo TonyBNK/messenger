@@ -153,8 +153,6 @@ export class Block implements IBlock {
             .forEach((child) => {
                 const stub = fragment.content.querySelector(`[data-id='${child._id}']`);
 
-                console.log(stub);
-
                 if (stub) {
                     stub.replaceWith(child.getContent());
                 }

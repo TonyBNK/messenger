@@ -13,8 +13,8 @@
         }
     },
     "scripts": {
-        "dev": "tsc --noEmit && parcel static/index.html --port 3000 --open",
-        "build": "parcel build static/index.html",
+        "dev": "tsc --noEmit && parcel index.html --port 3000 --open",
+        "build": "parcel build index.html",
         "start": "node server.js",
         "eslint": "node_modules/.bin/eslint . --ext .ts --fix",
         "stylelint": "node_modules/.bin/stylelint . --fix"

@@ -28,6 +28,9 @@
                 "tsx": "never"
             }
         ],
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "no-underscore-dangle": "off",
         "no-unused-vars": "off",
         "no-undef": "off",
         "no-shadow": "off",

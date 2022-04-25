@@ -3,19 +3,13 @@ import {Block} from '../common/Block/Block';
 
 export class Button extends Block {
     constructor(props: Record<string, any>) {
-        // обернул кнопку (как строчный элемент) спаном
         super('span', props);
     }
 
     render() {
-        const {
-            label,
-            className,
-        } = this.props;
-
-        return template({
-            label,
-            className,
+        return this.compile(template, {
+            label: this.props.label,
+            className: this.props.className,
         });
     }
 }

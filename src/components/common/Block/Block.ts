@@ -1,3 +1,4 @@
+import {v4 as makeUUID} from 'uuid';
 import {EventBus, IObservable} from '../../../utils/eventBus';
 import {Nullable} from '../../../types/types';
 
@@ -9,8 +10,6 @@ export interface IBlock {
     dispatchComponentDidMount(): void;
 
     setProps(nextProps: Record<string, any>): void;
-
-    render(): void;
 
     show(): void;
 
@@ -27,33 +26,68 @@ export class Block implements IBlock {
 
     _element: Nullable<HTMLElement> = null;
 
-    _meta: Nullable<{ tagName: string, props: Record<string, unknown> }> = null;
+    _meta: Nullable<{ tagName: string, props: Record<string, any> }> = null;
+
+    _id: string;
 
     props;
 
     eventBus;
 
+    children;
+
     /** JSDoc
      * @param {string} tagName
-     * @param {Object} props
+     * @param {Object} propsAndChildren
      *
      * @returns {void}
      */
-    constructor(tagName = 'div', props = {}) {
+    constructor(tagName = 'div', propsAndChildren = {}) {
         const eventBus = new EventBus();
+
+        const {
+            children,
+            props,
+        } = this._getChildren(propsAndChildren);
+
+        this.children = children;
 
         this._meta = {
             tagName,
             props,
         };
 
-        this.props = this._makePropsProxy(props);
+        this._id = makeUUID();
+
+        this.props = this._makePropsProxy({
+            ...props,
+            __id: this._id,
+        });
 
         this.eventBus = () => eventBus;
 
         this._registerEvents(eventBus);
 
         eventBus.emit(Block.EVENTS.INIT);
+    }
+
+    _getChildren(propsAndChildren: Record<string, any>) {
+        const children: Record<string, any> = {};
+        const props: Record<string, any> = {};
+
+        Object.entries(propsAndChildren)
+            .forEach(([key, value]) => {
+                if (value instanceof Block) {
+                    children[key] = value;
+                } else {
+                    props[key] = value;
+                }
+            });
+
+        return {
+            children,
+            props,
+        };
     }
 
     _makePropsProxy(props: Record<string, any>) {
@@ -103,6 +137,32 @@ export class Block implements IBlock {
             .emit(Block.EVENTS.FLOW_RENDER);
     }
 
+    compile(template: Function, props: Record<string, any>) {
+        const propsAndStubs = {...props};
+
+        Object.entries(this.children)
+            .forEach(([key, child]) => {
+                propsAndStubs[key] = `<div data-id='${child._id}'></div>`;
+            });
+
+        const fragment = document.createElement('template');
+
+        fragment.innerHTML = template(propsAndStubs);
+
+        Object.values(this.children)
+            .forEach((child) => {
+                const stub = fragment.content.querySelector(`[data-id='${child._id}']`);
+
+                console.log(stub);
+
+                if (stub) {
+                    stub.replaceWith(child.getContent());
+                }
+            });
+
+        return fragment.content;
+    }
+
     _createResources() {
         if (this._meta) {
             this._element = this._createDocumentElement(this._meta.tagName);
@@ -110,7 +170,13 @@ export class Block implements IBlock {
     }
 
     _createDocumentElement(tagName: string) {
-        return document.createElement(tagName);
+        const element = document.createElement(tagName);
+
+        if (this.props?.settings?.withInternalID) {
+            element.setAttribute('data-id', this._id);
+        }
+
+        return element;
     }
 
     _render() {
@@ -119,7 +185,10 @@ export class Block implements IBlock {
         this._deleteEvents();
 
         if (this._element) {
-            this._element.innerHTML = `${block}`;
+            this._element.innerHTML = '';
+
+            // @ts-ignore
+            this._element.appendChild(block);
         }
 
         this._addEvents();
@@ -162,6 +231,11 @@ export class Block implements IBlock {
 
     _componentDidMount() {
         this.componentDidMount();
+
+        Object.values(this.children)
+            .forEach((child) => {
+                child.dispatchComponentDidMount();
+            });
     }
 
     componentDidMount() {

@@ -1,7 +1,4 @@
 import Handlebars from 'handlebars';
-import mainTemplate from '../../templates/profile/profileMain.hbs';
-import buttonsTemplate from '../../templates/profile/profileButtons.hbs';
-import infoTemplate from '../../templates/profile/profileInfo.hbs';
 import {
     ButtonsDataType,
     MainDataType,
@@ -10,6 +7,11 @@ import {
     ProfilePasswordRowType,
     RenderProfileType,
 } from './types';
+import {
+    profileButtonsTemplate,
+    profileInfoTemplate,
+    profileMainTemplate,
+} from '../../templates/complex';
 
 const renderProfile: RenderProfileType = (editMode = false, editPassword = false) => {
     const mainData: MainDataType = {
@@ -88,13 +90,13 @@ const renderProfile: RenderProfileType = (editMode = false, editPassword = false
         rows: editPassword ? passwordRows : infoRows,
     };
 
-    Handlebars.registerPartial('profileInfo', infoTemplate(infoData));
-    Handlebars.registerPartial('profileButtons', buttonsTemplate(buttonsData));
+    Handlebars.registerPartial('profileInfo', profileInfoTemplate(infoData));
+    Handlebars.registerPartial('profileButtons', profileButtonsTemplate(buttonsData));
 
     const profile = document.getElementById('profile');
 
     if (profile) {
-        profile.innerHTML = mainTemplate(mainData);
+        profile.innerHTML = profileMainTemplate(mainData);
     }
 
     if (!editMode) {

@@ -1,6 +1,6 @@
 import {v4 as makeUUID} from 'uuid';
 import {EventBus, IObservable} from '../../../utils/eventBus';
-import {Nullable} from '../../../types/types';
+import {Nullable} from '../../../types';
 
 export interface IBlock {
     init(): void;

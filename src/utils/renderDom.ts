@@ -1,7 +1,7 @@
 import {IBlock} from '../components/common/Block/Block';
 
-export const render = (query: string, block: IBlock) => {
-    const root = document.querySelector(query);
+export const render = (query: string, block: IBlock, docFrag?: DocumentFragment) => {
+    const root = docFrag ? docFrag.querySelector(query) : document.querySelector(query);
 
     const content = block.getContent();
 

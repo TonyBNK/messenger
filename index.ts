@@ -1,6 +1,6 @@
-import {Button} from './src/components/Button/Button';
+import {Button} from './src/components/base/Button/Button';
 import {render} from './src/utils/renderDom';
-import {Profile} from './src/components/Button/Profile';
+import {Profile} from './src/components/Profile/Profile';
 
 const button = new Button({
     className: 'main-button',

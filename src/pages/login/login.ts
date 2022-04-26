@@ -1,23 +1,39 @@
-import template from '../../templates/form/form.hbs';
-import {LoginDataType} from './types';
+import {Form} from '../../components/complex';
+import {AltUrl, Button} from '../../components/base';
+import {render} from '../../utils/renderDom';
 
-const data: LoginDataType = {
-    formTitle: 'Авторизация',
-    fields: [
-        {
-            name: 'login', label: 'Логин', type: 'text', required: true,
-        },
-        {
-            name: 'password', label: 'Пароль', type: 'password', required: true,
-        },
-    ],
-    buttonLabel: 'Вход',
-    altUrl: '../registration/registration.html',
-    altUrlLabel: 'Ещё не зарегистрированы?',
-};
+const fields = [
+    {
+        name: 'login',
+        label: 'Логин',
+        type: 'text',
+        required: true,
+    },
+    {
+        name: 'password',
+        label: 'Пароль',
+        type: 'password',
+        required: true,
+    },
+];
 
-const login = document.getElementById('login');
+const button = new Button({
+    type: 'submit',
+    className: 'main-button',
+    label: 'Вход',
+});
 
-if (login) {
-    login.innerHTML = template(data);
-}
+const altUrl = new AltUrl({
+    href: '../registration/registration.html',
+    className: 'alt-url',
+    label: 'Ещё не зарегистрированы?',
+});
+
+const login = new Form({
+    title: 'Авторизация',
+    fields,
+    button,
+    altUrl,
+});
+
+render('#login', login);

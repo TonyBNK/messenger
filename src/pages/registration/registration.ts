@@ -1,41 +1,69 @@
-import template from '../../templates/form/form.hbs';
-import {RegistrationDataType} from './types';
+import {Form} from '../../components/complex';
+import {render} from '../../utils/renderDom';
+import {AltUrl, Button} from '../../components/base';
 
-const data: RegistrationDataType = {
-    formTitle: 'Регистрация',
-    fields: [
-        {
-            name: 'first_name', label: 'Имя', type: 'text', required: true,
-        },
-        {
-            name: 'second_name', label: 'Фамилия', type: 'text', required: true,
-        },
-        {
-            name: 'login', label: 'Логин', type: 'text', required: true,
-        },
-        {
-            name: 'email', label: 'Почта', type: 'email', required: true,
-        },
-        {
-            name: 'phone', label: 'Телефон', type: 'tel', required: true,
-        },
-        {
-            name: 'password', label: 'Пароль', type: 'password', required: true,
-        },
-        {
-            name: 'passwordAgain',
-            label: 'Пароль ещё раз',
-            type: 'password',
-            required: true,
-        },
-    ],
-    buttonLabel: 'Зарегистрироваться',
-    altUrl: '../login/login.html',
-    altUrlLabel: 'Войти',
-};
+const fields = [
+    {
+        name: 'first_name',
+        label: 'Имя',
+        type: 'text',
+        required: true,
+    },
+    {
+        name: 'second_name',
+        label: 'Фамилия',
+        type: 'text',
+        required: true,
+    },
+    {
+        name: 'login',
+        label: 'Логин',
+        type: 'text',
+        required: true,
+    },
+    {
+        name: 'email',
+        label: 'Почта',
+        type: 'email',
+        required: true,
+    },
+    {
+        name: 'phone',
+        label: 'Телефон',
+        type: 'tel',
+        required: true,
+    },
+    {
+        name: 'password',
+        label: 'Пароль',
+        type: 'password',
+        required: true,
+    },
+    {
+        name: 'passwordAgain',
+        label: 'Пароль ещё раз',
+        type: 'password',
+        required: true,
+    },
+];
 
-const registration = document.getElementById('registration');
+const button = new Button({
+    type: 'submit',
+    className: 'main-button',
+    label: 'Зарегистрироваться',
+});
 
-if (registration) {
-    registration.innerHTML = template(data);
-}
+const altUrl = new AltUrl({
+    href: '../login/login.html',
+    className: 'alt-url',
+    label: 'Войти',
+});
+
+const registration = new Form({
+    title: 'Регистрация',
+    fields,
+    button,
+    altUrl,
+});
+
+render('#registration', registration);

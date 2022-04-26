@@ -1,5 +1,5 @@
-import template from '../../templates/development/development.hbs';
 import {ChatsDataType} from './types';
+import {developmentTemplate} from '../../templates/complex';
 
 const data: ChatsDataType = {
     description: 'Страница в разработке',
@@ -10,5 +10,5 @@ const data: ChatsDataType = {
 const chats = document.getElementById('chats');
 
 if (chats) {
-    chats.innerHTML = template(data);
+    chats.innerHTML = developmentTemplate(data);
 }

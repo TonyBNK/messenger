@@ -11,10 +11,7 @@
         @include makeFlexBoxContainer(column, center, center);
 
         .profile-photo {
-            background-color: $borderSecondaryColor;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            @include makeCircle(150px);
             margin-bottom: 50px;
         }
 
@@ -41,9 +38,7 @@
                     @include makeFlexBoxContainer(row, space-between, center);
 
                     span, label, input {
-                        @include makeLabel;
-
-                        font-weight: 550;
+                        @include makeLabel($titleMainColor, 16px, 550);
 
                         &:first-child, label {
                             color: $titleMainColor;
@@ -51,7 +46,7 @@
                     }
 
                     input {
-                        @include makeInput;
+                        @include makeInput($titleSecondaryColor, none, 16px, 550);
                     }
                 }
             }

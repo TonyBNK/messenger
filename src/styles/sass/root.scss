@@ -44,17 +44,17 @@ h3 {
 }
 
 .alt-url {
-    @include makeLink;
+    @include makeLink();
 }
 
 .main-button {
-    @include makeMainFormButton;
+    @include makeMainFormButton();
 }
 
 .field-title {
-    @include makeLabel;
+    @include makeLabel();
 }
 
 .field-input {
-    @include makeInput;
+    @include makeInput();
 }

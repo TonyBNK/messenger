@@ -21,21 +21,21 @@
     border: none;
 }
 
-@mixin makeLink() {
+@mixin makeLink($linkColor: $linkMainColor) {
     text-decoration: none;
     font-size: 14px;
     font-family: sans-serif;
     font-weight: 600;
-    color: $linkMainColor;
+    color: $linkColor;
 
     &:visited {
-        color: $linkMainColor;
+        color: $linkColor;
     }
 }
 
-@mixin makeLabel() {
+@mixin makeLabel($labelColor: $titleSecondaryColor) {
     font-size: 16px;
-    color: $titleSecondaryColor;
+    color: $labelColor;
     font-family: sans-serif;
 }
 

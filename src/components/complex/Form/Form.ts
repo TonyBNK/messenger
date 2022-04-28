@@ -2,10 +2,36 @@ import {Block} from '../../common';
 import {Input} from '../../base';
 import {render} from '../../../utils/renderDom';
 import {formTemplate} from '../../../templates/complex';
+import {IButton} from '../../base/Button/Button';
+import {IAltUrl} from '../../base/AltUrl/AltUrl';
+
+type FieldType = {
+    name: string
+    label: string
+    type: string
+    required: boolean
+}
+
+type FormPropsType = {
+    title: string
+    button: IButton
+    altUrl: IAltUrl
+    fields: Array<FieldType>
+}
 
 export class Form extends Block {
-    constructor(props: Record<string, any>) {
+    constructor(props: FormPropsType) {
         super('div', props);
+    }
+
+    private renderFields(form: DocumentFragment) {
+        this.props.fields.forEach((field: FieldType) => {
+            render('.form-field-container', new Input({
+                ...field,
+                classNameLabel: 'field-title',
+                classNameInput: 'field-input',
+            }), form);
+        });
     }
 
     render() {
@@ -16,13 +42,7 @@ export class Form extends Block {
             fields: this.props.fields,
         });
 
-        this.props.fields.forEach((field: Record<string, any>) => {
-            render('.form-field-container', new Input({
-                ...field,
-                classNameLabel: 'field-title',
-                classNameInput: 'field-input',
-            }), form);
-        });
+        this.renderFields(form);
 
         return form;
     }

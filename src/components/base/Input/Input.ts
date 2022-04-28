@@ -1,8 +1,18 @@
 import {Block} from '../../common';
 import {inputTemplate} from '../../../templates/base';
 
+type InputPropsType = {
+    name: string
+    label: string
+    type?: string
+    classNameLabel?: string
+    classNameInput?: string
+    required?: boolean
+    autofocus?: boolean
+}
+
 export class Input extends Block {
-    constructor(props: Record<string, any>) {
+    constructor(props: InputPropsType) {
         super('div', props);
     }
 
@@ -14,6 +24,7 @@ export class Input extends Block {
             classNameLabel: this.props.classNameLabel,
             classNameInput: this.props.classNameInput,
             required: this.props.required,
+            autofocus: this.props.autofocus,
         });
     }
 }

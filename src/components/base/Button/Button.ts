@@ -1,8 +1,22 @@
 import {Block} from '../../common';
 import {buttonTemplate} from '../../../templates/base';
+import {IBlock} from '../../common/Block/Block';
+
+type ButtonPropsType = {
+    label: string
+    id?: string
+    type?: string
+    className?: string
+    events?: {
+        click?: () => void
+    }
+}
+
+export interface IButton extends IBlock {
+}
 
 export class Button extends Block {
-    constructor(props: Record<string, any>) {
+    constructor(props: ButtonPropsType) {
         super('span', props);
     }
 

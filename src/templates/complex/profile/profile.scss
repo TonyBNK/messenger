@@ -11,7 +11,7 @@
         @include makeFlexBoxContainer(column, center, center);
 
         .profile-photo {
-            background-color: $borderBottomSecondaryColor;
+            background-color: $borderSecondaryColor;
             width: 150px;
             height: 150px;
             border-radius: 50%;
@@ -28,7 +28,7 @@
 
             .list-item {
                 margin-bottom: 15px;
-                border-bottom: $borderBottomSecondaryColor 2px solid;
+                border-bottom: $borderSecondaryColor 2px solid;
                 padding-bottom: 15px;
 
                 &:last-child {
@@ -37,7 +37,7 @@
                     margin-bottom: 50px;
                 }
 
-                .field-container {
+                div {
                     @include makeFlexBoxContainer(row, space-between, center);
 
                     span, label, input {
@@ -58,12 +58,11 @@
         }
 
         .button-container {
-            @include makeFlexBoxContainer(column);
+            @include makeFlexBoxContainer(column, flex-start, flex-start);
 
-            align-items: flex-start;
             width: 100%;
 
-            .alt-url {
+            span {
                 margin-bottom: 15px;
                 padding-bottom: 10px;
 
@@ -71,14 +70,16 @@
                     padding-bottom: 0;
                     margin-bottom: 0;
 
-                    &:visited {
-                        color: $linkSecondaryColor;
+                    a {
+                        &:visited {
+                            color: $linkSecondaryColor;
+                        }
                     }
                 }
-            }
 
-            .main-button {
-                align-self: center;
+                &:only-child {
+                    align-self: center;
+                }
             }
         }
     }

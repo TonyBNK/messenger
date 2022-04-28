@@ -1,0 +1,318 @@
+@import "../../styles/sass/mixins";
+@import "../../styles/sass/variables";
+
+.window {
+    height: 100vh;
+
+    .chats-container {
+        @include makeFlexBoxContainer();
+        height: 100%;
+
+        .chat-list {
+            max-width: 450px;
+            min-width: 300px;
+            width: 25%;
+            border-right: $borderSecondaryColor 2px solid;
+            padding: 0 15px;
+
+            @include makeFlexBoxContainer(column, flex-start, center);
+
+            .chat-list-head {
+                height: 120px;
+                border-bottom: $borderSecondaryColor 2px solid;
+                width: 100%;
+                padding: 20px 0;
+
+                @include makeFlexBoxContainer(column, space-between, flex-end);
+
+                a {
+                    @include makeLink($titleSecondaryColor);
+                    font-size: 16px;
+
+                    div {
+                        margin: 0 5px 0 10px;
+                        display: inline-block;
+                        width: 10px;
+                        height: 10px;
+                        border-bottom: $titleSecondaryColor 2px solid;
+                        border-right: $titleSecondaryColor 2px solid;
+                        transform: rotate(-45deg);
+                    }
+                }
+
+                input {
+                    padding: 0 10px;
+                    width: 100%;
+                    height: 40px;
+                    background-color: $borderSecondaryColor;
+                    border: none;
+                    border-radius: 7px;
+                    font-size: 25px;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            .chat-list-body {
+                width: 100%;
+
+                .chat-list-item-container {
+                    border-bottom: $borderSecondaryColor 2px solid;
+
+                    .chat-list-item {
+                        margin: 5px -15px;
+                        height: 100px;
+                        padding: 10px 15px;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: $chatHoverColor;
+                        }
+
+                        .chat-content {
+                            height: 100%;
+                            width: 100%;
+                            @include makeFlexBoxContainer(row);
+
+                            .chat-content-avatar {
+                                width: 80px;
+                                height: 80px;
+                                border-radius: 50%;
+                                background-color: $borderSecondaryColor;
+                            }
+
+                            .chat-content-body {
+                                margin-left: 15px;
+                                width: calc(100% - 95px);
+
+                                @include makeFlexBoxContainer(row, space-between, center);
+
+                                .text-content {
+                                    height: 100%;
+                                    width: 100%;
+
+                                    .name {
+                                        max-height: 20px;
+                                        @include makeLabel($titleMainColor);
+                                        font-weight: 600;
+                                    }
+
+                                    .last-message {
+                                        @include makeLabel();
+                                        padding: 5px 0 0 0;
+                                        max-height: 60px;
+                                    }
+                                }
+
+                                .time-content {
+                                    height: 100%;
+                                    width: 80px;
+
+                                    @include makeFlexBoxContainer(column, space-between, flex-end);
+
+                                    .time {
+                                        @include makeLabel();
+                                    }
+
+                                    .unread-messages {
+                                        @include makeLabel(white);
+                                        font-weight: 600;
+
+                                        @include makeFlexBoxContainer(row, center, center);
+
+                                        height: 25px;
+                                        width: 25px;
+                                        border-radius: 50%;
+                                        background-color: $buttonMainColor;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .chat-window {
+            padding: 0 15px;
+            width: 100%;
+            height: 100%;
+
+            .chat-window-head {
+                padding: 10px 0;
+                height: 60px;
+                border-bottom: $borderSecondaryColor 2px solid;
+                @include makeFlexBoxContainer(row, space-between, center);
+
+                .pen-friend-container {
+                    @include makeFlexBoxContainer(row, flex-start, center);
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                    .pen-friend-avatar {
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        background-color: $borderSecondaryColor;
+                    }
+
+                    .pen-friend-name {
+                        margin-left: 15px;
+                        @include makeLabel($titleMainColor);
+                        font-weight: 600;
+                    }
+                }
+
+                .chat-options {
+                    height: 40px;
+                    width: 40px;
+                    border-radius: 50%;
+
+                    @include makeFlexBoxContainer(column, space-evenly, center);
+
+                    &:hover {
+                        background-color: $borderSecondaryColor;
+                        cursor: pointer;
+                    }
+
+                    .options-dot {
+                        height: 4px;
+                        width: 4px;
+                        border-radius: 50%;
+                        background-color: $titleMainColor;
+                    }
+                }
+            }
+
+            .chat-window-body {
+                height: calc(100% - 60px);
+                @include makeFlexBoxContainer(column, space-between, center);
+
+                .messages {
+                    height: 100%;
+                    width: 100%;
+                    padding: 30px 0;
+                    @include makeFlexBoxContainer(column, flex-end);
+
+                    .message-date {
+                        @include makeLabel();
+                        align-self: center;
+                    }
+
+                    .my-message {
+                        margin: 30px 0;
+                        max-width: 45%;
+                        align-self: flex-end;
+                        background-color: $myMessageColor;
+                        padding: 10px;
+                        font-family: sans-serif;
+                        border-radius: 15px 15px 0 15px;
+                        position: relative;
+                    }
+
+                    .pen-friend-message {
+                        margin: 30px 0;
+                        max-width: 45%;
+                        background-color: $penFriendMessageColor;
+                        padding: 10px;
+                        font-family: sans-serif;
+                        border-radius: 0 15px 15px 15px;
+                        position: relative;
+                    }
+
+                    .message-time {
+                        position: absolute;
+                        right: 10px;
+                        bottom: 7px;
+                        @include makeLabel();
+                        font-size: 12px;
+                    }
+                }
+
+                .input-container {
+                    width: 100%;
+                    height: 60px;
+                    border-top: $borderSecondaryColor 2px solid;
+
+                    @include makeFlexBoxContainer(row, space-between, center);
+
+                    .message-attachments {
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        position: relative;
+
+                        &:before {
+                            content: " ";
+                            position: absolute;
+                            display: block;
+                            background-color: $titleSecondaryColor;
+                            width: 2px;
+                            margin-left: -1px;
+                            left: 50%;
+                            top: 5px;
+                            bottom: 5px;
+                            z-index: 9;
+                        }
+
+                        &:after {
+                            content: " ";
+                            position: absolute;
+                            display: block;
+                            background-color: $titleSecondaryColor;
+                            margin-top: -1px;
+                            height: 2px;
+                            top: 50%;
+                            left: 5px;
+                            right: 5px;
+                            z-index: 9;
+                        }
+
+                        &:hover {
+                            background-color: $borderSecondaryColor;
+                            cursor: pointer;
+                        }
+                    }
+
+                    .new-message {
+                        padding: 0 10px;
+                        height: 40px;
+                        background-color: $borderSecondaryColor;
+                        border: none;
+                        border-radius: 30px;
+                        font-size: 25px;
+                        width: calc(100% - 110px);
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    .send-message {
+                        background: $buttonMainColor;
+                        height: 40px;
+                        width: 40px;
+                        border-radius: 50%;
+                        font-family: sans-serif;
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: white;
+                        cursor: pointer;
+                        border: none;
+                    }
+                }
+            }
+
+            .empty-chat-window {
+                height: 100%;
+                @include makeFlexBoxContainer(row, center, center);
+                @include makeLabel();
+                font-weight: 600;
+            }
+        }
+    }
+}

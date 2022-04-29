@@ -40,7 +40,13 @@
     font-weight: $fontWeight;
 }
 
-@mixin makeInput($color: $titleSecondaryColor, $backgroundColor: none, $fontSize: 12px, $fontWeight: 500, $borderRadius: inherit) {
+@mixin makeInput(
+    $color: $titleSecondaryColor,
+    $backgroundColor: inherit,
+    $fontSize: 12px,
+    $fontWeight: 500,
+    $borderRadius: inherit
+) {
     border: none;
     color: $color;
     background-color: $backgroundColor;
@@ -97,7 +103,7 @@
 }
 
 @mixin makeIconBlank($backgroundColor: $titleSecondaryColor) {
-    content: " ";
+    content: ' ';
     position: absolute;
     display: block;
     background-color: $backgroundColor;
@@ -107,6 +113,7 @@
 @mixin makeVerticalLine($backgroundColor: $titleSecondaryColor) {
     &:before {
         @include makeIconBlank($backgroundColor);
+
         width: 2px;
         margin-left: -1px;
         left: 50%;
@@ -118,6 +125,7 @@
 @mixin makeHorizontalLine($backgroundColor: $titleSecondaryColor) {
     &:after {
         @include makeIconBlank($backgroundColor);
+
         height: 2px;
         margin-top: -1px;
         top: 50%;

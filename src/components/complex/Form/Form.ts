@@ -1,9 +1,7 @@
 import {Block} from '../../common';
-import {Input} from '../../base';
+import {Input, IButton, IAltUrl} from '../../base';
 import {render} from '../../../utils/renderDom';
 import {formTemplate} from '../../../templates/complex';
-import {IButton} from '../../base/Button/Button';
-import {IAltUrl} from '../../base/AltUrl/AltUrl';
 
 type FieldType = {
     name: string

@@ -1,9 +1,9 @@
-import {Block} from '../../common';
+import {Block, IBlock} from '../../common';
 import {buttonTemplate} from '../../../templates/base';
-import {IBlock} from '../../common/Block/Block';
 
 type ButtonPropsType = {
-    label: string
+    label?: string
+    children?: IBlock
     id?: string
     type?: string
     className?: string
@@ -26,6 +26,7 @@ export class Button extends Block {
             type: this.props.type,
             className: this.props.className,
             label: this.props.label,
+            children: this.props.children,
         });
     }
 }

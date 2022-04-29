@@ -12,6 +12,7 @@
 
         .profile-photo {
             @include makeCircle(150px);
+
             margin-bottom: 50px;
         }
 

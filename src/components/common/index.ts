@@ -1,5 +1,1 @@
-import {Block} from './Block/Block';
-
-export {
-    Block,
-};
+export * from './Block/Block';

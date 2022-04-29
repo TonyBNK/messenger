@@ -1,11 +1,13 @@
-@import "../../styles/sass/mixins";
-@import "../../styles/sass/variables";
+@import '../../../styles/sass/mixins';
+@import '../../../styles/sass/variables';
 
 .window {
     height: 100vh;
+    width: 100vw;
 
     .chats-container {
         @include makeFlexBoxContainer();
+
         height: 100%;
 
         .chat-list {
@@ -27,16 +29,19 @@
 
                 .to-profile {
                     @include makeLink($titleSecondaryColor, 16px);
-
                     @include makeArrow();
                 }
 
-                .chat-list-search {
-                    @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 7px);
-
-                    padding: 0 10px;
+                div {
                     width: 100%;
-                    height: 40px;
+
+                    .chat-list-search {
+                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 7px);
+
+                        padding: 0 10px;
+                        width: 100%;
+                        height: 40px;
+                    }
                 }
             }
 
@@ -45,6 +50,10 @@
 
                 .chat-list-item-container {
                     border-bottom: $borderSecondaryColor 2px solid;
+
+                    .selected-chat {
+                        background-color: $chatSelectedColor;
+                    }
 
                     .chat-list-item {
                         margin: 5px -15px;
@@ -55,7 +64,6 @@
 
                         .chat-content {
                             @include fillWholeSpace();
-
                             @include makeFlexBoxContainer(row);
 
                             .chat-content-avatar {
@@ -73,12 +81,14 @@
 
                                     .name {
                                         max-height: 20px;
+
                                         @include makeLabel($titleMainColor, 16px, 600);
                                     }
 
                                     .last-message {
                                         @include makeLabel();
-                                        padding: 5px 0 0 0;
+
+                                        padding: 5px 0 0;
                                         max-height: 60px;
                                     }
                                 }
@@ -89,15 +99,13 @@
 
                                     @include makeFlexBoxContainer(column, space-between, flex-end);
 
-                                    .time {
+                                    .last-message-time {
                                         @include makeLabel();
                                     }
 
                                     .unread-messages {
                                         @include makeLabel(white, 16px, 600);
-
                                         @include makeFlexBoxContainer(row, center, center);
-
                                         @include makeCircle(25px, $buttonMainColor);
                                     }
                                 }
@@ -117,11 +125,11 @@
                 padding: 10px 0;
                 height: 60px;
                 border-bottom: $borderSecondaryColor 2px solid;
+
                 @include makeFlexBoxContainer(row, space-between, center);
 
                 .pen-friend-container {
                     @include makeFlexBoxContainer(row, flex-start, center);
-
                     @include makeHoverEffect(none);
 
                     .pen-friend-avatar {
@@ -130,52 +138,65 @@
 
                     .pen-friend-name {
                         margin-left: 15px;
+
                         @include makeLabel($titleMainColor, 16px, 600);
                     }
                 }
 
                 .chat-options {
-                    @include makeCircle(40px, none);
+                    border: none;
+                    background-color: inherit;
 
-                    @include makeFlexBoxContainer(column, space-evenly, center);
+                    div {
+                        height: 100%;
 
-                    @include makeHoverEffect();
+                        @include makeCircle(40px, none);
+                        @include makeFlexBoxContainer(column, space-evenly, center);
+                        @include makeHoverEffect();
 
-                    .options-dot {
-                        @include makeCircle(4px, $titleMainColor);
+                        .options-dot {
+                            @include makeCircle(4px, $titleMainColor);
+                        }
                     }
                 }
             }
 
             .chat-window-body {
                 height: calc(100% - 60px);
+
                 @include makeFlexBoxContainer(column, space-between, center);
 
-                .messages {
+                .message-list {
                     @include fillWholeSpace();
 
                     padding: 30px 0;
 
                     @include makeFlexBoxContainer(column, flex-end);
 
-                    .message-date {
+                    .messages-date {
                         @include makeLabel();
+
                         align-self: center;
                     }
 
-                    .my-message {
-                        @include makeMessageContainer($myMessageColor, flex-end);
-                    }
+                    div {
+                        @include makeFlexBoxContainer(column);
 
-                    .pen-friend-message {
-                        @include makeMessageContainer();
-                    }
+                        .my-message {
+                            @include makeMessageContainer($myMessageColor, flex-end);
+                        }
 
-                    .message-time {
-                        position: absolute;
-                        right: 10px;
-                        bottom: 7px;
-                        @include makeLabel($titleSecondaryColor, 12px);
+                        .pen-friend-message {
+                            @include makeMessageContainer();
+                        }
+
+                        .message-time {
+                            position: absolute;
+                            right: 10px;
+                            bottom: 7px;
+
+                            @include makeLabel($titleSecondaryColor, 12px);
+                        }
                     }
                 }
 
@@ -188,28 +209,36 @@
 
                     .message-attachments {
                         @include makeCircle(40px, none);
+
                         position: relative;
+                        border: none;
+                        background-color: inherit;
 
                         @include makePlusIcon();
-
                         @include makeHoverEffect();
+
+                        margin-right: 10px;
                     }
 
-                    .new-message {
-                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+                    div {
+                        width: 100%;
 
-                        padding: 0 10px;
-                        height: 40px;
-                        width: calc(100% - 110px);
+                        .new-message {
+                            @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+
+                            padding: 0 10px;
+                            height: 40px;
+                            width: 100%;
+                            border: none;
+                        }
                     }
 
                     .send-message {
                         @include makeCircle(40px, $buttonMainColor);
-
                         @include makeLabel(white, 16px, 500);
-
                         @include makeHoverEffect(none);
 
+                        margin-left: 10px;
                         border: none;
                     }
                 }
@@ -219,7 +248,6 @@
                 height: 100%;
 
                 @include makeFlexBoxContainer(row, center, center);
-
                 @include makeLabel($titleSecondaryColor, 16px, 600);
             }
         }

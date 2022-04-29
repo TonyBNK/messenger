@@ -1,14 +1,17 @@
-import {Block} from '../../common';
+import {Block, IBlock} from '../../common';
 import {inputTemplate} from '../../../templates/base';
 
 type InputPropsType = {
-    name: string
-    label: string
+    name?: string
+    label?: string
     type?: string
     classNameLabel?: string
     classNameInput?: string
     required?: boolean
     autofocus?: boolean
+}
+
+export interface IInput extends IBlock {
 }
 
 export class Input extends Block {

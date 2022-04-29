@@ -1,6 +1,5 @@
 import {avatarTemplate} from '../../../templates/base';
-import {Block} from '../../common';
-import {IBlock} from '../../common/Block/Block';
+import {Block, IBlock} from '../../common';
 
 type AvatarPropsType = {
     image?: string

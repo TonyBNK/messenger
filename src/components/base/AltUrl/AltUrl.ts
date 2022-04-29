@@ -1,12 +1,12 @@
 import {altUrlTemplate} from '../../../templates/base';
-import {Block} from '../../common';
-import {IBlock} from '../../common/Block/Block';
+import {Block, IBlock} from '../../common';
 
 type AltUrlPropsType = {
     href: string
     label: string
     id?: string
     className?: string
+    children?: IBlock
 }
 
 export interface IAltUrl extends IBlock {
@@ -20,8 +20,10 @@ export class AltUrl extends Block {
     render() {
         return this.compile(altUrlTemplate, {
             href: this.props.href,
-            className: this.props.className,
             label: this.props.label,
+            id: this.props.id,
+            className: this.props.className,
+            children: this.props.children,
         });
     }
 }

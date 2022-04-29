@@ -1,9 +1,12 @@
-import {Block} from '../../common';
+import {Block, IBlock} from '../../common';
 import {textRowTemplate} from '../../../templates/base';
 
 type TextRowType = {
     label: string
     value: string,
+}
+
+export interface ITextRow extends IBlock {
 }
 
 export class TextRow extends Block {

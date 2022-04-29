@@ -1,10 +1,9 @@
 import {Block} from '../../common';
 import {profileTemplate} from '../../../templates/complex';
-import {AltUrl, Input} from '../../base';
-import {TextRow} from '../../base/TextRow/TextRow';
-import {render} from '../../../utils/renderDom';
-import {IAvatar} from '../../base/Avatar/Avatar';
-import {IButton} from '../../base/Button/Button';
+import {
+    AltUrl, IAvatar, IButton, Input, TextRow,
+} from '../../base';
+import {render, renderList} from '../../../utils/renderDom';
 
 type FieldType = {
     label: string
@@ -46,24 +45,6 @@ export class Profile extends Block {
         });
     }
 
-    private renderFields(profile: DocumentFragment) {
-        const rows = profile.querySelectorAll('.list-item');
-
-        rows.forEach((row, i) => {
-            const block = this.props.editMode
-                ? new Input({...this.props.fields[i]})
-                : new TextRow({...this.props.fields[i]});
-
-            const content = block.getContent();
-
-            if (content) {
-                row.appendChild(content);
-            }
-
-            block.dispatchComponentDidMount();
-        });
-    }
-
     render() {
         const profile = this.compile(profileTemplate, {
             avatar: this.props.avatar,
@@ -78,7 +59,7 @@ export class Profile extends Block {
             this.renderLinks(profile);
         }
 
-        this.renderFields(profile);
+        renderList(profile, '.list-item', this.props.fields, this.props.editMode ? Input : TextRow);
 
         return profile;
     }

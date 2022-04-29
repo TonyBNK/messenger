@@ -1,7 +1,6 @@
-import {Avatar} from '../../components/base/Avatar/Avatar';
-import {Profile} from '../../components/complex/Profile/Profile';
+import {Avatar, Button} from '../../components/base';
+import {Profile} from '../../components/complex';
 import {render} from '../../utils/renderDom';
-import {Button} from '../../components/base';
 
 const infoFields = [
     {

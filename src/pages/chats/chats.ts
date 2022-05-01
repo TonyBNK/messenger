@@ -4,6 +4,7 @@ import {
 } from '../../components/base';
 import {Arrow, More} from '../../components/icons';
 import {Chats} from '../../components/pages';
+import {Form} from '../../components/complex';
 
 const toProfile = new AltUrl({
     href: '../profile/profile.html',
@@ -63,15 +64,35 @@ const attachmentsButton = new Button({
     className: 'message-attachments',
 });
 
-const newMessage = new Input({
-    type: 'text',
-    classNameInput: 'new-message',
-    name: 'message',
-});
+const handleSubmit = (e: Event) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target as HTMLFormElement).entries());
+
+    console.log(data);
+};
 
 const sendButton = new Button({
+    type: 'submit',
     className: 'send-message',
     label: '➜',
+});
+
+const fields = [
+    {
+        type: 'text',
+        classNameInput: 'new-message',
+        name: 'message',
+    },
+];
+
+const form = new Form({
+    name: 'newMessage',
+    fields,
+    button: sendButton,
+    events: {
+        submit: handleSubmit,
+    },
 });
 
 const chats = new Chats({
@@ -84,8 +105,7 @@ const chats = new Chats({
     messagesDate: '19 июня',
     messages,
     attachmentsButton,
-    newMessage,
-    sendButton,
+    form,
     isChatSelected: false,
 });
 

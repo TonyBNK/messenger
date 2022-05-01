@@ -8,7 +8,7 @@ import {render, renderList} from '../../../utils/renderDom';
 
 type FieldType = {
     name: string
-    label: string
+    label?: string
     type: string
     required?: boolean
     autofocus?: boolean

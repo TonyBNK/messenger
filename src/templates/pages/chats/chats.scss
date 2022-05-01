@@ -223,23 +223,41 @@
                     div {
                         width: 100%;
 
-                        .new-message {
-                            @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+                        .form-info {
+                            @include makeFlexBoxContainer(row, space-between, center);
 
-                            padding: 0 10px;
-                            height: 40px;
-                            width: 100%;
-                            border: none;
+                            .fields-container {
+                                div {
+                                    .new-message {
+                                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+
+                                        width: 100%;
+                                        padding: 0 10px;
+                                        height: 40px;
+                                        border: none;
+                                    }
+                                }
+                            }
+
+                            .form-buttons-container {
+                                width: 50px;
+
+                                .form-buttons {
+
+                                    span {
+
+                                        .send-message {
+                                            @include makeCircle(40px, $buttonMainColor);
+                                            @include makeLabel(white, 16px, 500);
+                                            @include makeHoverEffect(none);
+
+                                            margin-left: 10px;
+                                            border: none;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-
-                    .send-message {
-                        @include makeCircle(40px, $buttonMainColor);
-                        @include makeLabel(white, 16px, 500);
-                        @include makeHoverEffect(none);
-
-                        margin-left: 10px;
-                        border: none;
                     }
                 }
             }

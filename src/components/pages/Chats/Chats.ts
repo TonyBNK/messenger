@@ -4,7 +4,7 @@ import {
 } from '../../base';
 import {render, renderList} from '../../../utils/renderDom';
 import {chatsTemplate} from '../../../templates/pages';
-import {Chat} from '../../complex';
+import {Chat, IForm} from '../../complex';
 
 type ChatType = {
     avatar: IAvatar
@@ -34,8 +34,7 @@ type ChatsPropsType = {
     messagesDate: string
     messages: Array<MessageType>
     attachmentsButton: IButton
-    newMessage: IInput
-    sendButton: IButton
+    form: IForm
     isChatSelected: boolean
 }
 
@@ -63,8 +62,7 @@ export class Chats extends Block {
             messagesDate: this.props.messagesDate,
             messages: this.props.messages,
             attachmentsButton: this.props.attachmentsButton,
-            newMessage: this.props.newMessage,
-            sendButton: this.props.sendButton,
+            form: this.props.form,
             isChatSelected: this.props.isChatSelected,
         });
 

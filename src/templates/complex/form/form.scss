@@ -1,49 +1,33 @@
 @import '../../../styles/sass/mixins';
 @import '../../../styles/sass/variables';
 
-.window {
-    min-width: 375px;
-    background: $windowBackgroundColor;
-    box-shadow: 0 0 6px rgba(0, 0, 0, 14%);
-    border-radius: 12px;
-    padding: 40px 30px;
+.form-info {
+    margin-top: 30px;
+    min-height: 400px;
 
-    .form-container {
-        .form-title {
-            @include makeLabel($titleSecondaryColor, 24px, 600);
+    @include makeFlexBoxContainer(column, space-between);
 
-            text-align: center;
-        }
+    .fields-container {
+        div {
+            @include makeFlexBoxContainer(column);
 
-        .form-info {
-            margin-top: 30px;
-            min-height: 400px;
-
-            @include makeFlexBoxContainer(column, space-between);
-
-            .form-field-container {
-                div {
-                    @include makeFlexBoxContainer(column);
-
-                    .field-title {
-                        margin-top: 10px;
-                        font-weight: 600;
-                    }
-
-                    .field-input {
-                        height: 30px;
-                        margin-bottom: 30px;
-                        font-size: 18px;
-                        border-bottom: 2px solid $borderMainColor;
-                    }
-                }
+            .field-title {
+                margin-top: 10px;
+                font-weight: 600;
             }
 
-            .form-buttons-container {
-                @include makeFlexBoxContainer(column);
-
-                align-items: center;
+            .field-input {
+                height: 30px;
+                margin-bottom: 30px;
+                font-size: 18px;
+                border-bottom: 2px solid $borderMainColor;
             }
         }
+    }
+
+    .form-buttons-container {
+        @include makeFlexBoxContainer(column);
+
+        align-items: center;
     }
 }

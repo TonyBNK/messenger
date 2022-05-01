@@ -21,19 +21,23 @@ export const renderList = (
     items: Array<Record<string, any>>,
     Component: Constructable<Block>,
 ) => {
-    const elements = fragment.querySelectorAll(query);
+    const container = fragment.querySelector(query);
 
-    elements.forEach((element, i) => {
-        const block = new Component({
-            ...items[i],
-        });
+    const blocks = items.map((item) => new Component({
+        ...item,
+    }));
 
-        const content = block.getContent();
+    if (container) {
+        container.textContent = '';
 
-        if (content) {
-            element.appendChild(content);
+        for (let i = 0; i < blocks.length; i++) {
+            const content = blocks[i].getContent();
+
+            if (content) {
+                container.appendChild(content);
+            }
         }
+    }
 
-        block.dispatchComponentDidMount();
-    });
+    return container;
 };

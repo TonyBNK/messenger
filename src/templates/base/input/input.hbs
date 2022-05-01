@@ -1,11 +1,15 @@
-<label for="{{name}}" class="{{classNameLabel}}">
+<label
+    for="{{name}}"
+    class="{{#if classNameLabel}}{{classNameLabel}}{{else}}field-title{{/if}}"
+>
     {{label}}
 </label>
 <input
-    class="{{classNameInput}}"
+    class="{{#if classNameInput}}{{classNameInput}}{{else}}field-input{{/if}}"
     type="{{type}}"
     name="{{name}}"
     id="{{name}}"
+    value="{{value}}"
     {{#if required}}required{{/if}}
     {{#if autofocus}}autofocus{{/if}}
 >

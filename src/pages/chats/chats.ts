@@ -1,9 +1,9 @@
 import {render} from '../../utils/renderDom';
-import {Chats} from '../../components/complex';
 import {
     AltUrl, Avatar, Button, Input,
 } from '../../components/base';
 import {Arrow, More} from '../../components/icons';
+import {Chats} from '../../components/pages';
 
 const toProfile = new AltUrl({
     href: '../profile/profile.html',
@@ -66,6 +66,7 @@ const attachmentsButton = new Button({
 const newMessage = new Input({
     type: 'text',
     classNameInput: 'new-message',
+    name: 'message',
 });
 
 const sendButton = new Button({

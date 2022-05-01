@@ -1,5 +1,5 @@
 import {Block, IBlock} from '../../common';
-import {chatTemplate} from '../../../templates/base';
+import {chatTemplate} from '../../../templates/complex';
 
 type ChatPropsType = {
     id?: string

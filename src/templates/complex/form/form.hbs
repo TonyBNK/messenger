@@ -1,16 +1,15 @@
-<div class="window">
-    <div class="form-container">
-        <div class="form-title">
-            {{title}}
-        </div>
-        <form action="" method="get" class="form-info">
-            {{#each fields}}
-                <div class="form-field-container"></div>
-            {{/each}}
-            <div class="form-buttons-container">
-                {{{button}}}
-                {{{altUrl}}}
-            </div>
-        </form>
+<form
+    method="post"
+    class="form-info"
+    name="{{name}}"
+>
+    <div class="fields-container">
+        {{#each fields}}
+            {{{this}}}
+        {{/each}}
     </div>
-</div>
+    <div class="form-buttons-container">
+        {{{button}}}
+        {{{altUrl}}}
+    </div>
+</form>

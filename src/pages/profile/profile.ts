@@ -1,6 +1,7 @@
 import {Avatar, Button} from '../../components/base';
-import {Profile} from '../../components/complex';
 import {render} from '../../utils/renderDom';
+import {Profile} from '../../components/pages';
+import {Form} from '../../components/complex';
 
 const infoFields = [
     {
@@ -56,7 +57,7 @@ const passwordFields = [
     },
     {
         label: 'Повторите новый пароль',
-        name: 'newPasswordRepeat',
+        name: 'newPasswordAgain',
         type: 'password',
     },
 ];
@@ -71,6 +72,9 @@ const links = [
                 userProfile.setProps({
                     editMode: true,
                 });
+                form.setProps({
+                    readonly: false,
+                });
             },
         },
     },
@@ -82,6 +86,9 @@ const links = [
             click: () => {
                 userProfile.setProps({
                     editMode: true,
+                });
+                form.setProps({
+                    readonly: false,
                     fields: passwordFields,
                 });
             },
@@ -92,6 +99,14 @@ const links = [
         label: 'Выйти',
     },
 ];
+
+const handleSubmit = (e: Event) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target as HTMLFormElement).entries());
+
+    console.log(data);
+};
 
 const avatar = new Avatar({
     id: 'profilePhoto',
@@ -107,16 +122,28 @@ const button = new Button({
         click: () => {
             userProfile.setProps({
                 editMode: false,
+            });
+            form.setProps({
                 fields: infoFields,
+                readonly: true,
             });
         },
+    },
+});
+
+const form = new Form({
+    name: 'userProfile',
+    fields: infoFields,
+    readonly: true,
+    events: {
+        submit: handleSubmit,
     },
 });
 
 const userProfile = new Profile({
     avatar,
     name: 'Иван',
-    fields: infoFields,
+    form,
     links,
     button,
 });

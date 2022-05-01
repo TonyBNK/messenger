@@ -3,7 +3,7 @@ import {textRowTemplate} from '../../../templates/base';
 
 type TextRowType = {
     label: string
-    value: string,
+    value?: string,
 }
 
 export interface ITextRow extends IBlock {

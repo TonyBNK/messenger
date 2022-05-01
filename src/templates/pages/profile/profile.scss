@@ -1,0 +1,88 @@
+@import '../../../styles/sass/mixins';
+@import '../../../styles/sass/variables';
+
+.window {
+    min-width: 375px;
+    width: 800px;
+
+    .profile-container {
+        margin: 40px 30px;
+
+        @include makeFlexBoxContainer(column, center, center);
+
+        .profile-name {
+            font-weight: 550;
+        }
+
+        div {
+            @include makeFlexBoxContainer(column, center, center);
+            width: 100%;
+
+            .profile-photo {
+                @include makeCircle(150px);
+
+                margin-bottom: 50px;
+            }
+
+            .form-info {
+                width: 100%;
+
+                .fields-container {
+
+                    div {
+                        margin-bottom: 15px;
+                        border-bottom: $borderSecondaryColor 2px solid;
+                        padding-bottom: 15px;
+
+                        &:last-child {
+                            border-bottom: none;
+                            padding-bottom: 0;
+                            margin-bottom: 50px;
+                        }
+
+
+                        @include makeFlexBoxContainer(row, space-between, center);
+
+                        span, label, input {
+                            @include makeLabel($titleSecondaryColor, 16px, 550);
+
+                            &:first-child, label {
+                                color: $titleMainColor;
+                            }
+                        }
+
+                        input {
+                            @include makeInput($titleSecondaryColor, none, 16px, 550);
+                        }
+                    }
+                }
+            }
+        }
+
+        .button-container {
+            @include makeFlexBoxContainer(column, flex-start, flex-start);
+
+            width: 100%;
+
+            span {
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+
+                &:last-child {
+                    padding-bottom: 0;
+                    margin-bottom: 0;
+
+                    a {
+                        &:visited {
+                            color: $linkSecondaryColor;
+                        }
+                    }
+                }
+
+                &:only-child {
+                    align-self: center;
+                }
+            }
+        }
+    }
+}

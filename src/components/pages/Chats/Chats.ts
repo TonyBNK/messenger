@@ -1,9 +1,10 @@
 import {Block} from '../../common';
-import {chatsTemplate} from '../../../templates/complex';
 import {
-    Chat, Message, IAltUrl, IInput, IAvatar, IButton,
+    Message, IAltUrl, IInput, IAvatar, IButton,
 } from '../../base';
 import {render, renderList} from '../../../utils/renderDom';
+import {chatsTemplate} from '../../../templates/pages';
+import {Chat} from '../../complex';
 
 type ChatType = {
     avatar: IAvatar

@@ -5,6 +5,7 @@ type InputPropsType = {
     name?: string
     label?: string
     type?: string
+    value?: string
     classNameLabel?: string
     classNameInput?: string
     required?: boolean
@@ -24,6 +25,7 @@ export class Input extends Block {
             name: this.props.name,
             label: this.props.label,
             type: this.props.type,
+            value: this.props.value,
             classNameLabel: this.props.classNameLabel,
             classNameInput: this.props.classNameInput,
             required: this.props.required,

@@ -1,17 +1,8 @@
 import {Block} from '../../common';
-import {profileTemplate} from '../../../templates/complex';
-import {
-    AltUrl, IAvatar, IButton, Input, TextRow,
-} from '../../base';
-import {render, renderList} from '../../../utils/renderDom';
-
-type FieldType = {
-    label: string
-    name: string
-    value?: string
-    type?: string
-    autofocus?: boolean
-}
+import {AltUrl, IAvatar, IButton} from '../../base';
+import {render} from '../../../utils/renderDom';
+import {profileTemplate} from '../../../templates/pages';
+import {IForm} from '../../complex';
 
 type LinkType = {
     href: string
@@ -25,7 +16,7 @@ type LinkType = {
 type ProfilePropsType = {
     avatar: IAvatar
     name: string
-    fields: Array<FieldType>
+    form: IForm
     links: Array<LinkType>
     button: IButton
     editMode?: boolean
@@ -49,7 +40,7 @@ export class Profile extends Block {
         const profile = this.compile(profileTemplate, {
             avatar: this.props.avatar,
             name: this.props.name,
-            fields: this.props.fields,
+            form: this.props.form,
             links: this.props.links,
             button: this.props.button,
             editMode: this.props.editMode,
@@ -59,7 +50,7 @@ export class Profile extends Block {
             this.renderLinks(profile);
         }
 
-        renderList(profile, '.list-item', this.props.fields, this.props.editMode ? Input : TextRow);
+        // renderList(profile, '.form-field-container', this.props.form.fields, this.props.editMode ? Input : TextRow);
 
         return profile;
     }

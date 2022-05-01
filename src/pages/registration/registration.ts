@@ -1,6 +1,7 @@
 import {Form} from '../../components/complex';
 import {render} from '../../utils/renderDom';
 import {AltUrl, Button} from '../../components/base';
+import {Registration} from '../../components/pages';
 
 const fields = [
     {
@@ -47,6 +48,14 @@ const fields = [
     },
 ];
 
+const handleSubmit = (e: Event) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target as HTMLFormElement).entries());
+
+    console.log(data);
+};
+
 const button = new Button({
     type: 'submit',
     className: 'main-button',
@@ -59,11 +68,19 @@ const altUrl = new AltUrl({
     label: 'Войти',
 });
 
-const registration = new Form({
-    title: 'Регистрация',
+const form = new Form({
     fields,
     button,
     altUrl,
+    name: 'registration',
+    events: {
+        submit: handleSubmit,
+    },
+});
+
+const registration = new Registration({
+    title: 'Регистрация',
+    form,
 });
 
 render('#registration', registration);

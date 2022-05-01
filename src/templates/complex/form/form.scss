@@ -26,8 +26,11 @@
     }
 
     .form-buttons-container {
-        @include makeFlexBoxContainer(column);
 
-        align-items: center;
+        .form-buttons {
+            @include makeFlexBoxContainer(column);
+
+            align-items: center;
+        }
     }
 }

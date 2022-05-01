@@ -59,28 +59,24 @@
             }
         }
 
-        .button-container {
-            @include makeFlexBoxContainer(column, flex-start, flex-start);
+        .form-buttons-container {
+            .form-links {
+                @include makeFlexBoxContainer(column, flex-start, flex-start);
 
-            width: 100%;
+                span {
+                    margin-bottom: 15px;
+                    padding-bottom: 10px;
 
-            span {
-                margin-bottom: 15px;
-                padding-bottom: 10px;
+                    &:last-child {
+                        padding-bottom: 0;
+                        margin-bottom: 0;
 
-                &:last-child {
-                    padding-bottom: 0;
-                    margin-bottom: 0;
-
-                    a {
-                        &:visited {
-                            color: $linkSecondaryColor;
+                        a {
+                            &:visited {
+                                color: $linkSecondaryColor;
+                            }
                         }
                     }
-                }
-
-                &:only-child {
-                    align-self: center;
                 }
             }
         }

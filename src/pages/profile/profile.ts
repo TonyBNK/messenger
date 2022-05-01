@@ -1,4 +1,4 @@
-import {Avatar, Button} from '../../components/base';
+import {AltUrl, Avatar, Button} from '../../components/base';
 import {render} from '../../utils/renderDom';
 import {Profile} from '../../components/pages';
 import {Form} from '../../components/complex';
@@ -118,14 +118,20 @@ const button = new Button({
     type: 'submit',
     className: 'main-button',
     label: 'Сохранить',
+});
+
+const altUrl = new AltUrl({
+    href: '#',
+    className: 'alt-url',
+    label: 'Назад',
     events: {
         click: () => {
             userProfile.setProps({
                 editMode: false,
             });
             form.setProps({
-                fields: infoFields,
                 readonly: true,
+                fields: infoFields,
             });
         },
     },
@@ -135,6 +141,9 @@ const form = new Form({
     name: 'userProfile',
     fields: infoFields,
     readonly: true,
+    links,
+    button,
+    altUrl,
     events: {
         submit: handleSubmit,
     },
@@ -144,8 +153,6 @@ const userProfile = new Profile({
     avatar,
     name: 'Иван',
     form,
-    links,
-    button,
 });
 
 render('#profile', userProfile);

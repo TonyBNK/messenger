@@ -7,6 +7,9 @@ type AltUrlPropsType = {
     id?: string
     className?: string
     children?: IBlock
+    events?: {
+        click?: () => void
+    }
 }
 
 export interface IAltUrl extends IBlock {

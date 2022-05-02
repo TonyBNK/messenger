@@ -7,15 +7,16 @@ import {formTemplate} from '../../../templates/complex';
 import {render, renderList} from '../../../utils/renderDom';
 
 export type FieldType = {
-    name: string
+    name?: string
+    id?: string
     label?: string
-    type: string
+    type?: string
     value?: string
     required?: boolean
     autofocus?: boolean
     error?: string
     events?: {
-        blur?: (e: Event) => void,
+        blur?: (e: Event, regex: Record<string, any>) => void,
         focus?: (e: Event) => void,
     }
 }
@@ -37,7 +38,7 @@ type FormPropsType = {
     links?: Array<LinkType>
     readonly?: boolean
     events?: {
-        submit?: (e: Event) => void
+        submit?: (e: Event, regex: Record<string, any>) => void
     }
 }
 

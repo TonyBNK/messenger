@@ -3,6 +3,7 @@ import {inputTemplate} from '../../../templates/base';
 
 type InputPropsType = {
     name?: string
+    id?: string
     label?: string
     type?: string
     value?: string
@@ -12,7 +13,7 @@ type InputPropsType = {
     autofocus?: boolean
     error?: string
     events?: {
-        blur?: (e: Event) => void,
+        blur?: (e: Event, regex: Record<string, any>) => void,
         focus?: (e: Event) => void,
     }
 }
@@ -27,6 +28,7 @@ export class Input extends Block {
 
     render() {
         return this.compile(inputTemplate, {
+            id: this.props.id,
             name: this.props.name,
             label: this.props.label,
             type: this.props.type,

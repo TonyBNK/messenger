@@ -8,7 +8,7 @@
     class="{{#if classNameInput}}{{classNameInput}}{{else}}field-input{{/if}}"
     type="{{type}}"
     name="{{name}}"
-    id="{{name}}"
+    id="{{#if id}}{{id}}{{else}}{{name}}{{/if}}"
     {{#if required}}required{{/if}}
     {{#if autofocus}}autofocus{{/if}}
 >

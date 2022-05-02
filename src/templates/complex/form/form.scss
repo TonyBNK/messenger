@@ -31,8 +31,7 @@
             .error-message {
                 position: absolute;
                 bottom: 10px;
-                left: auto;
-                right: auto;
+                right: 0;
                 @include makeLabel($errorColor, 12px, 600);
             }
         }

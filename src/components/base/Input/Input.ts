@@ -23,7 +23,7 @@ export interface IInput extends IBlock {
 
 export class Input extends Block {
     constructor(props: InputPropsType) {
-        super('span', props);
+        super('div', props);
     }
 
     render() {

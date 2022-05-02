@@ -8,7 +8,7 @@
     @include makeFlexBoxContainer(column, space-between);
 
     .fields-container {
-        span {
+        div {
             @include makeFlexBoxContainer(column);
             position: relative;
 

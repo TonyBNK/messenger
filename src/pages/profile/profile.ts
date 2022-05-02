@@ -1,64 +1,120 @@
 import {AltUrl, Avatar, Button} from '../../components/base';
 import {render} from '../../utils/renderDom';
 import {Profile} from '../../components/pages';
-import {Form} from '../../components/complex';
+import {FieldType, Form} from '../../components/complex';
+import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
 
-const infoFields = [
+const regex = {
+    first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
+    second_name: /^[A-ZА-Я][A-zА-я-]+$/u,
+    display_name: /^[A-ZА-Я][A-zА-я-]+$/u,
+    login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
+    oldPassword: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
+    newPassword: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
+    newPassword_again: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
+    email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
+    phone: /^[+]?[0-9]{10,15}$/,
+};
+
+const infoFields: Array<FieldType> = [
     {
+        id: 'profile-email',
         label: 'Почта',
         name: 'email',
         value: 'pochta@yandex.ru',
         type: 'email',
-        autofocus: true,
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-login',
         label: 'Логин',
         name: 'login',
         value: 'ivanivanov',
         type: 'text',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-first_name',
         label: 'Имя',
         name: 'first_name',
         value: 'Иван',
         type: 'text',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-second_name',
         label: 'Фамилия',
         name: 'second_name',
         value: 'Иванов',
         type: 'text',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-display_name',
         label: 'Имя в чате',
         name: 'display_name',
         value: 'Иван',
         type: 'text',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-phone',
         label: 'Телефон',
         name: 'phone',
-        value: '+7 (909) 967 30 30',
+        value: '+79099673030',
         type: 'tel',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
 ];
 
-const passwordFields = [
+const passwordFields: Array<FieldType> = [
     {
+        id: 'profile-oldPassword',
         label: 'Старый пароль',
         name: 'oldPassword',
         type: 'password',
-        autofocus: true,
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-newPassword',
         label: 'Новый пароль',
         name: 'newPassword',
         type: 'password',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
     {
+        id: 'profile-newPassword_again',
         label: 'Повторите новый пароль',
-        name: 'newPasswordAgain',
+        name: 'newPassword_again',
         type: 'password',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
 ];
 
@@ -100,14 +156,6 @@ const links = [
     },
 ];
 
-const handleSubmit = (e: Event) => {
-    e.preventDefault();
-
-    const data = Object.fromEntries(new FormData(e.target as HTMLFormElement).entries());
-
-    console.log(data);
-};
-
 const avatar = new Avatar({
     id: 'profilePhoto',
     className: 'profile-photo',
@@ -138,14 +186,14 @@ const altUrl = new AltUrl({
 });
 
 const form = new Form({
-    name: 'userProfile',
+    name: 'profile-form',
     fields: infoFields,
     readonly: true,
     links,
     button,
     altUrl,
     events: {
-        submit: handleSubmit,
+        submit: (e: Event) => handleSubmit(e, regex),
     },
 });
 

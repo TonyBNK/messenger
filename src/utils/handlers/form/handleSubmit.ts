@@ -15,7 +15,7 @@ export const handleSubmit = (e: Event, regex: Record<string, any>) => {
         .entries(data)
         .forEach(([key, value]) => {
             if (!regex[key].test(`${value}`) || !passwordValidate(`${prefix}-${key}`)) {
-                const input = document.getElementById(key);
+                const input = document.getElementById(`${prefix}-${key}`);
                 if (input) {
                     input.classList.add('invalid');
                 }

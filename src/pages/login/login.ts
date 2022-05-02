@@ -8,7 +8,7 @@ const regex = {
     password: /^(?=.*[A-Z])(?=.*\d)[\w@$!%*#?&-]{8,40}$/,
 };
 
-const handleSubmit = (e: Event): boolean => {
+const handleSubmit = (e: Event) => {
     e.preventDefault();
 
     const formData = e.target as HTMLFormElement;
@@ -34,11 +34,10 @@ const handleSubmit = (e: Event): boolean => {
         });
 
     if (error) {
-        return false;
+        return;
     }
     console.log(data);
     formData.reset();
-    return true;
 };
 
 const handleBlur = (e: Event) => {

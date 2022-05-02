@@ -4,7 +4,12 @@ import {
 } from '../../components/base';
 import {Arrow, More} from '../../components/icons';
 import {Chats} from '../../components/pages';
-import {Form} from '../../components/complex';
+import {FieldType, Form} from '../../components/complex';
+import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
+
+const regex = {
+    message: /^(?!\s*$).+/,
+};
 
 const toProfile = new AltUrl({
     href: '../profile/profile.html',
@@ -64,34 +69,30 @@ const attachmentsButton = new Button({
     className: 'message-attachments',
 });
 
-const handleSubmit = (e: Event) => {
-    e.preventDefault();
-
-    const data = Object.fromEntries(new FormData(e.target as HTMLFormElement).entries());
-
-    console.log(data);
-};
-
 const sendButton = new Button({
     type: 'submit',
     className: 'send-message',
     label: '➜',
 });
 
-const fields = [
+const fields: Array<FieldType> = [
     {
+        id: 'chats-message',
         type: 'text',
-        classNameInput: 'new-message',
         name: 'message',
+        events: {
+            blur: (e: Event) => handleBlur(e, regex),
+            focus: handleFocus,
+        },
     },
 ];
 
 const form = new Form({
-    name: 'newMessage',
+    name: 'chats-form',
     fields,
     button: sendButton,
     events: {
-        submit: handleSubmit,
+        submit: (e: Event) => handleSubmit(e, regex),
     },
 });
 

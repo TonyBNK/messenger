@@ -12,6 +12,8 @@ export type FieldType = {
     label?: string
     type?: string
     value?: string
+    classNameLabel?: string
+    classNameInput?: string
     required?: boolean
     autofocus?: boolean
     error?: string

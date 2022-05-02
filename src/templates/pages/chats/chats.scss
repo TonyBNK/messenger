@@ -228,13 +228,27 @@
 
                             .fields-container {
                                 div {
-                                    .new-message {
+                                    position: relative;
+
+                                    .field-input {
                                         @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
 
                                         width: 100%;
                                         padding: 0 10px;
                                         height: 40px;
                                         border: none;
+                                    }
+
+                                    .invalid {
+                                        background-color: rgba($errorColor, 0.1);
+                                    }
+
+                                    .error-message {
+                                        position: absolute;
+                                        top: 50%;
+                                        margin-top: -0.6em;
+                                        right: 5px;
+                                        @include makeLabel($errorColor, 12px, 600);
                                     }
                                 }
                             }

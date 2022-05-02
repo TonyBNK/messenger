@@ -6,12 +6,18 @@ import {
 import {formTemplate} from '../../../templates/complex';
 import {render, renderList} from '../../../utils/renderDom';
 
-type FieldType = {
+export type FieldType = {
     name: string
     label?: string
     type: string
+    value?: string
     required?: boolean
     autofocus?: boolean
+    error?: string
+    events?: {
+        blur?: (e: Event) => void,
+        focus?: (e: Event) => void,
+    }
 }
 
 type LinkType = {

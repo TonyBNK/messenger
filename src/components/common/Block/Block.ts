@@ -198,7 +198,17 @@ export class Block implements IBlock {
         Object.keys(events)
             .forEach((eventName) => {
                 if (this._element) {
-                    this._element.removeEventListener(eventName, events[eventName]);
+                    if (eventName === 'focus' || eventName === 'blur') {
+                        const {children} = this._element;
+
+                        for (let i = 0; i < children.length; i++) {
+                            if (children[i].tagName === 'INPUT') {
+                                children[i].removeEventListener(eventName, events[eventName]);
+                            }
+                        }
+                    } else {
+                        this._element.removeEventListener(eventName, events[eventName]);
+                    }
                 }
             });
     }
@@ -209,7 +219,17 @@ export class Block implements IBlock {
         Object.keys(events)
             .forEach((eventName) => {
                 if (this._element) {
-                    this._element.addEventListener(eventName, events[eventName]);
+                    if (eventName === 'focus' || eventName === 'blur') {
+                        const {children} = this._element;
+
+                        for (let i = 0; i < children.length; i++) {
+                            if (children[i].tagName === 'INPUT') {
+                                children[i].addEventListener(eventName, events[eventName]);
+                            }
+                        }
+                    } else {
+                        this._element.addEventListener(eventName, events[eventName]);
+                    }
                 }
             });
     }

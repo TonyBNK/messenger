@@ -3,10 +3,12 @@ $titleSecondaryColor: #999;
 $windowBackgroundColor: #FFF;
 $buttonMainColor: #3369F3;
 $linkMainColor: $buttonMainColor;
-$linkSecondaryColor: red;
+$errorColor: red;
+$linkSecondaryColor: $errorColor;
 $borderMainColor: $buttonMainColor;
 $borderSecondaryColor: #EAEAEA;
 $chatHoverColor: rgba($buttonMainColor, 0.1);
 $chatSelectedColor: rgba($buttonMainColor, 0.3);
 $myMessageColor: $chatHoverColor;
 $penFriendMessageColor: rgba($titleSecondaryColor, 0.1);
+

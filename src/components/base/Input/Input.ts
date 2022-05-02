@@ -10,6 +10,11 @@ type InputPropsType = {
     classNameInput?: string
     required?: boolean
     autofocus?: boolean
+    error?: string
+    events?: {
+        blur?: (e: Event) => void,
+        focus?: (e: Event) => void,
+    }
 }
 
 export interface IInput extends IBlock {
@@ -17,7 +22,7 @@ export interface IInput extends IBlock {
 
 export class Input extends Block {
     constructor(props: InputPropsType) {
-        super('div', props);
+        super('span', props);
     }
 
     render() {
@@ -30,6 +35,7 @@ export class Input extends Block {
             classNameInput: this.props.classNameInput,
             required: this.props.required,
             autofocus: this.props.autofocus,
+            error: this.props.error,
         });
     }
 }

@@ -1,5 +1,5 @@
-import {Block, IBlock} from '../components/common';
-import {Constructable} from '../types';
+import {Block, IBlock} from '../../components/common';
+import {Constructable} from '../../types';
 
 export const render = (query: string, block: IBlock, docFrag?: DocumentFragment) => {
     const root = docFrag ? docFrag.querySelector(query) : document.querySelector(query);

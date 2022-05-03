@@ -1,5 +1,5 @@
 import {v4 as makeUUID} from 'uuid';
-import {EventBus, IObservable} from '../../../utils/eventBus';
+import {EventBus, IObservable} from '../../../utils/main';
 import {Nullable} from '../../../types';
 
 export interface IBlock {

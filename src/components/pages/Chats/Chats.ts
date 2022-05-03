@@ -2,7 +2,7 @@ import {Block} from '../../common';
 import {
     Message, IAltUrl, IInput, IAvatar, IButton,
 } from '../../base';
-import {render, renderList} from '../../../utils/renderDom';
+import {render, renderList} from '../../../utils/main';
 import {chatsTemplate} from '../../../templates/pages';
 import {Chat, IForm} from '../../complex';
 

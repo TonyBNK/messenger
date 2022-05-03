@@ -1,5 +1,5 @@
 import {AltUrl, Avatar, Button} from '../../components/base';
-import {render} from '../../utils/renderDom';
+import {render} from '../../utils/main';
 import {Profile} from '../../components/pages';
 import {FieldType, Form} from '../../components/complex';
 import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
@@ -170,7 +170,6 @@ const button = new Button({
 
 const altUrl = new AltUrl({
     href: '#',
-    className: 'alt-url',
     label: 'Назад',
     events: {
         click: () => {

@@ -50,68 +50,6 @@
 
                 .chat-list-item-container {
                     border-bottom: $borderSecondaryColor 2px solid;
-
-                    .selected-chat {
-                        background-color: $chatSelectedColor;
-                    }
-
-                    .chat-list-item {
-                        margin: 5px -15px;
-                        height: 100px;
-                        padding: 10px 15px;
-
-                        @include makeHoverEffect($chatHoverColor);
-
-                        .chat-content {
-                            @include fillWholeSpace();
-                            @include makeFlexBoxContainer(row);
-
-                            .chat-content-avatar {
-                                @include makeCircle(80px);
-                            }
-
-                            .chat-content-body {
-                                margin-left: 15px;
-                                width: calc(100% - 95px);
-
-                                @include makeFlexBoxContainer(row, space-between, center);
-
-                                .text-content {
-                                    @include fillWholeSpace();
-
-                                    .name {
-                                        max-height: 20px;
-
-                                        @include makeLabel($titleMainColor, 16px, 600);
-                                    }
-
-                                    .last-message {
-                                        @include makeLabel();
-
-                                        padding: 5px 0 0;
-                                        max-height: 60px;
-                                    }
-                                }
-
-                                .time-content {
-                                    height: 100%;
-                                    width: 80px;
-
-                                    @include makeFlexBoxContainer(column, space-between, flex-end);
-
-                                    .last-message-time {
-                                        @include makeLabel();
-                                    }
-
-                                    .unread-messages {
-                                        @include makeLabel(white, 16px, 600);
-                                        @include makeFlexBoxContainer(row, center, center);
-                                        @include makeCircle(25px, $buttonMainColor);
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

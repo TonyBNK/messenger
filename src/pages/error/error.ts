@@ -1,21 +1,27 @@
 import {last} from '../../utils/mydash';
-import {ErrorDataType, Status} from './types';
-import {errorTemplate} from '../../templates/complex';
+import {AltUrl} from '../../components/base';
+import {Error} from '../../components/pages';
+import {render} from '../../utils/main';
+
+enum Status {
+    NotFound = 404,
+    InternalSeverError = 500
+}
 
 const searchParams = window.location.search.split('=')
     .map((param) => +param);
 
-const statusCode: number = last(searchParams) ?? 404;
+const status: number = last(searchParams) ?? 404;
 
-const data: ErrorDataType = {
-    errorStatus: statusCode,
-    errorDescription: statusCode === Status.NotFound ? 'Не туда попали' : 'Мы уже фиксим',
-    altUrl: '../chats/chats.html',
-    altUrlLabel: 'Назад к чатам',
-};
+const altUrl = new AltUrl({
+    href: '../chats/chats.html',
+    label: 'Назад к чатам',
+});
 
-const error = document.getElementById('error');
+const error = new Error({
+    status,
+    description: status === Status.NotFound ? 'Не туда попали' : 'Мы уже фиксим',
+    altUrl,
+});
 
-if (error) {
-    error.innerHTML = errorTemplate(data);
-}
+render('#error-page', error);

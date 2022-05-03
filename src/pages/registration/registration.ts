@@ -1,5 +1,5 @@
 import {FieldType, Form} from '../../components/complex';
-import {render} from '../../utils/renderDom';
+import {render} from '../../utils/main';
 import {AltUrl, Button} from '../../components/base';
 import {Registration} from '../../components/pages';
 import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
@@ -95,7 +95,6 @@ const button = new Button({
 
 const altUrl = new AltUrl({
     href: '../login/login.html',
-    className: 'alt-url',
     label: 'Войти',
 });
 

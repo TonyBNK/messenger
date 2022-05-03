@@ -4,7 +4,7 @@ import {
     IAltUrl, IButton, Input, TextRow,
 } from '../../base';
 import {formTemplate} from '../../../templates/complex';
-import {render, renderList} from '../../../utils/renderDom';
+import {render, renderList} from '../../../utils/main';
 
 export type FieldType = {
     name?: string

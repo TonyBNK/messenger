@@ -1,4 +1,4 @@
-import {render} from '../../utils/renderDom';
+import {render} from '../../utils/main';
 import {
     AltUrl, Avatar, Button, Input,
 } from '../../components/base';

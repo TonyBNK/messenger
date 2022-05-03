@@ -7,6 +7,6 @@ export class More extends Block {
     }
 
     render() {
-        return this.compile(moreTemplate, this.props);
+        return this.compile(moreTemplate, {});
     }
 }

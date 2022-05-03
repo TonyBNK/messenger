@@ -13,8 +13,8 @@ type ChatType = {
     lastMessageTime: string
     unreadMessages: number
     selected?: boolean
-    events: {
-        click: () => void
+    events?: {
+        click?: () => void
     },
 }
 

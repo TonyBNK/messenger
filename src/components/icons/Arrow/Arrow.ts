@@ -7,6 +7,6 @@ export class Arrow extends Block {
     }
 
     render() {
-        return this.compile(arrowTemplate, this.props);
+        return this.compile(arrowTemplate, {});
     }
 }

@@ -16,6 +16,7 @@
 
         div {
             @include makeFlexBoxContainer(column, center, center);
+
             width: 100%;
 
             .profile-photo {
@@ -28,9 +29,9 @@
                 width: 100%;
 
                 .fields-container {
-
                     div {
                         @include makeFlexBoxContainer(row, space-between, center);
+
                         margin-bottom: 25px;
                         border-bottom: $borderSecondaryColor 2px solid;
                         padding-bottom: 5px;
@@ -45,6 +46,7 @@
                         .text-row-value, {
                             margin-bottom: -7px;
                             padding-bottom: 10px;
+
                             @include makeLabel($titleSecondaryColor, 16px, 600);
                         }
 
@@ -65,6 +67,7 @@
                             position: absolute;
                             bottom: -20px;
                             right: 0;
+
                             @include makeLabel($errorColor, 12px, 600);
                         }
                     }

@@ -5,7 +5,9 @@ import {
 import {Arrow, More} from '../../components/icons';
 import {Chats} from '../../components/pages';
 import {FieldType, Form} from '../../components/complex';
-import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
+import {handleSubmit} from '../../utils/handlers';
+import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
+import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
 
 const regex = {
     message: /^(?!\s*$).+/,
@@ -15,7 +17,7 @@ const toProfile = new AltUrl({
     href: '../profile/profile.html',
     className: 'to-profile',
     label: 'Профиль',
-    children: new Arrow({className: 'arrow'}),
+    children: new Arrow(),
 });
 
 const chatListSearch = new Input({
@@ -44,7 +46,7 @@ const penFriendAvatar = new Avatar({className: 'pen-friend-avatar'});
 
 const moreButton = new Button({
     className: 'chat-options',
-    children: new More({className: 'options-dot'}),
+    children: new More(),
 });
 
 const messages = [
@@ -75,17 +77,15 @@ const sendButton = new Button({
     label: '➜',
 });
 
-const fields: Array<FieldType> = [
+let fields: Array<FieldType> = [
     {
         id: 'chats-message',
         type: 'text',
         name: 'message',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
 ];
+
+fields = withFocusHandler(withBlurHandler(fields, regex));
 
 const form = new Form({
     name: 'chats-form',

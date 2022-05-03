@@ -10,6 +10,7 @@
     .fields-container {
         div {
             @include makeFlexBoxContainer(column);
+
             position: relative;
 
             .field-title {
@@ -32,13 +33,13 @@
                 position: absolute;
                 bottom: 10px;
                 right: 0;
+
                 @include makeLabel($errorColor, 12px, 600);
             }
         }
     }
 
     .form-buttons-container {
-
         .form-buttons {
             @include makeFlexBoxContainer(column);
 

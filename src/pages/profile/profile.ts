@@ -2,7 +2,9 @@ import {AltUrl, Avatar, Button} from '../../components/base';
 import {render} from '../../utils/main';
 import {Profile} from '../../components/pages';
 import {FieldType, Form} from '../../components/complex';
-import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
+import {handleSubmit} from '../../utils/handlers';
+import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
+import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
 
 const regex = {
     first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
@@ -16,17 +18,13 @@ const regex = {
     phone: /^[+]?[0-9]{10,15}$/,
 };
 
-const infoFields: Array<FieldType> = [
+let infoFields: Array<FieldType> = [
     {
         id: 'profile-email',
         label: 'Почта',
         name: 'email',
         value: 'pochta@yandex.ru',
         type: 'email',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-login',
@@ -34,10 +32,6 @@ const infoFields: Array<FieldType> = [
         name: 'login',
         value: 'ivanivanov',
         type: 'text',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-first_name',
@@ -45,10 +39,6 @@ const infoFields: Array<FieldType> = [
         name: 'first_name',
         value: 'Иван',
         type: 'text',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-second_name',
@@ -56,10 +46,6 @@ const infoFields: Array<FieldType> = [
         name: 'second_name',
         value: 'Иванов',
         type: 'text',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-display_name',
@@ -67,10 +53,6 @@ const infoFields: Array<FieldType> = [
         name: 'display_name',
         value: 'Иван',
         type: 'text',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-phone',
@@ -78,45 +60,33 @@ const infoFields: Array<FieldType> = [
         name: 'phone',
         value: '+79099673030',
         type: 'tel',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
 ];
 
-const passwordFields: Array<FieldType> = [
+let passwordFields: Array<FieldType> = [
     {
         id: 'profile-oldPassword',
         label: 'Старый пароль',
         name: 'oldPassword',
         type: 'password',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-newPassword',
         label: 'Новый пароль',
         name: 'newPassword',
         type: 'password',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'profile-newPassword_again',
         label: 'Повторите новый пароль',
         name: 'newPassword_again',
         type: 'password',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
 ];
+
+infoFields = withFocusHandler(withBlurHandler(infoFields, regex));
+
+passwordFields = withFocusHandler(withBlurHandler(passwordFields, regex));
 
 const links = [
     {
@@ -156,15 +126,11 @@ const links = [
     },
 ];
 
-const avatar = new Avatar({
-    id: 'profilePhoto',
-    className: 'profile-photo',
-});
+const avatar = new Avatar({id: 'profilePhoto'});
 
 const button = new Button({
     id: 'saveChanges',
     type: 'submit',
-    className: 'main-button',
     label: 'Сохранить',
 });
 

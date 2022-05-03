@@ -186,6 +186,7 @@
                                         top: 50%;
                                         margin-top: -0.6em;
                                         right: 5px;
+
                                         @include makeLabel($errorColor, 12px, 600);
                                     }
                                 }
@@ -195,9 +196,7 @@
                                 width: 50px;
 
                                 .form-buttons {
-
                                     span {
-
                                         .send-message {
                                             @include makeCircle(40px, $buttonMainColor);
                                             @include makeLabel(white, 16px, 500);

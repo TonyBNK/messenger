@@ -1,3 +1,5 @@
+import {FieldType} from '../../../components/complex';
+
 export const handleFocus = (e: Event) => {
     const {
         classList,
@@ -12,3 +14,13 @@ export const handleFocus = (e: Event) => {
         }
     }
 };
+
+export const withFocusHandler = (
+    fields: Array<FieldType>,
+): Array<FieldType> => fields.map((field) => ({
+    ...field,
+    events: {
+        ...field.events,
+        focus: handleFocus,
+    },
+}));

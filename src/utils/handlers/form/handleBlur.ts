@@ -1,4 +1,5 @@
 import {passwordValidate} from './passwordValidate';
+import {FieldType} from '../../../components/complex';
 
 export const handleBlur = (e: Event, regex: Record<string, any>) => {
     const {
@@ -16,3 +17,14 @@ export const handleBlur = (e: Event, regex: Record<string, any>) => {
         }
     }
 };
+
+export const withBlurHandler = (
+    fields: Array<FieldType>,
+    regex: Record<string, any>,
+): Array<FieldType> => fields.map((field) => ({
+    ...field,
+    events: {
+        ...field.events,
+        blur: (e: Event) => handleBlur(e, regex),
+    },
+}));

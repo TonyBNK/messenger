@@ -2,39 +2,34 @@ import {FieldType, Form} from '../../components/complex';
 import {AltUrl, Button} from '../../components/base';
 import {render} from '../../utils/main';
 import {Login} from '../../components/pages';
-import {handleBlur, handleFocus, handleSubmit} from '../../utils/handlers';
+import {handleSubmit} from '../../utils/handlers';
+import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
+import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 
 const regex = {
     login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
     password: /^(?=.*[A-Z])(?=.*\d)[\w@$!%*#?&-]{8,40}$/,
 };
 
-const fields: Array<FieldType> = [
+let fields: Array<FieldType> = [
     {
         id: 'login-login',
         name: 'login',
         label: 'Логин',
         type: 'text',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
     {
         id: 'login-password',
         name: 'password',
         label: 'Пароль',
         type: 'password',
-        events: {
-            blur: (e: Event) => handleBlur(e, regex),
-            focus: handleFocus,
-        },
     },
 ];
 
+fields = withFocusHandler(withBlurHandler(fields, regex));
+
 const button = new Button({
     type: 'submit',
-    className: 'main-button',
     label: 'Вход',
 });
 

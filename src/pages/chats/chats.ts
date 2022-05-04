@@ -4,10 +4,11 @@ import {
 } from '../../components/base';
 import {Arrow, More} from '../../components/icons';
 import {Chats} from '../../components/pages';
-import {FieldType, Form} from '../../components/complex';
+import {Form} from '../../components/complex';
 import {handleSubmit} from '../../utils/handlers';
 import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
+import {chatsFields, messages} from '../../mocks';
 
 const regex = {
     message: /^(?!\s*$).+/,
@@ -49,24 +50,6 @@ const moreButton = new Button({
     children: new More(),
 });
 
-const messages = [
-    {
-        className: 'pen-friend-message',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque facilis iste labore laboriosam numquam! Ab, assumenda dolorum ea eaque exercitationem explicabo illo incidunt itaque nobis officiis placeat porro quaerat voluptas.',
-        time: '11:56',
-    },
-    {
-        className: 'pen-friend-message',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa dolorum enim error est ipsa laudantium molestiae mollitia nam odio, quod sint tempore velit! Et inventore nemo repellat sint soluta!',
-        time: '11:57',
-    },
-    {
-        className: 'my-message',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa dolorum enim error est ipsa laudantium molestiae mollitia nam odio, quod sint tempore velit! Et inventore nemo repellat sint soluta!',
-        time: '12:00',
-    },
-];
-
 const attachmentsButton = new Button({
     className: 'message-attachments',
 });
@@ -77,19 +60,9 @@ const sendButton = new Button({
     label: '➜',
 });
 
-let fields: Array<FieldType> = [
-    {
-        id: 'chats-message',
-        type: 'text',
-        name: 'message',
-    },
-];
-
-fields = withFocusHandler(withBlurHandler(fields, regex));
-
 const form = new Form({
     name: 'chats-form',
-    fields,
+    fields: withFocusHandler(withBlurHandler(chatsFields, regex)),
     button: sendButton,
     events: {
         submit: (e: Event) => handleSubmit(e, regex),

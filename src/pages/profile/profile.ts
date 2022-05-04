@@ -1,10 +1,11 @@
 import {AltUrl, Avatar, Button} from '../../components/base';
 import {render} from '../../utils/main';
 import {Profile} from '../../components/pages';
-import {FieldType, Form} from '../../components/complex';
+import {Form} from '../../components/complex';
 import {handleSubmit} from '../../utils/handlers';
 import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
+import {infoFields, passwordFields} from '../../mocks';
 
 const regex = {
     first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
@@ -18,75 +19,9 @@ const regex = {
     phone: /^[+]?[0-9]{10,15}$/,
 };
 
-let infoFields: Array<FieldType> = [
-    {
-        id: 'profile-email',
-        label: 'Почта',
-        name: 'email',
-        value: 'pochta@yandex.ru',
-        type: 'email',
-    },
-    {
-        id: 'profile-login',
-        label: 'Логин',
-        name: 'login',
-        value: 'ivanivanov',
-        type: 'text',
-    },
-    {
-        id: 'profile-first_name',
-        label: 'Имя',
-        name: 'first_name',
-        value: 'Иван',
-        type: 'text',
-    },
-    {
-        id: 'profile-second_name',
-        label: 'Фамилия',
-        name: 'second_name',
-        value: 'Иванов',
-        type: 'text',
-    },
-    {
-        id: 'profile-display_name',
-        label: 'Имя в чате',
-        name: 'display_name',
-        value: 'Иван',
-        type: 'text',
-    },
-    {
-        id: 'profile-phone',
-        label: 'Телефон',
-        name: 'phone',
-        value: '+79099673030',
-        type: 'tel',
-    },
-];
+const infoRows = withFocusHandler(withBlurHandler(infoFields, regex));
 
-let passwordFields: Array<FieldType> = [
-    {
-        id: 'profile-oldPassword',
-        label: 'Старый пароль',
-        name: 'oldPassword',
-        type: 'password',
-    },
-    {
-        id: 'profile-newPassword',
-        label: 'Новый пароль',
-        name: 'newPassword',
-        type: 'password',
-    },
-    {
-        id: 'profile-newPassword_again',
-        label: 'Повторите новый пароль',
-        name: 'newPassword_again',
-        type: 'password',
-    },
-];
-
-infoFields = withFocusHandler(withBlurHandler(infoFields, regex));
-
-passwordFields = withFocusHandler(withBlurHandler(passwordFields, regex));
+const passwordRows = withFocusHandler(withBlurHandler(passwordFields, regex));
 
 const links = [
     {
@@ -115,7 +50,7 @@ const links = [
                 });
                 form.setProps({
                     readonly: false,
-                    fields: passwordFields,
+                    fields: passwordRows,
                 });
             },
         },
@@ -144,7 +79,7 @@ const altUrl = new AltUrl({
             });
             form.setProps({
                 readonly: true,
-                fields: infoFields,
+                fields: infoRows,
             });
         },
     },
@@ -152,7 +87,7 @@ const altUrl = new AltUrl({
 
 const form = new Form({
     name: 'profile-form',
-    fields: infoFields,
+    fields: infoRows,
     readonly: true,
     links,
     button,

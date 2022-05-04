@@ -1,10 +1,11 @@
-import {FieldType, Form} from '../../components/complex';
+import {Form} from '../../components/complex';
 import {render} from '../../utils/main';
 import {AltUrl, Button} from '../../components/base';
 import {Registration} from '../../components/pages';
 import {handleSubmit} from '../../utils/handlers';
 import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
+import {registrationFields} from '../../mocks';
 
 const regex = {
     first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
@@ -15,53 +16,6 @@ const regex = {
     email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
     phone: /^[+]?[0-9]{10,15}$/,
 };
-
-let fields: Array<FieldType> = [
-    {
-        id: 'registration-first_name',
-        name: 'first_name',
-        label: 'Имя',
-        type: 'text',
-    },
-    {
-        id: 'registration-second_name',
-        name: 'second_name',
-        label: 'Фамилия',
-        type: 'text',
-    },
-    {
-        id: 'registration-login',
-        name: 'login',
-        label: 'Логин',
-        type: 'text',
-    },
-    {
-        id: 'registration-email',
-        name: 'email',
-        label: 'Почта',
-        type: 'email',
-    },
-    {
-        id: 'registration-phone',
-        name: 'phone',
-        label: 'Телефон',
-        type: 'tel',
-    },
-    {
-        id: 'registration-password',
-        name: 'password',
-        label: 'Пароль',
-        type: 'password',
-    },
-    {
-        id: 'registration-password_again',
-        name: 'password_again',
-        label: 'Пароль ещё раз',
-        type: 'password',
-    },
-];
-
-fields = withFocusHandler(withBlurHandler(fields, regex));
 
 const button = new Button({
     type: 'submit',
@@ -74,7 +28,7 @@ const altUrl = new AltUrl({
 });
 
 const form = new Form({
-    fields,
+    fields: withFocusHandler(withBlurHandler(registrationFields, regex)),
     button,
     altUrl,
     name: 'registration-form',

@@ -11,7 +11,7 @@ app.use(express.static(`${__dirname}/dist`));
 
 // Home page
 app.get('/', (req, res) => {
-    res.sendFile(`${__dirname}/static/index.html`);
+    res.sendFile(`${__dirname}/index.html`);
 });
 // Login page
 app.get('/login', (req, res) => {
@@ -36,5 +36,5 @@ app.get('/error', (req, res) => {
 
 app.listen(
     app.get('port'),
-    () => console.log(`Example app listening on port ${app.get('port')}!`)
+    () => console.log(`Example app listening on port ${app.get('port')}!`),
 );

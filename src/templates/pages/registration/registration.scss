@@ -1,0 +1,18 @@
+@import '../../../styles/sass/mixins';
+@import '../../../styles/sass/variables';
+
+.window {
+    min-width: 375px;
+    background: $windowBackgroundColor;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 14%);
+    border-radius: 12px;
+    padding: 40px 30px;
+
+    .registration-container {
+        .registration-title {
+            @include makeLabel($titleSecondaryColor, 24px, 600);
+
+            text-align: center;
+        }
+    }
+}

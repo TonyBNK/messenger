@@ -1,48 +1,140 @@
-@import "variables";
+@import 'variables';
 
 @mixin makeFlexBoxContainer($flexDirection: 'row', $justifyContent: 'flex-start', $alignItems: 'flex-start') {
-  display: flex;
-  flex-direction: $flexDirection;
-  justify-content: $justifyContent;
-  align-items: $alignItems;
+    display: flex;
+    flex-direction: $flexDirection;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
 }
 
 @mixin makeMainFormButton() {
-  width: 280px;
-  height: 37px;
-  background: $buttonMainColor;
-  border-radius: 8px;
-  font-family: sans-serif;
-  font-weight: 600;
-  font-size: 16px;
-  color: white;
-  margin-bottom: 20px;
-  cursor: pointer;
-  border: none;
+    width: 280px;
+    height: 37px;
+    background: $buttonMainColor;
+    border-radius: 8px;
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: none;
 }
 
-@mixin makeLink() {
-  text-decoration: none;
-  font-size: 14px;
-  font-family: sans-serif;
-  font-weight: 600;
-  color: $linkMainColor;
+@mixin makeLink($linkColor: $linkMainColor, $fontSize: 14px) {
+    text-decoration: none;
+    font-size: $fontSize;
+    font-family: sans-serif;
+    font-weight: 600;
+    color: $linkColor;
 
-  &:visited {
-    color: $linkMainColor;
-  }
+    &:visited {
+        color: $linkColor;
+    }
 }
 
-@mixin makeLabel() {
-  font-size: 16px;
-  color: $titleSecondaryColor;
-  font-family: sans-serif;
+@mixin makeLabel($labelColor: $titleSecondaryColor, $fontSize: 16px, $fontWeight: 500) {
+    font-size: $fontSize;
+    color: $labelColor;
+    font-family: sans-serif;
+    font-weight: $fontWeight;
 }
 
-@mixin makeInput() {
-  border: none;
+@mixin makeInput(
+    $color: $titleSecondaryColor,
+    $backgroundColor: inherit,
+    $fontSize: 12px,
+    $fontWeight: 500,
+    $borderRadius: inherit
+) {
+    border: none;
+    color: $color;
+    background-color: $backgroundColor;
+    border-radius: $borderRadius;
+    font-size: $fontSize;
+    font-family: sans-serif;
+    font-weight: $fontWeight;
 
-  &:focus {
-    outline: none;
-  }
+    &:focus {
+        outline: none;
+    }
+}
+
+@mixin makeArrow($direction: rotate(-45deg), $color: $titleSecondaryColor) {
+    .arrow {
+        margin: 0 5px 0 10px;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-bottom: $color 2px solid;
+        border-right: $color 2px solid;
+        transform: $direction;
+    }
+}
+
+@mixin makeHoverEffect($backgroundColor: $borderSecondaryColor) {
+    &:hover {
+        cursor: pointer;
+        background-color: $backgroundColor;
+    }
+}
+
+@mixin makeCircle($size, $backgroundColor: $borderSecondaryColor) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    background-color: $backgroundColor;
+}
+
+@mixin fillWholeSpace() {
+    height: 100%;
+    width: 100%;
+}
+
+@mixin makeMessageContainer($backgroundColor: $penFriendMessageColor, $alignSelf: flex-start) {
+    margin: 30px 0;
+    max-width: 45%;
+    background-color: $backgroundColor;
+    padding: 10px;
+    font-family: sans-serif;
+    border-radius: 15px;
+    position: relative;
+    align-self: $alignSelf;
+}
+
+@mixin makeIconBlank($backgroundColor: $titleSecondaryColor) {
+    content: ' ';
+    position: absolute;
+    display: block;
+    background-color: $backgroundColor;
+    z-index: 9;
+}
+
+@mixin makeVerticalLine($backgroundColor: $titleSecondaryColor) {
+    &:before {
+        @include makeIconBlank($backgroundColor);
+
+        width: 2px;
+        margin-left: -1px;
+        left: 50%;
+        top: 5px;
+        bottom: 5px;
+    }
+}
+
+@mixin makeHorizontalLine($backgroundColor: $titleSecondaryColor) {
+    &:after {
+        @include makeIconBlank($backgroundColor);
+
+        height: 2px;
+        margin-top: -1px;
+        top: 50%;
+        left: 5px;
+        right: 5px;
+    }
+}
+
+@mixin makePlusIcon($backgroundColor: $titleSecondaryColor) {
+    @include makeVerticalLine($backgroundColor);
+    @include makeHorizontalLine($backgroundColor);
 }

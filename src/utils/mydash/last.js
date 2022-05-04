@@ -1,9 +1,0 @@
-function last(list) {
-    if (!Array.isArray(list)) {
-        return;
-    }
-    const length = list.length;
-    return length ? list[length - 1] : undefined;
-}
-
-export default last;

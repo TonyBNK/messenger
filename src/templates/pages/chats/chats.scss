@@ -1,0 +1,224 @@
+@import '../../../styles/sass/mixins';
+@import '../../../styles/sass/variables';
+
+.window {
+    height: 100vh;
+    width: 100vw;
+
+    .chats-container {
+        @include makeFlexBoxContainer();
+
+        height: 100%;
+
+        .chat-list {
+            max-width: 450px;
+            min-width: 300px;
+            width: 25%;
+            border-right: $borderSecondaryColor 2px solid;
+            padding: 0 15px;
+
+            @include makeFlexBoxContainer(column, flex-start, center);
+
+            .chat-list-head {
+                height: 120px;
+                border-bottom: $borderSecondaryColor 2px solid;
+                width: 100%;
+                padding: 20px 0;
+
+                @include makeFlexBoxContainer(column, space-between, flex-end);
+
+                .to-profile {
+                    @include makeLink($titleSecondaryColor, 16px);
+                    @include makeArrow();
+                }
+
+                div {
+                    width: 100%;
+
+                    .chat-list-search {
+                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 7px);
+
+                        padding: 0 10px;
+                        width: 100%;
+                        height: 40px;
+                    }
+                }
+            }
+
+            .chat-list-body {
+                width: 100%;
+
+                .chat-list-item-container {
+                    border-bottom: $borderSecondaryColor 2px solid;
+                }
+            }
+        }
+
+        .chat-window {
+            padding: 0 15px;
+
+            @include fillWholeSpace();
+
+            .chat-window-head {
+                padding: 10px 0;
+                height: 60px;
+                border-bottom: $borderSecondaryColor 2px solid;
+
+                @include makeFlexBoxContainer(row, space-between, center);
+
+                .pen-friend-container {
+                    @include makeFlexBoxContainer(row, flex-start, center);
+                    @include makeHoverEffect(none);
+
+                    .pen-friend-avatar {
+                        @include makeCircle(40px);
+                    }
+
+                    .pen-friend-name {
+                        margin-left: 15px;
+
+                        @include makeLabel($titleMainColor, 16px, 600);
+                    }
+                }
+
+                .chat-options {
+                    border: none;
+                    background-color: inherit;
+
+                    div {
+                        height: 100%;
+
+                        @include makeCircle(40px, none);
+                        @include makeFlexBoxContainer(column, space-evenly, center);
+                        @include makeHoverEffect();
+
+                        .options-dot {
+                            @include makeCircle(4px, $titleMainColor);
+                        }
+                    }
+                }
+            }
+
+            .chat-window-body {
+                height: calc(100% - 60px);
+
+                @include makeFlexBoxContainer(column, space-between, center);
+
+                .message-list {
+                    @include fillWholeSpace();
+
+                    padding: 30px 0;
+
+                    @include makeFlexBoxContainer(column, flex-end);
+
+                    .messages-date {
+                        @include makeLabel();
+
+                        align-self: center;
+                    }
+
+                    div {
+                        @include makeFlexBoxContainer(column);
+
+                        .my-message {
+                            @include makeMessageContainer($myMessageColor, flex-end);
+                        }
+
+                        .pen-friend-message {
+                            @include makeMessageContainer();
+                        }
+
+                        .message-time {
+                            position: absolute;
+                            right: 10px;
+                            bottom: 7px;
+
+                            @include makeLabel($titleSecondaryColor, 12px);
+                        }
+                    }
+                }
+
+                .input-container {
+                    width: 100%;
+                    height: 60px;
+                    border-top: $borderSecondaryColor 2px solid;
+
+                    @include makeFlexBoxContainer(row, space-between, center);
+
+                    .message-attachments {
+                        @include makeCircle(40px, none);
+
+                        position: relative;
+                        border: none;
+                        background-color: inherit;
+
+                        @include makePlusIcon();
+                        @include makeHoverEffect();
+
+                        margin-right: 10px;
+                    }
+
+                    div {
+                        width: 100%;
+
+                        .form-info {
+                            @include makeFlexBoxContainer(row, space-between, center);
+
+                            .fields-container {
+                                div {
+                                    position: relative;
+
+                                    .field-input {
+                                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+
+                                        width: 100%;
+                                        padding: 0 10px;
+                                        height: 40px;
+                                        border: none;
+                                    }
+
+                                    .invalid {
+                                        background-color: rgba($errorColor, 0.1);
+                                    }
+
+                                    .error-message {
+                                        position: absolute;
+                                        top: 50%;
+                                        margin-top: -0.6em;
+                                        right: 5px;
+
+                                        @include makeLabel($errorColor, 12px, 600);
+                                    }
+                                }
+                            }
+
+                            .form-buttons-container {
+                                width: 50px;
+
+                                .form-buttons {
+                                    span {
+                                        .send-message {
+                                            @include makeCircle(40px, $buttonMainColor);
+                                            @include makeLabel(white, 16px, 500);
+                                            @include makeHoverEffect(none);
+
+                                            margin-left: 10px;
+                                            border: none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .empty-chat-window {
+                height: 100%;
+
+                @include makeFlexBoxContainer(row, center, center);
+                @include makeLabel($titleSecondaryColor, 16px, 600);
+            }
+        }
+    }
+}

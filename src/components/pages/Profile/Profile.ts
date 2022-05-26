@@ -8,6 +8,10 @@ type ProfilePropsType = {
     name: string
     form: IForm
     editMode?: boolean
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export class Profile extends Block {

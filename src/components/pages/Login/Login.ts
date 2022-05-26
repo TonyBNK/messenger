@@ -5,6 +5,10 @@ import {IForm} from '../../complex';
 type LoginPropsType = {
     title: string
     form: IForm
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export class Login extends Block {

@@ -6,6 +6,10 @@ type ErrorPropsType = {
     status: number
     description: string
     altUrl: IAltUrl
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export class Error extends Block {

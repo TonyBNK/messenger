@@ -13,28 +13,40 @@ const regex = {
 };
 
 const button = new Button({
-    type: 'submit',
     label: 'Вход',
+    attr: {
+        class: 'main-button',
+        type: 'submit',
+    },
 });
 
 const altUrl = new AltUrl({
-    href: '../registration/registration.html',
     label: 'Ещё не зарегистрированы?',
+    attr: {
+        href: '../registration/registration.html',
+        class: 'alt-url',
+    },
 });
 
 const form = new Form({
-    name: 'login-form',
     fields: withFocusHandler(withBlurHandler(loginFields, regex)),
     button,
     altUrl,
     events: {
         submit: (e: Event) => handleSubmit(e, regex),
     },
+    attr: {
+        name: 'login-form',
+        class: 'form-info',
+    },
 });
 
 const login = new Login({
     title: 'Авторизация',
     form,
+    attr: {
+        class: 'window',
+    },
 });
 
 render('#login-page', login);

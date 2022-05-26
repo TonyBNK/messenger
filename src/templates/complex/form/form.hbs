@@ -1,24 +1,18 @@
-<form
-    method="post"
-    class="form-info"
-    name="{{name}}"
->
-    <div class="fields-container">
-        {{#each fields}}
-        {{/each}}
-    </div>
-    <div class="form-buttons-container">
-        {{#if readonly}}
-            <div class="form-links">
-                {{#each links}}
-                {{/each}}
-            </div>
-        {{/if}}
-        {{#unless readonly}}
-            <div class="form-buttons">
-                {{{button}}}
-                {{{altUrl}}}
-            </div>
-        {{/unless}}
-    </div>
-</form>
+<div class="fields-container">
+    {{#each fields}}
+    {{/each}}
+</div>
+<div class="form-buttons-container">
+    {{#if readonly}}
+        <div class="form-links">
+            {{#each links}}
+            {{/each}}
+        </div>
+    {{/if}}
+    {{#unless readonly}}
+        <div class="form-buttons">
+            {{{button}}}
+            {{{altUrl}}}
+        </div>
+    {{/unless}}
+</div>

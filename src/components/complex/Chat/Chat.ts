@@ -2,13 +2,16 @@ import {Block, IBlock} from '../../common';
 import {chatTemplate} from '../../../templates/complex';
 
 type ChatPropsType = {
-    id?: string
     avatar: string
     name: string
     lastMessage: string
     lastMessageTime: string
     unreadMessages?: number
     selected?: boolean
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export interface IChat extends IBlock {
@@ -21,7 +24,6 @@ export class Chat extends Block {
 
     render() {
         return this.compile(chatTemplate, {
-            id: this.props.id,
             avatar: this.props.avatar,
             name: this.props.name,
             lastMessage: this.props.lastMessage,

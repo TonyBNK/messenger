@@ -1,6 +1,6 @@
 import {Block} from '../../common';
 import {
-    Message, IAltUrl, IInput, IAvatar, IButton,
+    Message, IAltUrl, IInput, IAvatar, IButton, MessagePropsType,
 } from '../../base';
 import {render, renderList} from '../../../utils/main';
 import {chatsTemplate} from '../../../templates/pages';
@@ -18,11 +18,7 @@ type ChatType = {
     },
 }
 
-type MessageType = {
-    className: string
-    text: string
-    time: string
-}
+type MessageType = MessagePropsType;
 
 type ChatsPropsType = {
     toProfile: IAltUrl
@@ -36,6 +32,10 @@ type ChatsPropsType = {
     attachmentsButton: IButton
     form: IForm
     isChatSelected: boolean
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export class Chats extends Block {

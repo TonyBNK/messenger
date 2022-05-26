@@ -6,6 +6,7 @@ import {handleSubmit} from '../../utils/handlers';
 import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
 import {infoFields, passwordFields} from '../../mocks';
+import catWithGlasses from '../../../static/images/catWithGlasses.jpg';
 
 const regex = {
     first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
@@ -25,8 +26,6 @@ const passwordRows = withFocusHandler(withBlurHandler(passwordFields, regex));
 
 const links = [
     {
-        id: 'changeInfo',
-        href: '#',
         label: 'Изменить данные',
         events: {
             click: () => {
@@ -38,10 +37,12 @@ const links = [
                 });
             },
         },
+        attr: {
+            id: 'changeInfo',
+            href: '#',
+        },
     },
     {
-        id: 'changePassword',
-        href: '#',
         label: 'Изменить пароль',
         events: {
             click: () => {
@@ -54,23 +55,38 @@ const links = [
                 });
             },
         },
+        attr: {
+            id: 'changePassword',
+            href: '#',
+        },
     },
     {
-        href: '/',
         label: 'Выйти',
+        attr: {
+            href: '/',
+        },
     },
 ];
 
-const avatar = new Avatar({id: 'profilePhoto'});
+const avatar = new Avatar({
+    attr: {
+        id: 'profilePhoto',
+        class: 'profile-photo',
+        src: catWithGlasses,
+        alt: 'ава',
+    },
+});
 
 const button = new Button({
-    id: 'saveChanges',
-    type: 'submit',
     label: 'Сохранить',
+    attr: {
+        id: 'saveChanges',
+        type: 'submit',
+        class: 'main-button',
+    },
 });
 
 const altUrl = new AltUrl({
-    href: '#',
     label: 'Назад',
     events: {
         click: () => {
@@ -83,10 +99,13 @@ const altUrl = new AltUrl({
             });
         },
     },
+    attr: {
+        href: '#',
+        class: 'alt-url',
+    },
 });
 
 const form = new Form({
-    name: 'profile-form',
     fields: infoRows,
     readonly: true,
     links,
@@ -95,12 +114,20 @@ const form = new Form({
     events: {
         submit: (e: Event) => handleSubmit(e, regex),
     },
+    attr: {
+        method: 'post',
+        class: 'form-info',
+        name: 'profile-form',
+    },
 });
 
 const userProfile = new Profile({
     avatar,
     name: 'Иван',
     form,
+    attr: {
+        class: 'window',
+    },
 });
 
 render('#profile', userProfile);

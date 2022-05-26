@@ -1,48 +1,46 @@
-<div class="window">
-    <div class="chats-container">
-        <div class="chat-list">
-            <div class="chat-list-head">
-                {{{toProfile}}}
-                {{{chatListSearch}}}
-            </div>
-            <div class="chat-list-body">
-                {{#each chatList}}
-                    <div class="chat-list-item-container"></div>
-                {{/each}}
-            </div>
+<div class="chats-container">
+    <div class="chat-list">
+        <div class="chat-list-head">
+            {{{toProfile}}}
+            {{{chatListSearch}}}
         </div>
-        <div class="chat-window">
-            {{#if isChatSelected}}
-                <div class="chat-window-head">
-                    <div class="pen-friend-container">
-                        {{{penFriendAvatar}}}
-                        <div class="pen-friend-name">
-                            {{penFriendName}}
-                        </div>
-                    </div>
-                    {{{moreButton}}}
-                </div>
-                <div class="chat-window-body">
-                    <div class="message-list">
-                        <div class="messages-date">
-                            {{messagesDate}}
-                        </div>
-                        <div class="messages-container">
-                            {{#each messages}}
-                            {{/each}}
-                        </div>
-                    </div>
-                    <div class="input-container">
-                        {{{attachmentsButton}}}
-                        {{{form}}}
-                    </div>
-                </div>
-            {{/if}}
-            {{#unless isChatSelected}}
-                <div class="empty-chat-window">
-                    Выберите чат, чтобы отправить сообщение
-                </div>
-            {{/unless}}
+        <div class="chat-list-body">
+            {{#each chatList}}
+                <div class="chat-list-item-container"></div>
+            {{/each}}
         </div>
+    </div>
+    <div class="chat-window">
+        {{#if isChatSelected}}
+            <div class="chat-window-head">
+                <div class="pen-friend-container">
+                    {{{penFriendAvatar}}}
+                    <div class="pen-friend-name">
+                        {{penFriendName}}
+                    </div>
+                </div>
+                {{{moreButton}}}
+            </div>
+            <div class="chat-window-body">
+                <div class="message-list">
+                    <div class="messages-date">
+                        {{messagesDate}}
+                    </div>
+                    <div class="messages-container">
+                        {{#each messages}}
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="input-container">
+                    {{{attachmentsButton}}}
+                    {{{form}}}
+                </div>
+            </div>
+        {{/if}}
+        {{#unless isChatSelected}}
+            <div class="empty-chat-window">
+                Выберите чат, чтобы отправить сообщение
+            </div>
+        {{/unless}}
     </div>
 </div>

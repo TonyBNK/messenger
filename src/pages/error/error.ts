@@ -15,14 +15,20 @@ if (statusCode) {
     const status = +statusCode;
 
     const altUrl = new AltUrl({
-        href: '../chats/chats.html',
         label: 'Назад к чатам',
+        attr: {
+            href: '../chats/chats.html',
+            class: 'alt-url',
+        },
     });
 
     const error = new Error({
         status,
         description: messages[status as keyof typeof messages],
         altUrl,
+        attr: {
+            class: 'window',
+        },
     });
 
     render('#error-page', error);

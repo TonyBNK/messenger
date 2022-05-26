@@ -14,85 +14,85 @@
             font-weight: 550;
         }
 
-        div {
+        .profile-photo {
+            @include makeCircle(150px);
+
+            margin-bottom: 50px;
+        }
+
+        .form-info {
             @include makeFlexBoxContainer(column, center, center);
 
             width: 100%;
 
-            .profile-photo {
-                @include makeCircle(150px);
-
-                margin-bottom: 50px;
-            }
-
-            .form-info {
+            .fields-container {
                 width: 100%;
 
-                .fields-container {
-                    div {
-                        @include makeFlexBoxContainer(row, space-between, center);
+                div {
+                    @include makeFlexBoxContainer(row, space-between, center);
 
-                        margin-bottom: 25px;
-                        border-bottom: $borderSecondaryColor 2px solid;
-                        padding-bottom: 5px;
-                        position: relative;
+                    margin-bottom: 25px;
+                    border-bottom: $borderSecondaryColor 2px solid;
+                    padding-bottom: 5px;
+                    position: relative;
 
-                        .field-title,
-                        .text-row-label {
-                            @include makeLabel($titleMainColor, 16px, 600);
-                        }
+                    .field-title,
+                    .text-row-label {
+                        @include makeLabel($titleMainColor, 16px, 600);
+                    }
 
-                        .field-input,
-                        .text-row-value, {
-                            margin-bottom: -7px;
-                            padding-bottom: 10px;
+                    .field-input,
+                    .text-row-value, {
+                        margin-bottom: -7px;
+                        padding-bottom: 10px;
 
-                            @include makeLabel($titleSecondaryColor, 16px, 600);
-                        }
+                        @include makeLabel($titleSecondaryColor, 16px, 600);
+                    }
 
-                        .field-input {
-                            @include makeInput($titleSecondaryColor, inherit, 16px, 600, inherit);
-                        }
+                    .field-input {
+                        @include makeInput($titleSecondaryColor, inherit, 16px, 600, inherit);
+                    }
 
-                        &:last-child {
-                            border-bottom: none;
-                            margin-bottom: 50px;
-                        }
+                    &:last-child {
+                        border-bottom: none;
+                        margin-bottom: 50px;
+                    }
 
-                        .invalid {
-                            border-bottom: $errorColor 2px solid;
-                        }
+                    .invalid {
+                        border-bottom: $errorColor 2px solid;
+                    }
 
-                        .error-message {
-                            position: absolute;
-                            bottom: -20px;
-                            right: 0;
+                    .error-message {
+                        position: absolute;
+                        bottom: -20px;
+                        right: 0;
 
-                            @include makeLabel($errorColor, 12px, 600);
-                        }
+                        @include makeLabel($errorColor, 12px, 600);
                     }
                 }
             }
-        }
 
-        .form-buttons-container {
-            .form-links {
-                @include makeFlexBoxContainer(column, flex-start, flex-start);
+            .form-buttons-container {
+                width: 100%;
 
-                span {
-                    margin-bottom: 15px;
-                    padding-bottom: 10px;
+                .form-links {
+                    @include makeFlexBoxContainer(column, center, flex-start);
 
-                    &:last-child {
-                        padding-bottom: 0;
-                        margin-bottom: 0;
+                    .alt-url {
+                        cursor: pointer;
+                        margin-bottom: 15px;
+                        padding-bottom: 10px;
 
-                        a {
-                            &:visited {
-                                color: $linkSecondaryColor;
-                            }
+                        &:last-child {
+                            padding-bottom: 0;
+                            margin-bottom: 0;
+                            color: $linkSecondaryColor;
                         }
                     }
+                }
+
+                .form-buttons {
+                    @include makeFlexBoxContainer(column, center, center);
                 }
             }
         }

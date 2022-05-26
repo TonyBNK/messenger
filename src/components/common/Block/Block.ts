@@ -190,6 +190,7 @@ export class Block implements IBlock {
         }
 
         this._addEvents();
+        this._addAttribute();
     }
 
     _deleteEvents() {
@@ -230,6 +231,18 @@ export class Block implements IBlock {
                     } else {
                         this._element.addEventListener(eventName, events[eventName]);
                     }
+                }
+            });
+    }
+
+    _addAttribute() {
+        const {attr = {}} = this.props;
+
+        Object
+            .entries(attr)
+            .forEach(([key, value]) => {
+                if (this._element) {
+                    this._element.setAttribute(key, `${value}`);
                 }
             });
     }

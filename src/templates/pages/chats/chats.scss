@@ -158,54 +158,52 @@
                         margin-right: 10px;
                     }
 
-                    div {
+                    .form-info {
                         width: 100%;
 
-                        .form-info {
-                            @include makeFlexBoxContainer(row, space-between, center);
+                        @include makeFlexBoxContainer(row, space-between, center);
 
-                            .fields-container {
-                                div {
-                                    position: relative;
+                        .fields-container {
+                            width: 100%;
 
-                                    .field-input {
-                                        @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
+                            div {
+                                position: relative;
 
-                                        width: 100%;
-                                        padding: 0 10px;
-                                        height: 40px;
-                                        border: none;
-                                    }
+                                .field-input {
+                                    @include makeInput($titleMainColor, $borderSecondaryColor, 16px, 500, 30px);
 
-                                    .invalid {
-                                        background-color: rgba($errorColor, 0.1);
-                                    }
+                                    width: 100%;
+                                    padding: 0 10px;
+                                    height: 40px;
+                                    border: none;
+                                }
 
-                                    .error-message {
-                                        position: absolute;
-                                        top: 50%;
-                                        margin-top: -0.6em;
-                                        right: 5px;
+                                .invalid {
+                                    background-color: rgba($errorColor, 0.1);
+                                }
 
-                                        @include makeLabel($errorColor, 12px, 600);
-                                    }
+                                .error-message {
+                                    position: absolute;
+                                    top: 50%;
+                                    margin-top: -0.6em;
+                                    right: 5px;
+
+                                    @include makeLabel($errorColor, 12px, 600);
                                 }
                             }
+                        }
 
-                            .form-buttons-container {
-                                width: 50px;
+                        .form-buttons-container {
+                            width: 50px;
 
-                                .form-buttons {
-                                    span {
-                                        .send-message {
-                                            @include makeCircle(40px, $buttonMainColor);
-                                            @include makeLabel(white, 16px, 500);
-                                            @include makeHoverEffect(none);
+                            .form-buttons {
+                                .send-message {
+                                    @include makeCircle(40px, $buttonMainColor);
+                                    @include makeLabel(white, 16px, 500);
+                                    @include makeHoverEffect(none);
 
-                                            margin-left: 10px;
-                                            border: none;
-                                        }
-                                    }
+                                    margin-left: 10px;
+                                    border: none;
                                 }
                             }
                         }

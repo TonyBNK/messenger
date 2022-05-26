@@ -1,10 +1,13 @@
-import {avatarTemplate} from '../../../templates/base';
 import {Block, IBlock} from '../../common';
+import {avatarTemplate} from '../../../templates/base';
 
 type AvatarPropsType = {
-    image?: string
-    id?: string
-    className?: string
+    attr?: {
+        id?: string
+        class?: string
+        src?: string
+        alt?: string
+    }
 }
 
 export interface IAvatar extends IBlock {
@@ -12,14 +15,10 @@ export interface IAvatar extends IBlock {
 
 export class Avatar extends Block {
     constructor(props: AvatarPropsType) {
-        super('div', props);
+        super('img', props);
     }
 
     render() {
-        return this.compile(avatarTemplate, {
-            id: this.props.id,
-            image: this.props.image,
-            className: this.props.className,
-        });
+        return this.compile(avatarTemplate, {});
     }
 }

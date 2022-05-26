@@ -9,16 +9,19 @@ import {handleSubmit} from '../../utils/handlers';
 import {withFocusHandler} from '../../utils/handlers/form/handleFocus';
 import {withBlurHandler} from '../../utils/handlers/form/handleBlur';
 import {chatsFields, messages} from '../../mocks';
+import doge from '../../../static/images/doge.jpg';
 
 const regex = {
     message: /^(?!\s*$).+/,
 };
 
 const toProfile = new AltUrl({
-    href: '../profile/profile.html',
-    className: 'to-profile',
     label: 'Профиль',
-    children: new Arrow(),
+    children: new Arrow({attr: {class: 'arrow'}}),
+    attr: {
+        href: '../profile/profile.html',
+        class: 'to-profile',
+    },
 });
 
 const chatListSearch = new Input({
@@ -28,7 +31,13 @@ const chatListSearch = new Input({
 
 const chatList = [
     {
-        avatar: new Avatar({className: 'chat-content-avatar'}),
+        avatar: new Avatar({
+            attr: {
+                class: 'chat-content-avatar',
+                src: doge,
+                alt: 'ava',
+            },
+        }),
         name: 'Андрей',
         lastMessage: 'Изображение',
         lastMessageTime: '10:49',
@@ -40,32 +49,50 @@ const chatList = [
                 });
             },
         },
+        attr: {
+            class: 'chat-list-item',
+        },
     },
 ];
 
-const penFriendAvatar = new Avatar({className: 'pen-friend-avatar'});
+const penFriendAvatar = new Avatar({
+    attr: {
+        class: 'pen-friend-avatar',
+        src: doge,
+        alt: 'ava',
+    },
+});
 
 const moreButton = new Button({
-    className: 'chat-options',
     children: new More(),
+    attr: {
+        class: 'chat-options',
+    },
 });
 
 const attachmentsButton = new Button({
-    className: 'message-attachments',
+    attr: {
+        class: 'message-attachments',
+    },
 });
 
 const sendButton = new Button({
-    type: 'submit',
-    className: 'send-message',
     label: '➜',
+    attr: {
+        type: 'submit',
+        class: 'send-message',
+    },
 });
 
 const form = new Form({
-    name: 'chats-form',
     fields: withFocusHandler(withBlurHandler(chatsFields, regex)),
     button: sendButton,
     events: {
         submit: (e: Event) => handleSubmit(e, regex),
+    },
+    attr: {
+        name: 'chats-form',
+        class: 'form-info',
     },
 });
 
@@ -81,6 +108,9 @@ const chats = new Chats({
     attachmentsButton,
     form,
     isChatSelected: false,
+    attr: {
+        class: 'window',
+    },
 });
 
 render('#chats', chats);

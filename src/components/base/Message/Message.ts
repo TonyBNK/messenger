@@ -1,11 +1,13 @@
 import {messageTemplate} from '../../../templates/base';
 import {Block, IBlock} from '../../common';
 
-type MessagePropsType = {
-    id?: string
+export type MessagePropsType = {
     text: string
     time: string
-    className?: string
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export interface IMessage extends IBlock {
@@ -18,10 +20,8 @@ export class Message extends Block {
 
     render() {
         return this.compile(messageTemplate, {
-            id: this.props.id,
             text: this.props.text,
             time: this.props.time,
-            className: this.props.className,
         });
     }
 }

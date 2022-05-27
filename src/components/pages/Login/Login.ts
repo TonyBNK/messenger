@@ -16,6 +16,10 @@ export class Login extends Block {
         super('div', props);
     }
 
+    componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+        return oldProps.title !== newProps.title;
+    }
+
     render() {
         return this.compile(loginTemplate, {
             title: this.props.title,

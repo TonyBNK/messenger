@@ -50,7 +50,8 @@ export class Block implements IBlock {
             props,
         } = this._getChildren(propsAndChildren);
 
-        this.children = children;
+        // this.children = children;
+        this.children = this._makePropsProxy(children);
 
         this._meta = {
             tagName,
@@ -106,16 +107,18 @@ export class Block implements IBlock {
                 return typeof value === 'function' ? value.bind(target) : value;
             },
             set(target, prop, value) {
+                let oldValue;
                 if (typeof prop === 'string') {
                     if (prop.indexOf('_') === 0) {
                         throw new Error('Нет прав');
                     }
 
+                    oldValue = {...target};
                     target[prop] = value;
                 }
 
                 self.eventBus()
-                    .emit(Block.EVENTS.FLOW_CDU, {...target}, {target});
+                    .emit(Block.EVENTS.FLOW_CDU, oldValue, target);
                 return true;
             },
             deleteProperty() {
@@ -199,17 +202,7 @@ export class Block implements IBlock {
         Object.keys(events)
             .forEach((eventName) => {
                 if (this._element) {
-                    if (eventName === 'focus' || eventName === 'blur') {
-                        const {children} = this._element;
-
-                        for (let i = 0; i < children.length; i++) {
-                            if (children[i].tagName === 'INPUT') {
-                                children[i].removeEventListener(eventName, events[eventName]);
-                            }
-                        }
-                    } else {
-                        this._element.removeEventListener(eventName, events[eventName]);
-                    }
+                    this._element.removeEventListener(eventName, events[eventName]);
                 }
             });
     }
@@ -220,17 +213,7 @@ export class Block implements IBlock {
         Object.keys(events)
             .forEach((eventName) => {
                 if (this._element) {
-                    if (eventName === 'focus' || eventName === 'blur') {
-                        const {children} = this._element;
-
-                        for (let i = 0; i < children.length; i++) {
-                            if (children[i].tagName === 'INPUT') {
-                                children[i].addEventListener(eventName, events[eventName]);
-                            }
-                        }
-                    } else {
-                        this._element.addEventListener(eventName, events[eventName]);
-                    }
+                    this._element.addEventListener(eventName, events[eventName]);
                 }
             });
     }
@@ -277,12 +260,23 @@ export class Block implements IBlock {
             return;
         }
 
-        Object.assign(this.props, nextProps);
+        const {
+            children,
+            props,
+        } = this._getChildren(nextProps);
+
+        if (Object.values(children).length) {
+            Object.assign(this.children, children);
+        }
+
+        if (Object.values(props).length) {
+            Object.assign(this.props, props);
+        }
     };
 
     _componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>) {
-        const response = this.componentDidUpdate(oldProps, newProps);
-        if (response) {
+        const isReRender = this.componentDidUpdate(oldProps, newProps);
+        if (isReRender) {
             this._render();
         }
     }

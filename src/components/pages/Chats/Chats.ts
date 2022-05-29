@@ -74,7 +74,7 @@ export class Chats extends Block {
                 class: 'to-profile',
             },
             events: {
-                click: () => window.router.go('/profile'),
+                click: () => window.router.go('/settings'),
             },
         });
 

@@ -56,7 +56,7 @@ export class Chat extends Block {
     }
 
     chatClick() {
-        const chats = window.router.getRoute('/chats')._block;
+        const chats = window.router.getRoute('/messenger')._block;
 
         chats.setProps({
             activeChat: this.props,

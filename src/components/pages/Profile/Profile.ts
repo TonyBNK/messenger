@@ -99,7 +99,7 @@ export class Profile extends Block {
             {
                 label: 'Выйти',
                 events: {
-                    click: () => window.router.go('/login'),
+                    click: () => window.router.go('/'),
                 },
             },
         ];

@@ -62,7 +62,7 @@ export class Registration extends Block {
         const altUrl = new AltUrl({
             label: altUrlLabel ?? 'Войти',
             events: {
-                click: () => window.router.go('/login'),
+                click: () => window.router.go('/'),
             },
         });
 

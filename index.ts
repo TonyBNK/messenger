@@ -10,20 +10,16 @@ const router = new Router('.app');
 const {pathname} = window.location;
 
 router
-    .use('/login', Login)
-    .use('/registration', Registration)
-    .use('/chats', Chats, {chatList})
-    .use('/profile', Profile, profileProps)
+    .use('/', Login)
+    .use('/sign-up', Registration)
+    .use('/messenger', Chats, {chatList})
+    .use('/settings', Profile, profileProps)
     .start();
 
 if (!router.getRoute(pathname)) {
     router
         .use('/error', Error, {status: 404})
         .go('/error');
-}
-
-if (pathname.length === 1 && pathname[0] === '/') {
-    router.go('/chats');
 }
 
 // @ts-ignore

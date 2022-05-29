@@ -24,7 +24,7 @@ export class Error extends Block {
         const altUrl = new AltUrl({
             label: 'Назад к чатам',
             events: {
-                click: () => window.router.go('/chats'),
+                click: () => window.router.go('/messenger'),
             },
         });
 

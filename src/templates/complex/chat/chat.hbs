@@ -1,20 +1,22 @@
-<div class="chat-content">
-    {{{avatar}}}
-    <div class="chat-content-body">
-        <div class="text-content">
-            <div class="name">
-                {{name}}
+<div class="chat-list-item {{#if selected}}selected-chat{{/if}}">
+    <div class="chat-content">
+        {{{avatar}}}
+        <div class="chat-content-body">
+            <div class="text-content">
+                <div class="name">
+                    {{correspondent.name}}
+                </div>
+                <div class="last-message">
+                    {{lastMessage.text}}
+                </div>
             </div>
-            <div class="last-message">
-                {{lastMessage}}
-            </div>
-        </div>
-        <div class="time-content">
-            <div class="last-message-time">
-                {{lastMessageTime}}
-            </div>
-            <div class="unread-messages">
-                {{unreadMessages}}
+            <div class="time-content">
+                <div class="last-message-time">
+                    {{lastMessage.time}}
+                </div>
+                <div class="unread-messages">
+                    {{unreadMessagesCount}}
+                </div>
             </div>
         </div>
     </div>

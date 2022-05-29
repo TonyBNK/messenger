@@ -1,5 +1,4 @@
 import {Block, IBlock} from '../../common';
-import {avatarTemplate} from '../../../templates/base';
 
 type AvatarPropsType = {
     attr?: {
@@ -19,6 +18,6 @@ export class Avatar extends Block {
     }
 
     render() {
-        return this.compile(avatarTemplate, {});
+        return this.compile(() => '', {});
     }
 }

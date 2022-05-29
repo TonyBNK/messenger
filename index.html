@@ -7,21 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Чат</title>
     <link rel="stylesheet" href="src/styles/sass/root.scss">
+    <link rel="stylesheet" href="src/templates/pages/login/login.scss">
+    <link rel="stylesheet"
+          href="src/templates/pages/registration/registration.scss">
+    <link rel="stylesheet" href="src/templates/complex/form/form.scss">
+    <link rel="stylesheet" href="src/templates/pages/profile/profile.scss">
+    <link rel="stylesheet" href="src/templates/pages/error/error.scss">
+    <link rel="stylesheet" href="src/templates/pages/chats/chats.scss">
+    <link rel="stylesheet" href="src/templates/complex/chat/chat.scss">
 </head>
 <body>
-    <a href="src/pages/login/login.html">Логин</a>
-    <a href="src/pages/registration/registration.html">Регистрация</a>
-    <a id="404" href="src/pages/error/error.html">Error 404</a>
-    <a id="500" href="src/pages/error/error.html">Error 500</a>
-    <a href="src/pages/chats/chats.html">Чаты</a>
-    <a href="src/pages/profile/profile.html">Профиль</a>
     <div class="app"></div>
-    <script>
-        const link404 = document.getElementById('404');
-        link404.setAttribute('href', `${link404.href}?status=404`);
-
-        const link500 = document.getElementById('500');
-        link500.setAttribute('href', `${link500.href}?status=500`);
-    </script>
+    <script src="index.ts" type="module"></script>
 </body>
 </html>

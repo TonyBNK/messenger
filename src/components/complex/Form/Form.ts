@@ -1,7 +1,6 @@
 import {Block, IBlock} from '../../common';
 import {
-    AltUrl, AltUrlPropsType,
-    IAltUrl, IButton, Input, TextRow,
+    AltUrl, AltUrlType, IAltUrl, IButton, Input, TextRow,
 } from '../../base';
 import {formTemplate} from '../../../templates/complex';
 import {render, renderList} from '../../../utils/main';
@@ -23,7 +22,7 @@ export type FieldType = {
     }
 }
 
-type LinkType = AltUrlPropsType;
+type LinkType = AltUrlType;
 
 type FormPropsType = {
     button?: IButton
@@ -47,7 +46,14 @@ export interface IForm extends IBlock {
 
 export class Form extends Block {
     constructor(props: FormPropsType) {
-        super('form', props);
+        super('form', {
+            ...props,
+            attr: {
+                ...props.attr,
+                class: props.attr?.class ?? 'form-info',
+                method: props.attr?.method ?? 'post',
+            },
+        });
     }
 
     private renderLinks(profile: DocumentFragment) {
@@ -64,8 +70,6 @@ export class Form extends Block {
 
     render() {
         const form = this.compile(formTemplate, {
-            button: this.props.button,
-            altUrl: this.props.altUrl,
             fields: this.props.fields,
             readonly: this.props.readonly,
         });

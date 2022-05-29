@@ -1,46 +1,58 @@
 import {FieldType} from '../../components/complex';
 
-export const registrationFields: Array<FieldType> = [
+type RegistrationFieldsFactoryType = (
+    data?: {
+        firstNameLabel?: string
+        secondNameLabel?: string
+        loginLabel?: string
+        emailLabel?: string
+        phoneLabel?: string
+        passwordLabel?: string
+        passwordAgainLabel?: string
+    }
+) => Array<FieldType>;
+
+export const registrationFieldsFactory: RegistrationFieldsFactoryType = (data) => [
     {
         id: 'registration-first_name',
         name: 'first_name',
-        label: 'Имя',
+        label: data?.firstNameLabel ?? 'Имя',
         type: 'text',
     },
     {
         id: 'registration-second_name',
         name: 'second_name',
-        label: 'Фамилия',
+        label: data?.secondNameLabel ?? 'Фамилия',
         type: 'text',
     },
     {
         id: 'registration-login',
         name: 'login',
-        label: 'Логин',
+        label: data?.loginLabel ?? 'Логин',
         type: 'text',
     },
     {
         id: 'registration-email',
         name: 'email',
-        label: 'Почта',
+        label: data?.emailLabel ?? 'Почта',
         type: 'email',
     },
     {
         id: 'registration-phone',
         name: 'phone',
-        label: 'Телефон',
+        label: data?.phoneLabel ?? 'Телефон',
         type: 'tel',
     },
     {
         id: 'registration-password',
         name: 'password',
-        label: 'Пароль',
+        label: data?.passwordLabel ?? 'Пароль',
         type: 'password',
     },
     {
         id: 'registration-password_again',
         name: 'password_again',
-        label: 'Пароль ещё раз',
+        label: data?.passwordAgainLabel ?? 'Пароль ещё раз',
         type: 'password',
     },
 ];

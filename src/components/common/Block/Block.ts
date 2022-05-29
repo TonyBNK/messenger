@@ -14,6 +14,8 @@ export interface IBlock {
     show(): void;
 
     hide(): void;
+
+    remove(): void;
 }
 
 export class Block implements IBlock {
@@ -50,7 +52,6 @@ export class Block implements IBlock {
             props,
         } = this._getChildren(propsAndChildren);
 
-        // this.children = children;
         this.children = this._makePropsProxy(children);
 
         this._meta = {
@@ -299,6 +300,13 @@ export class Block implements IBlock {
         const el = this.getContent();
         if (el) {
             el.style.display = 'none';
+        }
+    }
+
+    remove() {
+        const el = this.getContent();
+        if (el) {
+            el.remove();
         }
     }
 }

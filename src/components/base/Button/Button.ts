@@ -19,13 +19,18 @@ export interface IButton extends IBlock {
 
 export class Button extends Block {
     constructor(props: ButtonPropsType) {
-        super('button', props);
+        super('button', {
+            ...props,
+            attr: {
+                ...props.attr,
+                class: props.attr?.class ?? 'main-button',
+            },
+        });
     }
 
     render() {
         return this.compile(buttonTemplate, {
             label: this.props.label,
-            children: this.props.children,
         });
     }
 }

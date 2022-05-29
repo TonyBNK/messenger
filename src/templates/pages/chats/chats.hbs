@@ -5,18 +5,20 @@
             {{{chatListSearch}}}
         </div>
         <div class="chat-list-body">
-            {{#each chatList}}
-                <div class="chat-list-item-container"></div>
-            {{/each}}
         </div>
     </div>
     <div class="chat-window">
-        {{#if isChatSelected}}
+        {{#unless activeChat}}
+            <div class="empty-chat-window">
+                Выберите чат, чтобы отправить сообщение
+            </div>
+        {{/unless}}
+        {{#if activeChat}}
             <div class="chat-window-head">
                 <div class="pen-friend-container">
-                    {{{penFriendAvatar}}}
+                    {{{avatar}}}
                     <div class="pen-friend-name">
-                        {{penFriendName}}
+                        {{activeChat.correspondent.name}}
                     </div>
                 </div>
                 {{{moreButton}}}
@@ -24,7 +26,7 @@
             <div class="chat-window-body">
                 <div class="message-list">
                     <div class="messages-date">
-                        {{messagesDate}}
+                        {{activeChat.messages.[0].data.date}}
                     </div>
                     <div class="messages-container">
                         {{#each messages}}
@@ -37,10 +39,5 @@
                 </div>
             </div>
         {{/if}}
-        {{#unless isChatSelected}}
-            <div class="empty-chat-window">
-                Выберите чат, чтобы отправить сообщение
-            </div>
-        {{/unless}}
     </div>
 </div>

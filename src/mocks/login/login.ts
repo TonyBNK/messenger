@@ -1,16 +1,23 @@
 import {FieldType} from '../../components/complex';
 
-export const loginFields: Array<FieldType> = [
+type LoginFieldsFactoryType = (
+    data?: {
+        loginLabel?: string
+        passwordLabel?: string
+    }
+) => Array<FieldType>;
+
+export const loginFieldsFactory: LoginFieldsFactoryType = (data) => [
     {
         id: 'login-login',
         name: 'login',
-        label: 'Логин',
+        label: data?.loginLabel ?? 'Логин',
         type: 'text',
     },
     {
         id: 'login-password',
         name: 'password',
-        label: 'Пароль',
+        label: data?.passwordLabel ?? 'Пароль',
         type: 'password',
     },
 ];

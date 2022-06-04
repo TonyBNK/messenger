@@ -1,7 +1,13 @@
 <div class="chats-container">
+    {{{addChatModal}}}
+    {{{addUserModal}}}
+    {{{deleteUserModal}}}
     <div class="chat-list">
         <div class="chat-list-head">
-            {{{toProfile}}}
+            <div class="chat-list-head-buttons">
+                {{{addChatButton}}}
+                {{{toProfile}}}
+            </div>
             {{{chatListSearch}}}
         </div>
         <div class="chat-list-body">
@@ -15,18 +21,24 @@
         {{/unless}}
         {{#if activeChat}}
             <div class="chat-window-head">
-                <div class="pen-friend-container">
+                <div class="chat-info-container">
                     {{{avatar}}}
-                    <div class="pen-friend-name">
-                        {{activeChat.correspondent.name}}
+                    <div class="chat-info-title">
+                        {{activeChat.title}}
                     </div>
                 </div>
-                {{{moreButton}}}
+                <div class="chat-participants">
+                    {{activeChat.participants}}
+                </div>
+                <div>
+                    {{{moreButton}}}
+                    {{{chatOptions}}}
+                </div>
             </div>
             <div class="chat-window-body">
                 <div class="message-list">
                     <div class="messages-date">
-                        {{activeChat.messages.[0].data.date}}
+                        {{messages.[0].date}}
                     </div>
                     <div class="messages-container">
                         {{#each messages}}

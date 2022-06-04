@@ -2,8 +2,10 @@ import {Block} from '../../common';
 import {loginTemplate} from '../../../templates/pages';
 import {Form} from '../../complex';
 import {AltUrl, Button} from '../../base';
-import {FieldsBuilder, handleSubmit} from '../../../utils/handlers';
+import {FieldsBuilder} from '../../../utils/handlers';
 import {loginFieldsFactory} from '../../../mocks';
+import {authController} from '../../../utils/controllers';
+import {router} from '../../../utils/main';
 
 type LoginPropsType = {
     formTitle?: string
@@ -47,7 +49,7 @@ export class Login extends Block {
         const altUrl = new AltUrl({
             label: altUrlLabel ?? 'Ещё не зарегистрированы?',
             events: {
-                click: () => window.router.go('/sign-up'),
+                click: () => router.go('/sign-up'),
             },
         });
 
@@ -59,7 +61,7 @@ export class Login extends Block {
             button,
             altUrl,
             events: {
-                submit: (e: Event) => handleSubmit(e, regex),
+                submit: (e: Event) => authController.signIn(e, regex),
             },
             attr: {
                 name: 'login-form',

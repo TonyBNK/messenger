@@ -2,20 +2,28 @@ import {Block} from '../../common';
 import {
     AltUrl, Avatar, Button, Input, Message, MessageItemType,
 } from '../../base';
-import {render, renderList} from '../../../utils/main';
-import {chatsTemplate} from '../../../templates/pages';
-import {Chat, ChatItemType, Form} from '../../complex';
+import {render, renderList, router} from '../../../utils/main';
+import {
+    Chat, ChatItemType, Form, Modal, Popup,
+} from '../../complex';
 import {Nullable} from '../../../types';
 import {Arrow, More} from '../../icons';
-import {chatsFieldsFactory} from '../../../mocks';
-import {FieldsBuilder, handleSubmit} from '../../../utils/handlers';
+import {
+    addChatFieldFactory,
+    addUserFieldFactory,
+    chatsFieldsFactory,
+    deleteUserFieldFactory,
+} from '../../../mocks';
+import {FieldsBuilder} from '../../../utils/handlers';
+import {authController, chatsController} from '../../../utils/controllers';
+import {chatsTemplate} from '../../../templates/pages';
+import {isEqual} from '../../../utils/mydash';
 
 type ChatsPropsType = {
     fieldsLabels?: {
         toProfileLabel?: string
     }
     sendButtonLabel?: string
-    chatList: Array<ChatItemType>
     activeChat?: Nullable<ChatItemType>
     regex?: {
         message: string
@@ -37,6 +45,18 @@ export class Chats extends Block {
             message: /^(?!\s*$).+/,
         };
 
+        const addChatModalRegex = {
+            add_chat_title: /^(?!\s*$).+/,
+        };
+
+        const addUserModalRegex = {
+            add_user_login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
+        };
+
+        const deleteUserModalRegex = {
+            delete_user_login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
+        };
+
         const sendButton = new Button({
             label: sendButtonLabel ?? '➜',
             attr: {
@@ -52,18 +72,67 @@ export class Chats extends Block {
                 .build(),
             button: sendButton,
             events: {
-                submit: (e: Event) => handleSubmit(e, regex),
+                submit: (e: Event) => chatsController.sendMessage(
+                    e,
+                    regex,
+                    this.props.socket,
+                ),
             },
             attr: {
                 name: 'chats-form',
             },
         });
 
-        const avatar = new Avatar({
+        const addChatModal = new Modal({
+            formTitle: 'Создать новый чат',
+            fields: new FieldsBuilder(addChatFieldFactory())
+                .withBlurHandler(addChatModalRegex)
+                .withFocusHandler()
+                .build(),
+            buttonLabel: 'Создать',
+            events: {
+                submit: (e) => chatsController.createChat(e, addChatModalRegex),
+            },
+        });
+
+        const addUserModal = new Modal({
+            formTitle: 'Добавить пользователя',
+            fields: new FieldsBuilder(addUserFieldFactory())
+                .withBlurHandler(addUserModalRegex)
+                .withFocusHandler()
+                .build(),
+            buttonLabel: 'Добавить',
+            events: {
+                submit: (e) => chatsController.addUserToChat(
+                    e,
+                    addUserModalRegex,
+                    this.props.activeChat?.id,
+                ),
+            },
+        });
+
+        const deleteUserModal = new Modal({
+            formTitle: 'Удалить пользователя',
+            fields: new FieldsBuilder(deleteUserFieldFactory())
+                .withBlurHandler(deleteUserModalRegex)
+                .withFocusHandler()
+                .build(),
+            buttonLabel: 'Удалить',
+            events: {
+                submit: (e) => chatsController.deleteUserFromChat(
+                    e,
+                    deleteUserModalRegex,
+                    this.props.activeChat?.id,
+                ),
+            },
+        });
+
+        const addChatButton = new Button({
             attr: {
-                class: 'pen-friend-avatar',
-                src: props.activeChat?.correspondent.avatar,
-                alt: 'ava',
+                class: 'add-chat-button',
+            },
+            events: {
+                click: (e: Event) => addChatModal.open.call(addChatModal, e),
             },
         });
 
@@ -74,7 +143,7 @@ export class Chats extends Block {
                 class: 'to-profile',
             },
             events: {
-                click: () => window.router.go('/settings'),
+                click: () => router.go('/settings'),
             },
         });
 
@@ -83,10 +152,32 @@ export class Chats extends Block {
             classNameInput: 'chat-list-search',
         });
 
+        const chatOptions = new Popup({
+            links: [
+                {
+                    label: 'Добавить пользователя',
+                    events: {
+                        click: (e) => addUserModal.open.call(addUserModal, e),
+                    },
+                },
+                {
+                    label: 'Удалить пользователя',
+                    events: {
+                        click: (e) => deleteUserModal.open.call(deleteUserModal, e),
+                    },
+                },
+            ],
+        });
+
         const moreButton = new Button({
             children: new More(),
             attr: {
                 class: 'chat-options',
+            },
+            events: {
+                click: (e: Event) => (chatOptions.isOpen
+                    ? chatOptions.close.call(chatOptions, e)
+                    : chatOptions.open.call(chatOptions, e)),
             },
         });
 
@@ -96,12 +187,25 @@ export class Chats extends Block {
             },
         });
 
+        const avatar = new Avatar({
+            attr: {
+                class: 'chat-info-avatar',
+                src: '',
+                alt: 'ava',
+            },
+        });
+
         super('div', {
             ...props,
-            avatar,
+            addChatModal,
+            addUserModal,
+            deleteUserModal,
+            addChatButton,
             toProfile,
             chatListSearch,
+            avatar,
             moreButton,
+            chatOptions,
             attachmentsButton,
             form,
             attr: {
@@ -110,12 +214,17 @@ export class Chats extends Block {
             },
         });
 
-        this.props.ava = avatar;
+        this.props.closeModal = addChatModal.close.bind(addChatModal);
+
+        this.props.avatar = avatar;
+
+        authController.getUserInfo();
+        chatsController.getChats();
     }
 
     private renderMessages(chats: DocumentFragment) {
-        if (this.props.activeChat) {
-            this.props.activeChat.messages.forEach((message: MessageItemType) => {
+        if (this.props.messages?.length) {
+            this.props.messages.forEach((message: MessageItemType) => {
                 render('.messages-container', new Message({
                     ...message,
                 }), chats);
@@ -123,15 +232,43 @@ export class Chats extends Block {
         }
     }
 
+    componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+        if (!oldProps.user || !newProps.user) return oldProps.user !== newProps.user;
+        if (!isEqual(oldProps.user, newProps.user)) return true;
+        if (!isEqual(oldProps.chats, newProps.chats)) return true;
+        if (oldProps.activeChat?.id !== newProps.activeChat?.id) return true;
+        if (!isEqual(oldProps.messages, newProps.messages)) return true;
+        return false;
+    }
+
     render() {
-        const chats = this.compile(chatsTemplate, {
-            activeChat: this.props.activeChat,
+        const {
+            activeChat,
+            messages,
+        } = this.props;
+
+        if (this._element) {
+            this._element.addEventListener('click', (e) => this.props.closeModal(e));
+        }
+
+        if (activeChat?.avatarSrc) {
+            this.props.avatar.setProps({
+                attr: {
+                    ...this.props.avatar.props.attr,
+                    src: activeChat.avatarSrc,
+                },
+            });
+        }
+
+        const chatList = this.compile(chatsTemplate, {
+            activeChat,
+            messages,
         });
 
-        renderList(chats, '.chat-list-body', this.props.chatList, Chat);
+        renderList(chatList, '.chat-list-body', this.props.chats, Chat);
 
-        this.renderMessages(chats);
+        this.renderMessages(chatList);
 
-        return chats;
+        return chatList;
     }
 }

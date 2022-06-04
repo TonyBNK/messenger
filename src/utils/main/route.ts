@@ -54,4 +54,8 @@ export class Route {
 
         // this._block.show();
     }
+
+    getBlock() {
+        return this._block;
+    }
 }

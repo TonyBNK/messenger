@@ -5,14 +5,21 @@
     min-width: 375px;
     width: 800px;
 
+    .to-chats {
+        @include makeCircle(40px, $buttonMainColor);
+        @include makeLabel(white, 16px, 500);
+        @include makeHoverEffect(none);
+
+        margin-left: 10px;
+        border: none;
+
+        transform: rotate(180deg);
+    }
+
     .profile-container {
         margin: 40px 30px;
 
         @include makeFlexBoxContainer(column, center, center);
-
-        .profile-name {
-            font-weight: 550;
-        }
 
         .profile-photo {
             @include makeCircle(150px);
@@ -20,6 +27,10 @@
             margin-bottom: 50px;
         }
 
+        .profile-name {
+            font-weight: 550;
+        }
+        
         .form-info {
             @include makeFlexBoxContainer(column, center, center);
 

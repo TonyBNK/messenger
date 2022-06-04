@@ -4,19 +4,21 @@
         <div class="chat-content-body">
             <div class="text-content">
                 <div class="name">
-                    {{correspondent.name}}
+                    {{title}}
                 </div>
                 <div class="last-message">
-                    {{lastMessage.text}}
+                    {{last_message.content}}
                 </div>
             </div>
             <div class="time-content">
                 <div class="last-message-time">
-                    {{lastMessage.time}}
+                    {{last_message.time}}
                 </div>
-                <div class="unread-messages">
-                    {{unreadMessagesCount}}
-                </div>
+                {{#if unread_count}}
+                    <div class="unread-messages">
+                        {{unread_count}}
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>

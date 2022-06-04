@@ -5,7 +5,7 @@ export type AltUrlType = {
     label?: string
     children?: IBlock
     events?: {
-        click?: () => void
+        click?: (e: Event) => void
     }
     attr?: {
         id?: string

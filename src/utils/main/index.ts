@@ -3,3 +3,5 @@ export * from './renderDom';
 export * from './httpTransport';
 export * from './route';
 export * from './router';
+export * from './store';
+export * from './connect';

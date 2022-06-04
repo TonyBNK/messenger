@@ -2,8 +2,10 @@ import {Block} from '../../common';
 import {registrationTemplate} from '../../../templates/pages';
 import {Form} from '../../complex';
 import {AltUrl, Button} from '../../base';
-import {FieldsBuilder, handleSubmit} from '../../../utils/handlers';
+import {FieldsBuilder} from '../../../utils/handlers';
 import {registrationFieldsFactory} from '../../../mocks';
+import {authController} from '../../../utils/controllers';
+import {router} from '../../../utils/main';
 
 type RegistrationPropsType = {
     formTitle?: string
@@ -62,7 +64,7 @@ export class Registration extends Block {
         const altUrl = new AltUrl({
             label: altUrlLabel ?? 'Войти',
             events: {
-                click: () => window.router.go('/'),
+                click: () => router.go('/'),
             },
         });
 
@@ -74,7 +76,7 @@ export class Registration extends Block {
             button,
             altUrl,
             events: {
-                submit: (e: Event) => handleSubmit(e, regex),
+                submit: (e: Event) => authController.signUp(e, regex),
             },
             attr: {
                 name: 'registration-form',

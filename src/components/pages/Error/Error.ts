@@ -1,6 +1,7 @@
 import {Block} from '../../common';
 import {errorTemplate} from '../../../templates/pages';
 import {AltUrl} from '../../base';
+import {router} from '../../../utils/main';
 
 type ErrorPropsType = {
     status: number
@@ -24,7 +25,7 @@ export class Error extends Block {
         const altUrl = new AltUrl({
             label: 'Назад к чатам',
             events: {
-                click: () => window.router.go('/messenger'),
+                click: () => router.go('/messenger'),
             },
         });
 

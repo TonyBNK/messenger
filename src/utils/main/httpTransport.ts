@@ -8,17 +8,21 @@ const METHODS = {
 };
 
 type OptionsType = {
-    data?: Nullable<Document | XMLHttpRequestBodyInit>
+    data?: Nullable<Document | XMLHttpRequestBodyInit | Record<string, unknown>>
     headers?: Record<string, string>
     timeout?: number
     method?: string
+    withCredentials?: boolean
+    mode?: string
 };
 
 type MethodType = (url: string, options: OptionsType) => Promise<unknown>;
 
 type RequestType = (url: string, options: OptionsType, timeout?: number) => Promise<unknown>;
 
-const queryStringify = (data?: Nullable<Document | XMLHttpRequestBodyInit>): string => {
+const queryStringify = (
+    data?: Nullable<Document | XMLHttpRequestBodyInit | Record<string, unknown>>,
+): string => {
     if (!data) {
         return '';
     }
@@ -28,14 +32,20 @@ const queryStringify = (data?: Nullable<Document | XMLHttpRequestBodyInit>): str
     return params.reduce((queryString, [key, value], i) => queryString.concat(`${key}=${value}${i === params.length - 1 ? '' : '&'}`), '?');
 };
 
-export class HTTPTransport {
+class HTTPTransport {
+    host: string;
+
+    constructor(host: string) {
+        this.host = host;
+    }
+
     get: MethodType = (url, options = {}) => this.request(
         url.concat(queryStringify(options.data)),
         {
             ...options,
             method: METHODS.GET,
         },
-        options.timeout,
+        // options.timeout,
     );
 
     post: MethodType = (url, options = {}) => this.request(
@@ -44,7 +54,7 @@ export class HTTPTransport {
             ...options,
             method: METHODS.POST,
         },
-        options.timeout,
+        // options.timeout,
     );
 
     put: MethodType = (url, options = {}) => this.request(
@@ -53,7 +63,7 @@ export class HTTPTransport {
             ...options,
             method: METHODS.PUT,
         },
-        options.timeout,
+        // options.timeout,
     );
 
     delete: MethodType = (url, options = {}) => this.request(
@@ -62,7 +72,7 @@ export class HTTPTransport {
             ...options,
             method: METHODS.DELETE,
         },
-        options.timeout,
+        // options.timeout,
     );
 
     request: RequestType = (url, options, timeout = 5000) => {
@@ -70,6 +80,7 @@ export class HTTPTransport {
             method,
             data,
             headers = {},
+            withCredentials,
         } = options;
 
         const headerSettings = Object.entries(headers);
@@ -80,7 +91,9 @@ export class HTTPTransport {
             } else {
                 const xhr = new XMLHttpRequest();
 
-                xhr.open(method, url);
+                xhr.open(method, this.host.concat(url));
+
+                xhr.withCredentials = !!withCredentials;
 
                 for (let i = 0; i < headerSettings.length; i++) {
                     xhr.setRequestHeader(`${headerSettings[i][0]}`, `${headerSettings[i][1]}`);
@@ -99,9 +112,11 @@ export class HTTPTransport {
                 if (method === METHODS.GET || !data) {
                     xhr.send();
                 } else {
-                    xhr.send(data);
+                    xhr.send(data as XMLHttpRequestBodyInit);
                 }
             }
         });
     };
 }
+
+export const yandexTransport = new HTTPTransport('https://ya-praktikum.tech/api/v2');

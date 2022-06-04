@@ -1,6 +1,6 @@
 import {passwordValidate} from './passwordValidate';
 
-export const handleSubmit = (e: Event, regex: Record<string, any>) => {
+export const validateData = (e: Event, regex: Record<string, any>) => {
     e.preventDefault();
 
     const formData = e.target as HTMLFormElement;
@@ -28,8 +28,9 @@ export const handleSubmit = (e: Event, regex: Record<string, any>) => {
         });
 
     if (error) {
-        return;
+        return null;
     }
-    console.log(data);
+
     formData.reset();
+    return data;
 };

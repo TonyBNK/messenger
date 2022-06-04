@@ -22,13 +22,11 @@ export type FieldType = {
     }
 }
 
-type LinkType = AltUrlType;
-
 type FormPropsType = {
     button?: IButton
     altUrl?: IAltUrl
     fields?: Array<FieldType>
-    links?: Array<LinkType>
+    links?: Array<AltUrlType>
     readonly?: boolean
     events?: {
         submit?: (e: Event, regex: Record<string, any>) => void
@@ -57,7 +55,7 @@ export class Form extends Block {
     }
 
     private renderLinks(profile: DocumentFragment) {
-        this.props.links.forEach((link: LinkType) => {
+        this.props.links.forEach((link: AltUrlType) => {
             render('.form-links', new AltUrl({
                 ...link,
                 attr: {

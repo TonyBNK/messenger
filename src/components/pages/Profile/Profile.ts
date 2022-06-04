@@ -2,13 +2,15 @@ import {Block} from '../../common';
 import {profileTemplate} from '../../../templates/pages';
 import {Form} from '../../complex';
 import {AltUrl, Avatar, Button} from '../../base';
-import {FieldsBuilder, handleSubmit} from '../../../utils/handlers';
+import {FieldsBuilder, getUserAvatar} from '../../../utils/handlers';
 import {infoFieldsFactory, passwordFieldsFactory} from '../../../mocks';
+import {authController, userController} from '../../../utils/controllers';
+import {isEqual} from '../../../utils/mydash';
+import emptyAvatar from '../../../../static/images/emptyAvatar.png';
+import store from '../../../utils/main/store';
+import {router} from '../../../utils/main';
 
 type ProfilePropsType = {
-    avatar: string
-    name: string
-
     regex?: {
         first_name: string
         second_name: string
@@ -28,10 +30,7 @@ type ProfilePropsType = {
 
 export class Profile extends Block {
     constructor(props: ProfilePropsType) {
-        const {
-            avatar,
-            attr,
-        } = props;
+        const {attr} = props;
 
         const regex = props.regex ?? {
             first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
@@ -55,6 +54,16 @@ export class Profile extends Block {
             .withFocusHandler()
             .build();
 
+        const toChats = new Button({
+            label: '➜',
+            attr: {
+                class: 'to-chats',
+            },
+            events: {
+                click: () => router.go('/messenger'),
+            },
+        });
+
         const button = new Button({
             label: 'Сохранить',
             attr: {
@@ -68,7 +77,7 @@ export class Profile extends Block {
                 click: () => {
                     form.setProps({
                         readonly: true,
-                        fields: infoRows,
+                        fields: this.props.infoRows ?? infoRows,
                     });
                 },
             },
@@ -91,7 +100,7 @@ export class Profile extends Block {
                     click: () => {
                         form.setProps({
                             readonly: false,
-                            fields: passwordRows,
+                            fields: this.props.passwordRows ?? passwordRows,
                         });
                     },
                 },
@@ -99,10 +108,36 @@ export class Profile extends Block {
             {
                 label: 'Выйти',
                 events: {
-                    click: () => window.router.go('/'),
+                    click: () => authController.logOut(),
                 },
             },
         ];
+
+        const avatar = new Avatar({
+            attr: {
+                id: 'profilePhoto',
+                class: 'profile-photo',
+                src: store.getState().user?.avatar
+                    ? getUserAvatar(store.getState().user?.avatar)
+                    : emptyAvatar,
+                alt: 'ава',
+            },
+            events: {
+                click: () => {
+                    if (this._element) {
+                        (this._element.querySelector('#my-avatar') as HTMLElement).click();
+                    }
+                },
+                change: () => {
+                },
+                submit: (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    return userController.changeUserAvatar(e);
+                },
+            },
+        });
 
         const form = new Form({
             fields: infoRows,
@@ -111,7 +146,12 @@ export class Profile extends Block {
             button,
             altUrl,
             events: {
-                submit: (e: Event) => handleSubmit(e, regex),
+                submit: (e: Event) => {
+                    const fieldsContainer = (e.target as HTMLFormElement).querySelector('.fields-container');
+                    return fieldsContainer!.children.length === 6
+                        ? userController.changeUserProfile(e, regex)
+                        : userController.changeUserPassword(e, regex);
+                },
             },
             attr: {
                 name: 'profile-form',
@@ -121,28 +161,78 @@ export class Profile extends Block {
         super('div', {
             ...props,
             form,
-            avatar: new Avatar({
-                attr: {
-                    id: 'profilePhoto',
-                    class: 'profile-photo',
-                    src: avatar,
-                    alt: 'ава',
-                },
-            }),
+            avatar,
+            toChats,
             attr: {
                 ...attr,
                 class: attr?.class ?? 'profile-window',
             },
         });
+
+        this.props.avatar = avatar;
+
+        this.props.infoRows = infoRows;
+        this.props.passwordRows = passwordRows;
+
+        this.props.form = form;
+
+        authController.getUserInfo();
     }
 
     componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
-        return oldProps.name !== newProps.name;
+        if (oldProps.name !== newProps.name) return true;
+        if (!oldProps.user || !newProps.user) return oldProps.user !== newProps.user;
+        return !isEqual(oldProps.user, newProps.user);
     }
 
     render() {
+        const {
+            user,
+            form,
+            infoRows,
+            passwordRows,
+            avatar,
+        } = this.props;
+
+        if (user) {
+            const src = user.avatar;
+
+            if (src && avatar) {
+                avatar.setProps({
+                    attr: {
+                        ...this.props.avatar.props.attr,
+                        src: getUserAvatar(src),
+                    },
+                });
+            }
+        }
+
+        if (infoRows) {
+            this.setProps({
+                infoRows: infoRows.map((row: any) => ({
+                    ...row,
+                    value: user[row.id.split('-')[1]],
+                })),
+            });
+        }
+
+        if (passwordRows) {
+            this.setProps({
+                passwordRows: passwordRows.map((row: any) => ({
+                    ...row,
+                    value: user[row.id.split('-')[1]],
+                })),
+            });
+        }
+
+        if (form) {
+            this.props.form.setProps({
+                fields: this.props.infoRows,
+            });
+        }
+
         return this.compile(profileTemplate, {
-            name: this.props.name,
+            name: user?.display_name ?? user?.first_name,
         });
     }
 }

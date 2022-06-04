@@ -141,7 +141,7 @@ export class Block implements IBlock {
             .emit(Block.EVENTS.FLOW_RENDER);
     }
 
-    compile(template: Function, props: Record<string, any>) {
+    compile(template: Function, props: Record<string, any> = {}) {
         const propsAndStubs = {...props};
 
         Object.entries(this.children)

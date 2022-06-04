@@ -5,6 +5,8 @@ import {Constructable} from '../../types';
 export class Router {
     static __instance: any;
 
+    location: any;
+
     routes: any;
 
     history: any;
@@ -20,13 +22,14 @@ export class Router {
 
         this.routes = [];
         this.history = window.history;
+        this.location = window.location;
         this._currentRoute = null;
         this._rootQuery = rootQuery;
 
         Router.__instance = this;
     }
 
-    use(pathname: string, block: Constructable<IBlock>, props: Record<string, any> = {}) {
+    public use(pathname: string, block: Constructable<IBlock>, props: Record<string, any> = {}) {
         const route = new Route(pathname, block, {
             ...props,
             rootQuery: this._rootQuery,
@@ -37,7 +40,7 @@ export class Router {
         return this;
     }
 
-    start() {
+    public start() {
         window.onpopstate = (event) => {
             const element = event.currentTarget as Window;
             this._onRoute(element.location.pathname);
@@ -46,8 +49,30 @@ export class Router {
         this._onRoute(window.location.pathname);
     }
 
-    _onRoute(pathname: string) {
+    public go(pathname: string) {
+        this.history.pushState({}, '', pathname);
+        this._onRoute(pathname);
+    }
+
+    public back() {
+        this.history.back();
+    }
+
+    public forward() {
+        this.history.forward();
+    }
+
+    public getRoute(pathname: string) {
+        return this.routes.find((route: Route) => route.match(pathname));
+    }
+
+    public refresh() {
+        this.location.reload();
+    }
+
+    private _onRoute(pathname: string) {
         const route = this.getRoute(pathname);
+
         if (!route) {
             return;
         }
@@ -59,21 +84,6 @@ export class Router {
         this._currentRoute = route;
         route.render(route, pathname);
     }
-
-    go(pathname: string) {
-        this.history.pushState({}, '', pathname);
-        this._onRoute(pathname);
-    }
-
-    back() {
-        this.history.back();
-    }
-
-    forward() {
-        this.history.forward();
-    }
-
-    getRoute(pathname: string) {
-        return this.routes.find((route: Route) => route.match(pathname));
-    }
 }
+
+export const router = new Router('.app');

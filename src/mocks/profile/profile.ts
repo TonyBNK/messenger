@@ -1,4 +1,5 @@
 import {FieldType} from '../../components/complex';
+import store from '../../utils/main/store';
 
 type InfoFieldsFactoryType = (
     data?: {
@@ -24,42 +25,42 @@ export const infoFieldsFactory: InfoFieldsFactoryType = (data) => [
         id: 'profile-email',
         label: data?.emailLabel ?? 'Почта',
         name: 'email',
-        value: 'pochta@yandex.ru',
+        value: store.getState().user?.email ?? '',
         type: 'email',
     },
     {
         id: 'profile-login',
         label: data?.loginLabel ?? 'Логин',
         name: 'login',
-        value: 'ivanivanov',
+        value: store.getState().user?.login ?? '',
         type: 'text',
     },
     {
         id: 'profile-first_name',
         label: data?.firstNameLabel ?? 'Имя',
         name: 'first_name',
-        value: 'Иван',
+        value: store.getState().user?.first_name ?? '',
         type: 'text',
     },
     {
         id: 'profile-second_name',
         label: data?.secondNameLabel ?? 'Фамилия',
         name: 'second_name',
-        value: 'Иванов',
+        value: store.getState().user?.second_name ?? '',
         type: 'text',
     },
     {
         id: 'profile-display_name',
         label: data?.displayNameLabel ?? 'Имя в чате',
         name: 'display_name',
-        value: 'Иван',
+        value: store.getState().user?.display_name ?? '',
         type: 'text',
     },
     {
         id: 'profile-phone',
         label: data?.phoneLabel ?? 'Телефон',
         name: 'phone',
-        value: '+79099673030',
+        value: store.getState().user?.phone ?? '',
         type: 'tel',
     },
 ];

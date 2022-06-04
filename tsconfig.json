@@ -21,7 +21,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "types": [
-            "node"
+            "node",
+            "mocha"
         ],
         "typeRoots": [
             "./node_modules/@types",
@@ -33,6 +34,7 @@
     ],
     "exclude": [
         "node_modules",
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "**/*.test.ts",
     ]
 }

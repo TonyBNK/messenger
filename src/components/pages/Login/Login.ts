@@ -5,7 +5,9 @@ import {AltUrl, Button} from '../../base';
 import {FieldsBuilder} from '../../../utils/handlers';
 import {loginFieldsFactory} from '../../../mocks';
 import {authController} from '../../../utils/controllers';
-import {router} from '../../../utils/main';
+import {regexRules, router} from '../../../utils/main';
+import {isEqual} from '../../../utils/mydash';
+import store from '../../../utils/main/store';
 
 type LoginPropsType = {
     formTitle?: string
@@ -34,9 +36,14 @@ export class Login extends Block {
             attr,
         } = props;
 
+        const {
+            login,
+            password,
+        } = regexRules.rules;
+
         const regex = props.regex ?? {
-            login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
-            password: /^(?=.*[A-Z])(?=.*\d)[\w@$!%*#?&-]{8,40}$/,
+            login,
+            password,
         };
 
         const button = new Button({
@@ -76,9 +83,18 @@ export class Login extends Block {
                 class: attr?.class ?? 'login-window',
             },
         });
+
+        authController.getUserInfo()
+            .then(() => {
+                if (store.getState().user) {
+                    router.go('/messenger');
+                }
+            });
     }
 
     componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+        if (!oldProps.user || !newProps.user) return oldProps.user !== newProps.user;
+        if (!isEqual(oldProps.user, newProps.user)) return true;
         return oldProps.formTitle !== newProps.formTitle;
     }
 

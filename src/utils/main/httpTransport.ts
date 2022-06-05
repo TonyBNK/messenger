@@ -16,7 +16,7 @@ type OptionsType = {
     mode?: string
 };
 
-type MethodType = (url: string, options: OptionsType) => Promise<unknown>;
+type MethodType = (url: string, options?: OptionsType) => Promise<unknown>;
 
 type RequestType = (url: string, options: OptionsType, timeout?: number) => Promise<unknown>;
 
@@ -45,7 +45,7 @@ class HTTPTransport {
             ...options,
             method: METHODS.GET,
         },
-        // options.timeout,
+        options.timeout,
     );
 
     post: MethodType = (url, options = {}) => this.request(
@@ -54,7 +54,7 @@ class HTTPTransport {
             ...options,
             method: METHODS.POST,
         },
-        // options.timeout,
+        options.timeout,
     );
 
     put: MethodType = (url, options = {}) => this.request(
@@ -63,7 +63,7 @@ class HTTPTransport {
             ...options,
             method: METHODS.PUT,
         },
-        // options.timeout,
+        options.timeout,
     );
 
     delete: MethodType = (url, options = {}) => this.request(
@@ -72,15 +72,15 @@ class HTTPTransport {
             ...options,
             method: METHODS.DELETE,
         },
-        // options.timeout,
+        options.timeout,
     );
 
     request: RequestType = (url, options, timeout = 5000) => {
         const {
             method,
             data,
-            headers = {},
-            withCredentials,
+            headers = (options.data) ? {'content-type': 'application/json'} : {},
+            withCredentials = true,
         } = options;
 
         const headerSettings = Object.entries(headers);
@@ -93,7 +93,7 @@ class HTTPTransport {
 
                 xhr.open(method, this.host.concat(url));
 
-                xhr.withCredentials = !!withCredentials;
+                xhr.withCredentials = withCredentials;
 
                 for (let i = 0; i < headerSettings.length; i++) {
                     xhr.setRequestHeader(`${headerSettings[i][0]}`, `${headerSettings[i][1]}`);

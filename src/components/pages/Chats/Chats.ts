@@ -2,7 +2,9 @@ import {Block} from '../../common';
 import {
     AltUrl, Avatar, Button, Input, Message, MessageItemType,
 } from '../../base';
-import {render, renderList, router} from '../../../utils/main';
+import {
+    regexRules, render, renderList, router,
+} from '../../../utils/main';
 import {
     Chat, ChatItemType, Form, Modal, Popup,
 } from '../../complex';
@@ -41,8 +43,10 @@ export class Chats extends Block {
             sendButtonLabel,
         } = props;
 
+        const {message} = regexRules.rules;
+
         const regex = props.regex ?? {
-            message: /^(?!\s*$).+/,
+            message,
         };
 
         const addChatModalRegex = {
@@ -245,14 +249,15 @@ export class Chats extends Block {
         const {
             activeChat,
             messages,
+            avatar,
         } = this.props;
 
         if (this._element) {
             this._element.addEventListener('click', (e) => this.props.closeModal(e));
         }
 
-        if (activeChat?.avatarSrc) {
-            this.props.avatar.setProps({
+        if (activeChat?.avatarSrc && avatar) {
+            avatar.setProps({
                 attr: {
                     ...this.props.avatar.props.attr,
                     src: activeChat.avatarSrc,

@@ -12,69 +12,12 @@ type GetChatUsersDataType = Omit<GetChatsDataType, 'title'> & {
 }
 
 export const chatsAPI = {
-    getChats: (data?: GetChatsDataType): Promise<any> => yandexTransport.get(
-        '/chats',
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data,
-        },
-    ),
-    getChatUsers: (id: number, data?: GetChatUsersDataType): Promise<any> => yandexTransport.get(
-        `/chats/${id}/users`,
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data,
-        },
-    ),
+    getChats: (data?: GetChatsDataType): Promise<any> => yandexTransport.get('/chats', {data}),
+    getChatUsers: (id: number, data?: GetChatUsersDataType): Promise<any> => yandexTransport.get(`/chats/${id}/users`, {data}),
     getChatToken: (id: number): Promise<any> => yandexTransport.post(
-        `/chats/token/${id}`,
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-        },
+        `/chats/token/${id}`, {headers: {'content-type': 'application/json'}},
     ),
-    createChat: (data: string): Promise<any> => yandexTransport.post(
-        '/chats',
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data,
-        },
-    ),
-    addUserToChat: (data: string): Promise<any> => yandexTransport.put(
-        '/chats/users',
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data,
-        },
-    ),
-    deleteUserFromChat: (data: string): Promise<any> => yandexTransport.delete(
-        '/chats/users',
-        {
-            withCredentials: true,
-            mode: 'cors',
-            headers: {
-                'content-type': 'application/json',
-            },
-            data,
-        },
-    ),
+    createChat: (data: string): Promise<any> => yandexTransport.post('/chats', {data}),
+    addUserToChat: (data: string): Promise<any> => yandexTransport.put('/chats/users', {data}),
+    deleteUserFromChat: (data: string): Promise<any> => yandexTransport.delete('/chats/users', {data}),
 };

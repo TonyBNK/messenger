@@ -1,5 +1,10 @@
 import {
-    router, withActiveChat, withChats, withMessages, withSocket, withUser,
+    router,
+    withActiveChat,
+    withChats,
+    withMessages,
+    withSocket,
+    withUser,
 } from './src/utils/main';
 import {
     Chats, Error, Login, Profile, Registration,

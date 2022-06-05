@@ -62,8 +62,6 @@ export const authController = {
             if (xhr.status === 200) {
                 store.set('user', JSON.parse(xhr.response));
             }
-
-            return;
         } catch (error) {
             console.log(error);
         } finally {
@@ -77,6 +75,7 @@ export const authController = {
 
             if (xhr.status === 200) {
                 router.go('/');
+                store.set('user', null);
             }
         } catch (error) {
             console.log(error);

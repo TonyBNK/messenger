@@ -5,3 +5,4 @@ export * from './route';
 export * from './router';
 export * from './store';
 export * from './connect';
+export * from './regexRules';

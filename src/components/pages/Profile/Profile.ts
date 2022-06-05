@@ -8,7 +8,7 @@ import {authController, userController} from '../../../utils/controllers';
 import {isEqual} from '../../../utils/mydash';
 import emptyAvatar from '../../../../static/images/emptyAvatar.png';
 import store from '../../../utils/main/store';
-import {router} from '../../../utils/main';
+import {regexRules, router} from '../../../utils/main';
 
 type ProfilePropsType = {
     regex?: {
@@ -32,16 +32,28 @@ export class Profile extends Block {
     constructor(props: ProfilePropsType) {
         const {attr} = props;
 
+        const {
+            first_name,
+            second_name,
+            display_name,
+            login,
+            oldPassword,
+            newPassword,
+            newPassword_again,
+            email,
+            phone,
+        } = regexRules.rules;
+
         const regex = props.regex ?? {
-            first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
-            second_name: /^[A-ZА-Я][A-zА-я-]+$/u,
-            display_name: /^[A-ZА-Я][A-zА-я-]+$/u,
-            login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
-            oldPassword: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
-            newPassword: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
-            newPassword_again: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
-            email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
-            phone: /^[+]?[0-9]{10,15}$/,
+            first_name,
+            second_name,
+            display_name,
+            login,
+            oldPassword,
+            newPassword,
+            newPassword_again,
+            email,
+            phone,
         };
 
         const infoRows = new FieldsBuilder(infoFieldsFactory())
@@ -205,24 +217,24 @@ export class Profile extends Block {
                     },
                 });
             }
-        }
 
-        if (infoRows) {
-            this.setProps({
-                infoRows: infoRows.map((row: any) => ({
-                    ...row,
-                    value: user[row.id.split('-')[1]],
-                })),
-            });
-        }
+            if (infoRows) {
+                this.setProps({
+                    infoRows: infoRows.map((row: any) => ({
+                        ...row,
+                        value: user[row.id.split('-')[1]],
+                    })),
+                });
+            }
 
-        if (passwordRows) {
-            this.setProps({
-                passwordRows: passwordRows.map((row: any) => ({
-                    ...row,
-                    value: user[row.id.split('-')[1]],
-                })),
-            });
+            if (passwordRows) {
+                this.setProps({
+                    passwordRows: passwordRows.map((row: any) => ({
+                        ...row,
+                        value: user[row.id.split('-')[1]],
+                    })),
+                });
+            }
         }
 
         if (form) {

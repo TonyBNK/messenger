@@ -5,7 +5,7 @@ import {AltUrl, Button} from '../../base';
 import {FieldsBuilder} from '../../../utils/handlers';
 import {registrationFieldsFactory} from '../../../mocks';
 import {authController} from '../../../utils/controllers';
-import {router} from '../../../utils/main';
+import {regexRules, router} from '../../../utils/main';
 
 type RegistrationPropsType = {
     formTitle?: string
@@ -44,14 +44,24 @@ export class Registration extends Block {
             attr,
         } = props;
 
+        const {
+            first_name,
+            second_name,
+            login,
+            password,
+            password_again,
+            email,
+            phone,
+        } = regexRules.rules;
+
         const regex = props.regex ?? {
-            first_name: /^[A-ZА-Я][A-zА-я-]+$/u,
-            second_name: /^[A-ZА-Я][A-zА-я-]+$/u,
-            login: /^(?=.*[a-zA-Z])[\w-]{3,20}$/,
-            password: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
-            password_again: /^(?=.*[A-ZА-Я])(?=.*\d)[\wА-я@$!%*#?&-]{8,40}$/u,
-            email: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
-            phone: /^[+]?[0-9]{10,15}$/,
+            first_name,
+            second_name,
+            login,
+            password,
+            password_again,
+            email,
+            phone,
         };
 
         const button = new Button({

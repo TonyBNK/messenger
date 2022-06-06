@@ -19,7 +19,7 @@ export const renderList = (
     fragment: DocumentFragment,
     query: string,
     items: Array<Record<string, any>>,
-    Component: Constructable<Block>,
+    Component: Constructable<Block> | any,
 ) => {
     const container = fragment.querySelector(query);
 

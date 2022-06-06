@@ -8,6 +8,8 @@
     @include makeFlexBoxContainer(column, space-between);
 
     .fields-container {
+        width: 100%;
+
         div {
             @include makeFlexBoxContainer(column);
 

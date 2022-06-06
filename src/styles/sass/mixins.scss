@@ -27,6 +27,7 @@
     font-family: sans-serif;
     font-weight: 600;
     color: $linkColor;
+    cursor: pointer;
 
     &:visited {
         color: $linkColor;
@@ -92,13 +93,12 @@
 }
 
 @mixin makeMessageContainer($backgroundColor: $penFriendMessageColor, $alignSelf: flex-start) {
-    margin: 30px 0;
+    margin: 5px 0;
     max-width: 45%;
     background-color: $backgroundColor;
     padding: 10px;
     font-family: sans-serif;
     border-radius: 15px;
-    position: relative;
     align-self: $alignSelf;
 }
 

@@ -1,23 +1,52 @@
 import {Block} from '../../common';
 import {errorTemplate} from '../../../templates/pages';
-import {IAltUrl} from '../../base';
+import {AltUrl} from '../../base';
+import {router} from '../../../utils/main';
 
 type ErrorPropsType = {
     status: number
-    description: string
-    altUrl: IAltUrl
+    attr?: {
+        id?: string
+        class?: string
+    }
 }
 
 export class Error extends Block {
+    static codes: Record<number, string> = {
+        404: 'Не туда попали',
+        500: 'Мы уже фиксим',
+    };
+
     constructor(props: ErrorPropsType) {
-        super('div', props);
+        const {
+            attr,
+        } = props;
+
+        const altUrl = new AltUrl({
+            label: 'Назад к чатам',
+            events: {
+                click: () => router.go('/messenger'),
+            },
+        });
+
+        super('div', {
+            ...props,
+            altUrl,
+            attr: {
+                ...attr,
+                class: attr?.class ?? 'error-window',
+            },
+        });
+    }
+
+    componentDidUpdate(oldProps: Record<string, any>, newProps: Record<string, any>): boolean {
+        return oldProps.status !== newProps.status;
     }
 
     render() {
         return this.compile(errorTemplate, {
             status: this.props.status,
-            description: this.props.description,
-            altUrl: this.props.altUrl,
+            description: Error.codes[this.props.status],
         });
     }
 }

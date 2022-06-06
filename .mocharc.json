@@ -1,0 +1,14 @@
+{
+    "extension": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx"
+    ],
+    "spec": " src/**/*.test.ts",
+    "require": [
+        "ts-node/register",
+        "jsdom-global/register",
+        "./mocks.js"
+    ]
+}

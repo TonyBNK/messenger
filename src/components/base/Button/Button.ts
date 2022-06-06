@@ -4,11 +4,13 @@ import {buttonTemplate} from '../../../templates/base';
 type ButtonPropsType = {
     label?: string
     children?: IBlock
-    id?: string
-    type?: string
-    className?: string
     events?: {
-        click?: () => void
+        click?: (e: Event) => void
+    }
+    attr?: {
+        id?: string
+        class?: string
+        type?: string
     }
 }
 
@@ -17,16 +19,18 @@ export interface IButton extends IBlock {
 
 export class Button extends Block {
     constructor(props: ButtonPropsType) {
-        super('span', props);
+        super('button', {
+            ...props,
+            attr: {
+                ...props.attr,
+                class: props.attr?.class ?? 'main-button',
+            },
+        });
     }
 
     render() {
         return this.compile(buttonTemplate, {
-            id: this.props.id,
-            type: this.props.type,
-            className: this.props.className,
             label: this.props.label,
-            children: this.props.children,
         });
     }
 }

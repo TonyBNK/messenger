@@ -1,14 +1,16 @@
 import {altUrlTemplate} from '../../../templates/base';
 import {Block, IBlock} from '../../common';
 
-type AltUrlPropsType = {
-    href: string
-    label: string
-    id?: string
-    className?: string
+export type AltUrlType = {
+    label?: string
     children?: IBlock
     events?: {
-        click?: () => void
+        click?: (e: Event) => void
+    }
+    attr?: {
+        id?: string
+        class?: string
+        href?: string
     }
 }
 
@@ -16,17 +18,19 @@ export interface IAltUrl extends IBlock {
 }
 
 export class AltUrl extends Block {
-    constructor(props: AltUrlPropsType) {
-        super('span', props);
+    constructor(props: AltUrlType) {
+        super('a', {
+            ...props,
+            attr: {
+                ...props.attr,
+                class: props.attr?.class ?? 'alt-url',
+            },
+        });
     }
 
     render() {
         return this.compile(altUrlTemplate, {
-            href: this.props.href,
             label: this.props.label,
-            id: this.props.id,
-            className: this.props.className,
-            children: this.props.children,
         });
     }
 }

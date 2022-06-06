@@ -26,6 +26,40 @@ export class Input extends Block {
         super('div', props);
     }
 
+    _addEvents() {
+        const {events = {}} = this.props;
+
+        Object
+            .keys(events)
+            .forEach((eventName) => {
+                if (this._element) {
+                    if (eventName === 'focus' || eventName === 'blur') {
+                        this._element.querySelectorAll('input')
+                            .forEach((input) => {
+                                input.addEventListener(eventName, events[eventName]);
+                            });
+                    }
+                }
+            });
+    }
+
+    _deleteEvents() {
+        const {events = {}} = this.props;
+
+        Object
+            .keys(events)
+            .forEach((eventName) => {
+                if (this._element) {
+                    if (eventName === 'focus' || eventName === 'blur') {
+                        this._element.querySelectorAll('input')
+                            .forEach((input) => {
+                                input.removeEventListener(eventName, events[eventName]);
+                            });
+                    }
+                }
+            });
+    }
+
     render() {
         return this.compile(inputTemplate, {
             id: this.props.id,

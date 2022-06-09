@@ -10,7 +10,6 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "noEmit": true,
         "outDir": "dist",
         "target": "es2016",
         "declaration": false,
@@ -35,6 +34,6 @@
     "exclude": [
         "node_modules",
         "**/*.spec.ts",
-        "**/*.test.ts",
+        "**/*.test.ts"
     ]
 }

@@ -100,7 +100,6 @@
 
                 .chat-participants {
                     @include makeFlexBoxContainer(row, center, center);
-
                     @include makeLabel();
                 }
 
@@ -157,7 +156,6 @@
 
                         .message-time {
                             @include makeFlexBoxContainer(row, flex-end, flex-end);
-
                             @include makeLabel($titleSecondaryColor, 12px);
                         }
                     }
@@ -172,9 +170,7 @@
 
                     .form-info {
                         width: 100%;
-
                         margin-top: 0;
-
                         min-height: auto;
 
                         @include makeFlexBoxContainer(row, space-between, center);

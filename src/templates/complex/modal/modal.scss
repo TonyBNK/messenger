@@ -1,5 +1,5 @@
-@import "src/styles/sass/variables";
-@import "src/styles/sass/mixins";
+@import 'src/styles/sass/variables';
+@import 'src/styles/sass/mixins';
 
 .modal-window {
     display: none;
@@ -11,7 +11,7 @@
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 40%);
     justify-content: center;
     align-items: center;
 

@@ -12,7 +12,6 @@
 
         margin-left: 10px;
         border: none;
-
         transform: rotate(180deg);
     }
 
@@ -30,7 +29,7 @@
         .profile-name {
             font-weight: 550;
         }
-        
+
         .form-info {
             @include makeFlexBoxContainer(column, center, center);
 

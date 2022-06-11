@@ -1,10 +1,10 @@
 **Ссылка на проект:** https://tonybnk-chat.netlify.app/
 
 **Ссылка на
-PR:** https://github.com/TonyBNK/middle.messenger.praktikum.yandex/pull/3
+PR:** https://github.com/TonyBNK/middle.messenger.praktikum.yandex/pull/4
 
 Проект представляет собой мессенджер, реализованный в виде SPA с использованием
-TypeScript, шаблонизатора Handlebars, препроцессора SCSS и сборщика Parcel.
+TypeScript, шаблонизатора Handlebars, препроцессора SCSS и сборщика Webpack.
 Применён компонентный подход.
 
 В проекте используются следующие статические анализаторы и инструменты
@@ -75,3 +75,15 @@ Chat);<br />
 **Тесты:**
 
 Написаны тесты для роутинга при использовании библиотек Chai и Mocha.
+
+**Эксплуатация приложения:**
+
+Проведён аудит пакетов.<br />
+Пакеты приведены в безопасное состояние.<br />
+Добавлен pre-commit.
+
+**Развёртывание:**
+
+Настроена Docker-сборка статического приложения.<br />
+Проект с Docker-сборкой размещён на Heroku,
+ссылка: https://ya-messenger-ex.herokuapp.com/

@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
-RUN apt update && apt install -y nodejs && apt install -y npm
-WORKDIR /var/messenger
-COPY ./server.js server.js
+FROM node:14.17.3
+WORKDIR /messenger
+COPY . .
 EXPOSE 3000
+RUN npm run build
 CMD node server.js

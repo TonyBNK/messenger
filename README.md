@@ -1,6 +1,7 @@
 **Ссылка на проект:** https://tonybnk-chat.netlify.app/
 
-**Ссылка на PR:**
+**Ссылка на
+PR:** https://github.com/TonyBNK/middle.messenger.praktikum.yandex/pull/4
 
 Проект представляет собой мессенджер, реализованный в виде SPA с использованием
 TypeScript, шаблонизатора Handlebars, препроцессора SCSS и сборщика Webpack.

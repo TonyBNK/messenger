@@ -21,7 +21,7 @@
         "dev": "webpack & webpack-dev-server --open",
         "test": "node_modules/.bin/mocha",
         "build": "webpack",
-        "start": "node server.js",
+        "start": "npm run build && node server.js",
         "eslint": "node_modules/.bin/eslint . --ext .ts --fix",
         "stylelint": "node_modules/.bin/stylelint . --fix"
     },
